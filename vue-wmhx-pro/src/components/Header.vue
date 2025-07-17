@@ -6,10 +6,11 @@
       <nav class="tech-nav">
         <div class="logo">RSE<span class="highlight">TECH</span></div>
         <ul class="nav-links">
-          <li><a href="#vision" class="nav-link">愿景使命</a></li>
-          <li><a href="#services" class="nav-link">服务内容</a></li>
-          <li><a href="#projects" class="nav-link">项目案例</a></li>
-          <li><a href="#experts" class="nav-link">专家团队</a></li>
+          <li><a href="#vision" class="nav-link">研究院简介</a></li>
+          <li><a href="#services" class="nav-link">专家团队</a></li>
+          <li><a href="#projects" class="nav-link">服务内容</a></li>
+          <li><a href="#experts" class="nav-link">活动咨询</a></li>
+          <li><a href="#experts" class="nav-link">项目案例</a></li>
           <li><a href="#contact" class="nav-link cta-button">联系我们</a></li>
         </ul>
       </nav>
