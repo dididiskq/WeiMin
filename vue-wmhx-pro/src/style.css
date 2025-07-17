@@ -1,0 +1,78 @@
+/* 全局样式变量 - 定义基础字体、颜色方案和背景 */
+:root {
+  font-family: 'Inter', 'Roboto', sans-serif;
+  line-height: 1.6;
+  font-weight: 300;
+
+  color-scheme: light;
+  color: #1e293b;
+  background: linear-gradient(135deg, #f8fafc 0%, #ffffff 50%, #f8fafc 100%);
+  background-attachment: fixed;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* 链接样式 - 定义默认和悬停状态的链接颜色 */
+a {
+  font-weight: 500;
+  color: #3b82f6;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #2563eb;
+}
+
+/* 全局body样式 - 设置基础布局、背景图案和溢出控制 */
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image: radial-gradient(circle at 10% 20%, rgba(248, 250, 252, 0.8) 0%, transparent 20%),
+                    radial-gradient(circle at 90% 80%, rgba(200, 200, 200, 0.2) 0%, transparent 30%);
+}
+
+/* 标题样式 - 定义主标题的字体大小和行高 */
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+/* 按钮样式 - 定义按钮基础样式、过渡效果和焦点状态 */
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #f1f5f9;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* 卡片组件基础样式 - 设置内边距和通用卡片布局 */
+.card {
+  padding: 2em;
+}
+
+/* 应用根容器 - 设置最大宽度、居中布局和内边距 */
+#app {
+  margin: 0 auto;
+  padding: 2rem 2rem 0;
+  text-align: center;
+}
+
+/* 科技风默认深色模式，禁用浅色模式 */
+/* 响应式颜色方案 - 禁用浅色模式，保持科技风深色主题 */
