@@ -9,9 +9,9 @@
           <li><router-link to="/institute-introduction" class="nav-link">研究院简介</router-link></li>
           <li><router-link to="/expert-team" class="nav-link">专家团队</router-link></li>
           <li><router-link to="/service-content" class="nav-link">服务内容</router-link></li>
-          <li><router-link to="/activity-consultation" class="nav-link">活动咨询</router-link></li>
+          <li><router-link to="/brand-activities" class="nav-link">品牌活动</router-link></li>
           <li><router-link to="/project-case" class="nav-link">项目案例</router-link></li>
-          <li><a href="#contact" class="nav-link cta-button">联系我们</a></li>
+          <li><router-link to="/contact-us" class="nav-link cta-button">联系我们</router-link></li>
         </ul>
       </nav>
     </div>

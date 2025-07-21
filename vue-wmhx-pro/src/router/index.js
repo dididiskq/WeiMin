@@ -3,7 +3,8 @@ import Home from '../views/Home.vue';
 import InstituteIntroduction from '../views/InstituteIntroduction.vue';
 import ExpertTeam from '../views/ExpertTeam.vue';
 import ServiceContent from '../views/ServiceContent.vue';
-import ActivityConsultation from '../views/ActivityConsultation.vue';
+import BrandActivities from '../views/BrandActivities.vue';
+import ContactUs from '../views/ContactUs.vue';
 import ProjectCase from '../views/ProjectCase.vue';
 
 /**
@@ -32,9 +33,14 @@ const routes = [
     component: ServiceContent
   },
   {
-    path: '/activity-consultation',
-    name: 'ActivityConsultation',
-    component: ActivityConsultation
+    path: '/brand-activities',
+    name: 'BrandActivities',
+    component: BrandActivities
+  },
+  {
+    path: '/contact-us',
+    name: 'ContactUs',
+    component: ContactUs
   },
   {
     path: '/project-case',

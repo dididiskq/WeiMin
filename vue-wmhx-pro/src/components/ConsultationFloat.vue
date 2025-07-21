@@ -1,17 +1,17 @@
 <template>
   <!-- 悬浮咨询组件 - 固定在屏幕左侧中间位置 -->
   <!-- 包含咨询图标和垂直排列的文字，点击可触发咨询功能 -->
-  <div class="consultation-float">
-    <div class="consultation-icon">
-      <i class="icon"></i>
-    </div>
-    <div class="consultation-text">联系我们</div>
+  <div class="consultation-float" @click="goToContact">
+      <div class="consultation-icon">
+        <i class="icon"></i>
+      </div>
+      <div class="consultation-text">联系我们</div>
   </div>
 </template>
 
 <style scoped>
-  /* 基础悬浮容器样式 - 固定定位、蓝色背景、圆角设计 */
-  /* z-index: 1000 确保显示在其他内容上方 */
+/* 基础悬浮容器样式 - 固定定位、蓝色背景、圆角设计 */
+/* z-index: 1000 确保显示在其他内容上方 */
 .consultation-float {
   position: fixed;
   left: 0;
@@ -26,7 +26,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  cursor: pointer;
+  text-decoration: none;
 }
 
 .consultation-icon {
@@ -52,7 +52,22 @@
   letter-spacing: 1px;
 }
 
+.consultation-link {
+  text-decoration: none;
+  display: block;
+}
+
 .consultation-float:hover {
   background-color: #0E42D2;
 }
 </style>
+
+<script>
+export default {
+  methods: {
+    goToContact() {
+      this.$router.push('/contact-us');
+    }
+  }
+}
+</script>

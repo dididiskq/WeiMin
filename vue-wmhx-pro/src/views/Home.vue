@@ -85,8 +85,8 @@ onMounted(() => {
           <h1 class="hero-title">服务创新科技 · 普惠中国智造</h1>
           <p class="hero-subtitle">推动可靠性理论应用，赋能百万工程师</p>
           <div class="hero-buttons">
-            <router-link to="/services" class="primary-btn">了解服务</router-link>
-            <button class="secondary-btn">查看案例</button>
+            <router-link to="/service-content" class="primary-btn">了解服务</router-link>
+            <router-link to="/project-case" class="secondary-btn">查看案例</router-link>
           </div>
         </div>
       </section>
@@ -183,6 +183,7 @@ onMounted(() => {
           </div>
         </div>
       </section>
+      
     </main>
 
 
