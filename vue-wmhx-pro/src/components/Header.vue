@@ -4,13 +4,13 @@
   <header class="tech-header">
     <div class="container">
       <nav class="tech-nav">
-        <div class="logo">RSE<span class="highlight">TECH</span></div>
+        <router-link to="/" class="logo-link"><div class="logo">RSE<span class="highlight">TECH</span></div></router-link>
         <ul class="nav-links">
-          <li><a href="#vision" class="nav-link">研究院简介</a></li>
-          <li><a href="#services" class="nav-link">专家团队</a></li>
-          <li><a href="#projects" class="nav-link">服务内容</a></li>
-          <li><a href="#experts" class="nav-link">活动咨询</a></li>
-          <li><a href="#experts" class="nav-link">项目案例</a></li>
+          <li><router-link to="/institute-introduction" class="nav-link">研究院简介</router-link></li>
+          <li><router-link to="/expert-team" class="nav-link">专家团队</router-link></li>
+          <li><router-link to="/service-content" class="nav-link">服务内容</router-link></li>
+          <li><router-link to="/activity-consultation" class="nav-link">活动咨询</router-link></li>
+          <li><router-link to="/project-case" class="nav-link">项目案例</router-link></li>
           <li><a href="#contact" class="nav-link cta-button">联系我们</a></li>
         </ul>
       </nav>
@@ -51,10 +51,19 @@
   width: 100%;
 }
 
+.logo-link {
+  text-decoration: none;
+}
+
 .logo {
   font-size: 1.5rem;
   font-weight: 300;
   color: #fff;
+  transition: color 0.3s ease;
+}
+
+.logo:hover {
+  color: #dcfce7;
 }
 
 .highlight {

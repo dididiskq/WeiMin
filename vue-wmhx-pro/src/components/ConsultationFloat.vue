@@ -5,7 +5,7 @@
     <div class="consultation-icon">
       <i class="icon"></i>
     </div>
-    <div class="consultation-text">在线咨询</div>
+    <div class="consultation-text">联系我们</div>
   </div>
 </template>
 

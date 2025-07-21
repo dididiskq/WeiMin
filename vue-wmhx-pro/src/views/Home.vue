@@ -73,7 +73,7 @@ onMounted(() => {
         <source src="/videos/background.mp4" type="video/mp4">
         您的浏览器不支持视频播放
       </video>
-      
+
       <div class="hero-gradient"></div>
     </header>
 
@@ -185,9 +185,9 @@ onMounted(() => {
       </section>
     </main>
 
-   
+
   </div>
-   <!-- 引入页脚组件 -->
+  <!-- 引入页脚组件 -->
   <Footer />
 </template>
 
@@ -221,12 +221,15 @@ onMounted(() => {
     transform: translateY(0) translateX(0);
     opacity: 0;
   }
+
   20% {
     opacity: 0.5;
   }
+
   80% {
     opacity: 0.5;
   }
+
   100% {
     transform: translateY(-100vh) translateX(50px);
     opacity: 0;
