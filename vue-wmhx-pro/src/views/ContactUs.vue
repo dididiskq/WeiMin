@@ -16,7 +16,7 @@
               </div>
               <div class="contact-details">
                 <h3>公司地址</h3>
-                <p>深圳市南山区科技园南区科技南十二路007号</p>
+                <p>深圳市龙华区人民路与八一路交汇处环智中心C座46楼</p>
               </div>
             </div>
             
@@ -26,7 +26,7 @@
               </div>
               <div class="contact-details">
                 <h3>联系电话</h3>
-                <p>0755-12345678</p>
+                <p>李老师：6666-12345678</p>
               </div>
             </div>
             
@@ -36,7 +36,7 @@
               </div>
               <div class="contact-details">
                 <h3>电子邮箱</h3>
-                <p>contact@reliability-engineering.org</p>
+                <p>RSE_2021@163.com</p>
               </div>
             </div>
           </div>

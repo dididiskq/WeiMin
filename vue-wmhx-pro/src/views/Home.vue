@@ -183,6 +183,90 @@ onMounted(() => {
           </div>
         </div>
       </section>
+
+      <!-- 品牌活动 -->
+      <section id="activities" class="section fade-in">
+        <div class="section-header">
+          <h2 class="section-title">品牌活动</h2>
+          <div class="section-divider"></div>
+        </div>
+        <div class="activities-container">
+          <div class="activity-card">
+            <div class="activity-date">2023.12.15</div>
+            <h3 class="activity-title">2023可靠性工程国际研讨会</h3>
+            <p class="activity-desc">汇聚全球可靠性领域专家，探讨前沿技术与应用案例</p>
+            <div class="activity-tag">国际会议</div>
+          </div>
+          <div class="activity-card">
+            <div class="activity-date">2024.03.20</div>
+            <h3 class="activity-title">可靠性工程师认证培训</h3>
+            <p class="activity-desc">专业认证课程，提升工程师可靠性设计与分析能力</p>
+            <div class="activity-tag">培训课程</div>
+          </div>
+          <div class="activity-card">
+            <div class="activity-date">2024.06.10</div>
+            <h3 class="activity-title">制造业可靠性提升峰会</h3>
+            <p class="activity-desc">聚焦制造业可靠性痛点，分享最佳实践与解决方案</p>
+            <div class="activity-tag">行业峰会</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 项目案例 -->
+      <section id="cases" class="section fade-in">
+        <div class="section-header">
+          <h2 class="section-title">项目案例</h2>
+          <div class="section-divider"></div>
+        </div>
+        <div class="cases-grid">
+          <div class="case-card">
+            <div class="case-image" style="background-color: #dbeafe;"></div>
+            <h3 class="case-title">汽车电子可靠性测试平台</h3>
+            <p class="case-desc">为某汽车电子企业构建全生命周期可靠性测试解决方案</p>
+            <router-link to="/project-case" class="case-link">查看详情 →</router-link>
+          </div>
+          <div class="case-card">
+            <div class="case-image" style="background-color: #dbeafe;"></div>
+            <h3 class="case-title">工业设备故障预测系统</h3>
+            <p class="case-desc">基于AI的设备健康管理系统，实现故障提前预警与维护</p>
+            <router-link to="/project-case" class="case-link">查看详情 →</router-link>
+          </div>
+          <div class="case-card">
+            <div class="case-image" style="background-color: #dbeafe;"></div>
+            <h3 class="case-title">消费电子可靠性优化项目</h3>
+            <p class="case-desc">通过可靠性设计提升消费电子产品使用寿命与用户体验</p>
+            <router-link to="/project-case" class="case-link">查看详情 →</router-link>
+          </div>
+        </div>
+      </section>
+
+      <!-- 合作企业 -->
+      <section id="cooperation" class="section fade-in">
+        <div class="section-header">
+          <h2 class="section-title">合作企业</h2>
+          <div class="section-divider"></div>
+        </div>
+        <div class="companies-grid">
+          <div class="company-card">
+            <div class="company-logo" style="background-color: #dbeafe;">NVIDIA</div>
+          </div>
+          <div class="company-card">
+            <div class="company-logo" style="background-color: #dbeafe;">Qualcomm</div>
+          </div>
+          <div class="company-card">
+            <div class="company-logo" style="background-color: #dbeafe;">Texas Instruments</div>
+          </div>
+          <div class="company-card">
+            <div class="company-logo" style="background-color: #dbeafe;">APTIV</div>
+          </div>
+          <div class="company-card">
+            <div class="company-logo" style="background-color: #dbeafe;">Neusoft</div>
+          </div>
+          <div class="company-card">
+            <div class="company-logo" style="background-color: #dbeafe;">ThunderSoft</div>
+          </div>
+        </div>
+      </section>
       
     </main>
 
@@ -487,7 +571,142 @@ onMounted(() => {
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
 }
 
-.card-icon {
+/* 合作企业 */
+.companies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 2rem;
+  justify-items: center;
+}
+
+.company-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.company-logo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #3b82f6;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.company-card:hover .company-logo {
+  transform: scale(1.1);
+  box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);
+}
+
+/* 品牌活动 */
+.activities-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.activity-card {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.activity-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.1);
+}
+
+.activity-date {
+  color: #3b82f6;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.activity-title {
+  color: #1e293b;
+  margin-bottom: 0.75rem;
+  font-size: 1.1rem;
+}
+
+.activity-desc {
+  color: #64748b;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.activity-tag {
+  display: inline-block;
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+}
+
+/* 项目案例 */
+.cases-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.case-card {
+  background: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.case-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.1);
+}
+
+.case-image {
+  height: 180px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: #3b82f6;
+}
+
+.case-title {
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+  padding: 0 1.5rem;
+}
+
+.case-desc {
+  color: #64748b;
+  margin-bottom: 1.5rem;
+  padding: 0 1.5rem;
+  line-height: 1.6;
+}
+
+.case-link {
+  display: inline-block;
+  color: #3b82f6;
+  font-weight: 500;
+  padding: 0 1.5rem 1.5rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.case-link:hover {
+  color: #2563eb;
+}
+
+/* 主要内容区域 */.card-icon {
   width: 60px;
   height: 60px;
   border-radius: 50%;
