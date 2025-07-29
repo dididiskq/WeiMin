@@ -10,6 +10,11 @@ import Header from '../components/Header.vue';
 
 const particles = ref([]);
 const sections = ref([]);
+const videoVisible = ref(true);
+
+const handleVideoEnd = () => {
+  videoVisible.value = false;
+};
 
 /**
  * 生成粒子背景效果
@@ -69,12 +74,15 @@ onMounted(() => {
 
     <!-- 英雄区域 -->
     <header class="hero-section">
-      <video class="hero-video" autoplay muted loop playsinline>
-        <source src="/videos/background.mp4" type="video/mp4">
-        您的浏览器不支持视频播放
-      </video>
+      <video class="hero-video" autoplay muted playsinline @ended="handleVideoEnd" v-if="videoVisible">
+  <source src="/videos/background.mp4" type="video/mp4">
+  您的浏览器不支持视频播放
+</video>
+<div class="video-logo-container" v-else>
+  <img src="@/assets/logo.svg" alt="品牌logo" class="animated-logo">
+</div>
 
-      <div class="hero-gradient"></div>
+      
     </header>
 
     <!-- 主要内容区域 -->
@@ -396,7 +404,8 @@ onMounted(() => {
 /* 英雄区域 - 全屏视频背景+渐变叠加层，居中展示主标题 */
 .hero-section {
   position: relative;
-  min-height: 100vh;
+  overflow: hidden;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -440,11 +449,10 @@ onMounted(() => {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   height: 100%;
   object-fit: cover;
   z-index: -1;
-  margin-left: calc(-50vw + 50%);
 }
 
 .hero-gradient {
@@ -453,7 +461,7 @@ onMounted(() => {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at center, rgba(248, 250, 252, 0.2), rgba(248, 250, 252, 0.8) 70%);
+  background: radial-gradient(circle at center, rgba(248, 250, 252, 0.05), rgba(248, 250, 252, 0.3) 70%);
   z-index: 1;
 }
 
@@ -591,6 +599,46 @@ onMounted(() => {
 .team-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 10px 15px -3px rgba(167, 243, 208, 0.2);
+}
+
+.team-photo {
+  width: 120px;
+}
+
+/* 视频区域logo动画 */
+.video-logo-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8fafc;
+}
+
+.animated-logo {
+  width: 350px;
+  height: auto;
+  animation: scaleIn 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transform: scale(0);
+  opacity: 0;
+}
+
+@keyframes scaleIn {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.1);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 .team-photo {
