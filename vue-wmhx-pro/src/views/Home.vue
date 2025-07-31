@@ -80,6 +80,14 @@ onMounted(() => {
 </video>
 <div class="video-logo-container" v-else>
   <img src="@/assets/logo.svg" alt="品牌logo" class="animated-logo">
+  <div class="hero-content-below-logo">
+    <h1 class="hero-title">服务创新科技 · 普惠中国智造</h1>
+    <p class="hero-subtitle">推动可靠性理论应用，赋能百万工程师</p>
+    <div class="hero-buttons">
+      <router-link to="/institute-introduction" class="primary-btn">了解我们</router-link>
+      <router-link to="/project-case" class="secondary-btn">查看案例</router-link>
+    </div>
+  </div>
 </div>
 
       
@@ -87,18 +95,7 @@ onMounted(() => {
 
     <!-- 主要内容区域 -->
     <main class="main-content">
-      <!-- 视频下方内容区 -->
-      <section class="section fade-in">
-        <div class="hero-content-moved">
-          <img src="@/assets/logo.svg" alt="品牌logo" class="section-logo">
-          <h1 class="hero-title">服务创新科技 · 普惠中国智造</h1>
-          <p class="hero-subtitle">推动可靠性理论应用，赋能百万工程师</p>
-          <div class="hero-buttons">
-            <router-link to="/institute-introduction" class="primary-btn">了解我们</router-link>
-            <router-link to="/project-case" class="secondary-btn">查看案例</router-link>
-          </div>
-        </div>
-      </section>
+      <!-- 愿景使命 -->
 
       <!-- 愿景使命 -->
       <section id="vision" class="section fade-in">
@@ -416,9 +413,10 @@ onMounted(() => {
 
 .hero-content-moved {
   max-width: 800px;
-  margin: 4rem auto;
+  margin: 2rem auto 4rem;
   text-align: center;
   padding: 2rem;
+  transform: translateY(-20px);
 }
 
 .hero-content {
@@ -624,6 +622,29 @@ onMounted(() => {
   animation: scaleIn 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   transform: scale(0);
   opacity: 0;
+}
+
+.hero-content-below-logo {
+  position: absolute;
+  bottom: 15%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  padding: 0 2rem;
+  animation: floatUp 1.5s cubic-bezier(0.22, 1, 0.36, 1) 0.5s forwards;
+  transform: translateY(50px);
+  opacity: 0;
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @keyframes scaleIn {
