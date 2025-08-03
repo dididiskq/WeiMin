@@ -11,9 +11,23 @@ import Header from '../components/Header.vue';
 const particles = ref([]);
 const sections = ref([]);
 const videoVisible = ref(true);
+const scrollTriggered = ref(false);
 
 const handleVideoEnd = () => {
-  videoVisible.value = false;
+  if (!scrollTriggered.value) {
+    videoVisible.value = false;
+  }
+};
+
+const handleScrollTrigger = () => {
+  // 只有当视频可见且滚动触发尚未发生时才执行
+  if (videoVisible.value && !scrollTriggered.value) {
+    // 检测是否有滚动行为（滚动距离超过10px）
+    if (window.scrollY > 10) {
+      scrollTriggered.value = true;
+      videoVisible.value = false;
+    }
+  }
 };
 
 /**
@@ -58,6 +72,7 @@ onMounted(() => {
   generateParticles();
   sections.value = document.querySelectorAll('.section');
   window.addEventListener('scroll', handleScroll);
+  window.addEventListener('scroll', handleScrollTrigger);
   handleScroll(); // 初始检查
 
   // 窗口调整时重新生成粒子
@@ -613,20 +628,26 @@ onMounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f8fafc;
+  background-color: #ffffff;
 }
 
 .animated-logo {
-  width: 350px;
+  width: 260px;
   height: auto;
   animation: scaleIn 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   transform: scale(0);
   opacity: 0;
+  margin-top:  -320px;
+}
+
+/* 确保动画只触发一次 */
+.video-logo-container, .hero-content-below-logo {
+  animation-play-state: running;
 }
 
 .hero-content-below-logo {
   position: absolute;
-  bottom: 15%;
+  bottom: 25%;
   left: 0;
   right: 0;
   text-align: center;
@@ -634,6 +655,7 @@ onMounted(() => {
   animation: floatUp 1.5s cubic-bezier(0.22, 1, 0.36, 1) 0.5s forwards;
   transform: translateY(50px);
   opacity: 0;
+  margin-top: 30px;
 }
 
 @keyframes floatUp {
