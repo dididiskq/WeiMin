@@ -97,10 +97,10 @@ onMounted(() => {
   <img src="@/assets/logo.svg" alt="品牌logo" class="animated-logo">
   <div class="hero-content-below-logo">
     <h1 class="hero-title">服务创新科技 · 普惠中国智造</h1>
-    <p class="hero-subtitle">推动可靠性理论应用，赋能百万工程师</p>
+    <p class="hero-subtitle">确性可靠性，赋能中国制造企业</p>
     <div class="hero-buttons">
-      <router-link to="/institute-introduction" class="primary-btn">了解我们</router-link>
-      <router-link to="/project-case" class="secondary-btn">查看案例</router-link>
+      <router-link to="/institute-introduction" class="primary-btn">认识为民可靠性研究院</router-link>
+      <router-link to="/project-case" class="secondary-btn">产品可靠性</router-link>
     </div>
   </div>
 </div>
@@ -119,7 +119,7 @@ onMounted(() => {
           <div class="section-divider"></div>
         </div>
         <div class="section-content">
-          <p>打造可靠性知识共享平台，提升企业系统能力，服务中国制造转型升级。</p>
+          <p>集合大学科研和专业工程师，打造可靠性共性技术公共服务平台，提升企业高可靠工程能力，支持中国制造业高质量发展。</p>
         </div>
       </section>
 
@@ -175,6 +175,48 @@ onMounted(() => {
         </div>
       </section>
 
+      <!-- 核心服务 -->
+      <section id="services" class="section fade-in">
+        <div class="section-header">
+          <h2 class="section-title">技术服务</h2>
+          <div class="section-divider"></div>
+        </div>
+        <div class="services-grid">
+          <div class="service-card hover-lift">
+            <div class="card-icon"><span>01</span></div>
+            <h3>可靠性工程师培训</h3>
+          </div>
+          <div class="service-card hover-lift">
+            <div class="card-icon"><span>02</span></div>
+            <h3>企业可靠性诊断</h3>
+          </div>
+          <div class="service-card hover-lift">
+            <div class="card-icon"><span>03</span></div>
+            <h3>技术项目咨询</h3>
+          </div>
+          <div class="service-card hover-lift">
+            <div class="card-icon"><span>04</span></div>
+            <h3>工程师驻场服务</h3>
+          </div>
+          <div class="service-card hover-lift">
+            <div class="card-icon"><span>05</span></div>
+            <h3>供应链可靠性</h3>
+          </div>
+          <div class="service-card hover-lift">
+            <div class="card-icon"><span>06</span></div>
+            <h3>可靠性正向设计</h3>
+          </div>
+          <div class="service-card hover-lift">
+            <div class="card-icon"><span>07</span></div>
+            <h3>标准和认证</h3>
+          </div>
+          <div class="service-card hover-lift">
+            <div class="card-icon"><span>08</span></div>
+            <h3>企业高可靠平台建设</h3>
+          </div>
+        </div>
+      </section>
+
       <!-- 知识产权和智库 -->
       <section id="intellectual-property" class="section fade-in">
         <div class="section-header">
@@ -211,36 +253,6 @@ onMounted(() => {
             <h3 class="case-title">培训资料</h3>
             <p class="case-desc">开发专业培训课件、视频教程及实践案例分析材料</p>
             <router-link to="/intellectual-property" class="case-link">查看详情 →</router-link>
-          </div>
-        </div>
-      </section>
-
-      <!-- 核心服务 -->
-      <section id="services" class="section fade-in">
-        <div class="section-header">
-          <h2 class="section-title">核心服务</h2>
-          <div class="section-divider"></div>
-        </div>
-        <div class="services-grid">
-          <div class="service-card hover-lift">
-            <div class="card-icon"><span>01</span></div>
-            <h3>工程师培训</h3>
-          </div>
-          <div class="service-card hover-lift">
-            <div class="card-icon"><span>02</span></div>
-            <h3>企业系统诊断</h3>
-          </div>
-          <div class="service-card hover-lift">
-            <div class="card-icon"><span>03</span></div>
-            <h3>技术咨询示范</h3>
-          </div>
-          <div class="service-card hover-lift">
-            <div class="card-icon"><span>04</span></div>
-            <h3>标准体系建设</h3>
-          </div>
-          <div class="service-card hover-lift">
-            <div class="card-icon"><span>05</span></div>
-            <h3>可靠性平台搭建</h3>
           </div>
         </div>
       </section>
