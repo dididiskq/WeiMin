@@ -95,6 +95,18 @@ onMounted(() => {
 </video>
 <div class="video-logo-container" v-else>
   <img src="@/assets/logo.svg" alt="品牌logo" class="animated-logo">
+  <div class="middle-connect-area">
+    <div class="website-section">
+       <a href="https://www.charmingclass.com/" target="_blank" class="website-link-container">
+         <div class="website-image-placeholder">场鸣职业课</div>
+       </a>
+       <p class="website-text">访问官方网站</p>
+     </div>
+    <div class="wechat-qrcode">
+      <img src="@/assets/vue.svg" alt="微信公众号二维码" class="qrcode-image">
+      <p class="qrcode-text">扫码关注公众号</p>
+    </div>
+  </div>
   <div class="hero-content-below-logo">
     <h1 class="hero-title">服务创新科技 · 普惠中国智造</h1>
     <p class="hero-subtitle">确性可靠性，赋能中国制造企业</p>
@@ -649,7 +661,108 @@ onMounted(() => {
   animation: scaleIn 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   transform: scale(0);
   opacity: 0;
-  margin-top:  -320px;
+  margin-top: -520px;
+}
+
+.middle-connect-area {
+  position: absolute;
+  top: 35%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  animation: floatUp 1.5s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+  transform: translateY(50px);
+  opacity: 0;
+  z-index: 10;
+}
+
+.website-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.website-text {
+  font-size: 0.9rem;
+  color: #4b5563;
+}
+
+.website-image-placeholder {
+  width: 120px;
+  height: 120px;
+  background-color: #3b82f6;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.hero-content-below-logo {
+  position: absolute;
+  bottom: 15%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  animation: floatUp 1.5s cubic-bezier(0.22, 1, 0.36, 1) 0.6s forwards;
+  transform: translateY(50px);
+  opacity: 0;
+  margin-top: 30px;
+  z-index: 5;
+}
+
+.website-link-container {
+  text-decoration: none;
+}
+
+.website-image-placeholder {
+  width: 120px;
+  height: 120px;
+  background-color: #f3f4f6;
+  color: #3b82f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 1px solid #e5e7eb;
+}
+
+.website-link-container:hover .website-image-placeholder {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.wechat-qrcode {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.qrcode-image {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  background-color: #f3f4f6;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+.qrcode-text {
+  font-size: 0.9rem;
+  color: #4b5563;
 }
 
 /* 确保动画只触发一次 */
@@ -659,7 +772,7 @@ onMounted(() => {
 
 .hero-content-below-logo {
   position: absolute;
-  bottom: 25%;
+  bottom: 15%;
   left: 0;
   right: 0;
   text-align: center;
