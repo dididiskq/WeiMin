@@ -89,12 +89,22 @@ onMounted(() => {
 
     <!-- 英雄区域 -->
     <header class="hero-section">
-      <video class="hero-video" autoplay muted playsinline @ended="handleVideoEnd" v-if="videoVisible">
-  <source src="/videos/background.mp4" type="video/mp4">
-  您的浏览器不支持视频播放
-</video>
+      <div class="hero-video-container" v-if="videoVisible">
+  <video class="hero-video" autoplay muted playsinline @ended="handleVideoEnd">
+    <source src="/videos/background.mp4" type="video/mp4">
+    您的浏览器不支持视频播放
+  </video>
+</div>
 <div class="video-logo-container" v-else>
   <img src="@/assets/logo.svg" alt="品牌logo" class="animated-logo">
+  <div class="hero-content-below-logo">
+    <h1 class="hero-title">服务创新科技 · 普惠中国智造</h1>
+    <p class="hero-subtitle">确性可靠性，赋能中国制造企业</p>
+    <div class="hero-buttons">
+      <router-link to="/institute-introduction" class="primary-btn">认识为民可靠性研究院</router-link>
+      <router-link to="/project-case" class="secondary-btn">了解产品可靠性</router-link>
+    </div>
+  </div>
   <div class="middle-connect-area">
     <div class="website-section">
        <a href="https://www.charmingclass.com/" target="_blank" class="website-link-container">
@@ -105,14 +115,6 @@ onMounted(() => {
     <div class="wechat-qrcode">
       <img src="@/assets/vue.svg" alt="微信公众号二维码" class="qrcode-image">
       <p class="qrcode-text">扫码关注公众号</p>
-    </div>
-  </div>
-  <div class="hero-content-below-logo">
-    <h1 class="hero-title">服务创新科技 · 普惠中国智造</h1>
-    <p class="hero-subtitle">确性可靠性，赋能中国制造企业</p>
-    <div class="hero-buttons">
-      <router-link to="/institute-introduction" class="primary-btn">认识为民可靠性研究院</router-link>
-      <router-link to="/project-case" class="secondary-btn">产品可靠性</router-link>
     </div>
   </div>
 </div>
@@ -143,47 +145,59 @@ onMounted(() => {
         </div>
         <div class="team-grid">
           <!-- 团队成员1 -->
-          <div class="team-card">
-            <div class="team-photo" style="background-color: #dcfce7;"></div>
-            <h3 class="team-name">张明</h3>
-            <p class="team-position">可靠性工程专家</p>
-            <p class="team-desc">15年工业可靠性研究经验，曾主导多项国家级可靠性项目。</p>
-          </div>
+          <router-link to="/expert-team" class="team-card-link">
+            <div class="team-card">
+              <div class="team-photo" style="background-color: #dcfce7;"></div>
+              <h3 class="team-name">张明</h3>
+              <p class="team-position">可靠性工程专家</p>
+              <p class="team-desc">15年工业可靠性研究经验，曾主导多项国家级可靠性项目。</p>
+            </div>
+          </router-link>
           <!-- 团队成员2 -->
-          <div class="team-card">
-            <div class="team-photo" style="background-color: #dcfce7;"></div>
-            <h3 class="team-name">李华</h3>
-            <p class="team-position">系统工程师</p>
-            <p class="team-desc">专注于复杂系统可靠性分析，发表学术论文20余篇。</p>
-          </div>
+          <router-link to="/expert-team" class="team-card-link">
+            <div class="team-card">
+              <div class="team-photo" style="background-color: #dcfce7;"></div>
+              <h3 class="team-name">李华</h3>
+              <p class="team-position">系统工程师</p>
+              <p class="team-desc">专注于复杂系统可靠性分析，发表学术论文20余篇。</p>
+            </div>
+          </router-link>
           <!-- 团队成员3 -->
-          <div class="team-card">
-            <div class="team-photo" style="background-color: #dcfce7;"></div>
-            <h3 class="team-name">王芳</h3>
-            <p class="team-position">数据分析师</p>
-            <p class="team-desc">擅长可靠性数据建模与分析，开发多项预测算法。</p>
-          </div>
+          <router-link to="/expert-team" class="team-card-link">
+            <div class="team-card">
+              <div class="team-photo" style="background-color: #dcfce7;"></div>
+              <h3 class="team-name">王芳</h3>
+              <p class="team-position">数据分析师</p>
+              <p class="team-desc">擅长可靠性数据建模与分析，开发多项预测算法。</p>
+            </div>
+          </router-link>
           <!-- 团队成员4 -->
-          <div class="team-card">
-            <div class="team-photo" style="background-color: #dcfce7;"></div>
-            <h3 class="team-name">赵强</h3>
-            <p class="team-position">机械工程专家</p>
-            <p class="team-desc">专注于机械系统故障诊断与寿命预测技术研究。</p>
-          </div>
+          <router-link to="/expert-team" class="team-card-link">
+            <div class="team-card">
+              <div class="team-photo" style="background-color: #dcfce7;"></div>
+              <h3 class="team-name">赵强</h3>
+              <p class="team-position">机械工程专家</p>
+              <p class="team-desc">专注于机械系统故障诊断与寿命预测技术研究。</p>
+            </div>
+          </router-link>
           <!-- 团队成员5 -->
-          <div class="team-card">
-            <div class="team-photo" style="background-color: #dcfce7;"></div>
-            <h3 class="team-name">陈静</h3>
-            <p class="team-position">软件可靠性工程师</p>
-            <p class="team-desc">负责软件系统可靠性测试与验证方法研究。</p>
-          </div>
+          <router-link to="/expert-team" class="team-card-link">
+            <div class="team-card">
+              <div class="team-photo" style="background-color: #dcfce7;"></div>
+              <h3 class="team-name">陈静</h3>
+              <p class="team-position">软件可靠性工程师</p>
+              <p class="team-desc">负责软件系统可靠性测试与验证方法研究。</p>
+            </div>
+          </router-link>
           <!-- 团队成员6 -->
-          <div class="team-card">
-            <div class="team-photo" style="background-color: #dcfce7;"></div>
-            <h3 class="team-name">刘杰</h3>
-            <p class="team-position">质量管理专家</p>
-            <p class="team-desc">ISO可靠性管理体系认证专家，多家企业顾问。</p>
-          </div>
+          <router-link to="/expert-team" class="team-card-link">
+            <div class="team-card">
+              <div class="team-photo" style="background-color: #dcfce7;"></div>
+              <h3 class="team-name">刘杰</h3>
+              <p class="team-position">质量管理专家</p>
+              <p class="team-desc">ISO可靠性管理体系认证专家，多家企业顾问。</p>
+            </div>
+          </router-link>
         </div>
       </section>
 
@@ -194,38 +208,54 @@ onMounted(() => {
           <div class="section-divider"></div>
         </div>
         <div class="services-grid">
-          <div class="service-card hover-lift">
-            <div class="card-icon"><span>01</span></div>
-            <h3>可靠性工程师培训</h3>
-          </div>
-          <div class="service-card hover-lift">
-            <div class="card-icon"><span>02</span></div>
-            <h3>企业可靠性诊断</h3>
-          </div>
-          <div class="service-card hover-lift">
-            <div class="card-icon"><span>03</span></div>
-            <h3>技术项目咨询</h3>
-          </div>
-          <div class="service-card hover-lift">
-            <div class="card-icon"><span>04</span></div>
-            <h3>工程师驻场服务</h3>
-          </div>
-          <div class="service-card hover-lift">
-            <div class="card-icon"><span>05</span></div>
-            <h3>供应链可靠性</h3>
-          </div>
-          <div class="service-card hover-lift">
-            <div class="card-icon"><span>06</span></div>
-            <h3>可靠性正向设计</h3>
-          </div>
-          <div class="service-card hover-lift">
-            <div class="card-icon"><span>07</span></div>
-            <h3>标准和认证</h3>
-          </div>
-          <div class="service-card hover-lift">
-            <div class="card-icon"><span>08</span></div>
-            <h3>企业高可靠平台建设</h3>
-          </div>
+          <router-link to="/service-content" class="service-card-link">
+            <div class="service-card hover-lift">
+              <div class="card-icon"><span>01</span></div>
+              <h3>可靠性工程师培训</h3>
+            </div>
+          </router-link>
+          <router-link to="/service-content" class="service-card-link">
+            <div class="service-card hover-lift">
+              <div class="card-icon"><span>02</span></div>
+              <h3>企业可靠性诊断</h3>
+            </div>
+          </router-link>
+          <router-link to="/service-content" class="service-card-link">
+            <div class="service-card hover-lift">
+              <div class="card-icon"><span>03</span></div>
+              <h3>技术项目咨询</h3>
+            </div>
+          </router-link>
+          <router-link to="/service-content" class="service-card-link">
+            <div class="service-card hover-lift">
+              <div class="card-icon"><span>04</span></div>
+              <h3>工程师驻场服务</h3>
+            </div>
+          </router-link>
+          <router-link to="/service-content" class="service-card-link">
+            <div class="service-card hover-lift">
+              <div class="card-icon"><span>05</span></div>
+              <h3>供应链可靠性</h3>
+            </div>
+          </router-link>
+          <router-link to="/service-content" class="service-card-link">
+            <div class="service-card hover-lift">
+              <div class="card-icon"><span>06</span></div>
+              <h3>可靠性正向设计</h3>
+            </div>
+          </router-link>
+          <router-link to="/service-content" class="service-card-link">
+            <div class="service-card hover-lift">
+              <div class="card-icon"><span>07</span></div>
+              <h3>标准和认证</h3>
+            </div>
+          </router-link>
+          <router-link to="/service-content" class="service-card-link">
+            <div class="service-card hover-lift">
+              <div class="card-icon"><span>08</span></div>
+              <h3>企业高可靠平台建设</h3>
+            </div>
+          </router-link>
         </div>
       </section>
 
@@ -276,24 +306,30 @@ onMounted(() => {
           <div class="section-divider"></div>
         </div>
         <div class="activities-container">
-          <div class="activity-card">
-            <div class="activity-date">2023.12.15</div>
-            <h3 class="activity-title">2023可靠性工程国际研讨会</h3>
-            <p class="activity-desc">汇聚全球可靠性领域专家，探讨前沿技术与应用案例</p>
-            <div class="activity-tag">国际会议</div>
-          </div>
-          <div class="activity-card">
-            <div class="activity-date">2024.03.20</div>
-            <h3 class="activity-title">可靠性工程师认证培训</h3>
-            <p class="activity-desc">专业认证课程，提升工程师可靠性设计与分析能力</p>
-            <div class="activity-tag">培训课程</div>
-          </div>
-          <div class="activity-card">
-            <div class="activity-date">2024.06.10</div>
-            <h3 class="activity-title">制造业可靠性提升峰会</h3>
-            <p class="activity-desc">聚焦制造业可靠性痛点，分享最佳实践与解决方案</p>
-            <div class="activity-tag">行业峰会</div>
-          </div>
+          <router-link to="/brand-activities" class="activity-card-link">
+            <div class="activity-card">
+              <div class="activity-date">2023.12.15</div>
+              <h3 class="activity-title">2023可靠性工程国际研讨会</h3>
+              <p class="activity-desc">汇聚全球可靠性领域专家，探讨前沿技术与应用案例</p>
+              <div class="activity-tag">国际会议</div>
+            </div>
+          </router-link>
+          <router-link to="/brand-activities" class="activity-card-link">
+            <div class="activity-card">
+              <div class="activity-date">2024.03.20</div>
+              <h3 class="activity-title">可靠性工程师认证培训</h3>
+              <p class="activity-desc">专业认证课程，提升工程师可靠性设计与分析能力</p>
+              <div class="activity-tag">培训课程</div>
+            </div>
+          </router-link>
+          <router-link to="/brand-activities" class="activity-card-link">
+            <div class="activity-card">
+              <div class="activity-date">2024.06.10</div>
+              <h3 class="activity-title">制造业可靠性提升峰会</h3>
+              <p class="activity-desc">聚焦制造业可靠性痛点，分享最佳实践与解决方案</p>
+              <div class="activity-tag">行业峰会</div>
+            </div>
+          </router-link>
         </div>
       </section>
 
@@ -304,24 +340,30 @@ onMounted(() => {
           <div class="section-divider"></div>
         </div>
         <div class="cases-grid">
-          <div class="case-card">
-            <div class="case-image" style="background-color: #dbeafe;"></div>
-            <h3 class="case-title">汽车电子可靠性测试平台</h3>
-            <p class="case-desc">为某汽车电子企业构建全生命周期可靠性测试解决方案</p>
-            <router-link to="/project-case" class="case-link">查看详情 →</router-link>
-          </div>
-          <div class="case-card">
-            <div class="case-image" style="background-color: #dbeafe;"></div>
-            <h3 class="case-title">工业设备故障预测系统</h3>
-            <p class="case-desc">基于AI的设备健康管理系统，实现故障提前预警与维护</p>
-            <router-link to="/project-case" class="case-link">查看详情 →</router-link>
-          </div>
-          <div class="case-card">
-            <div class="case-image" style="background-color: #dbeafe;"></div>
-            <h3 class="case-title">消费电子可靠性优化项目</h3>
-            <p class="case-desc">通过可靠性设计提升消费电子产品使用寿命与用户体验</p>
-            <router-link to="/project-case" class="case-link">查看详情 →</router-link>
-          </div>
+          <router-link to="/project-case" class="case-card-link">
+            <div class="case-card">
+              <div class="case-image" style="background-color: #dbeafe;"></div>
+              <h3 class="case-title">汽车电子可靠性测试平台</h3>
+              <p class="case-desc">为某汽车电子企业构建全生命周期可靠性测试解决方案</p>
+              <span class="case-link">查看详情 →</span>
+            </div>
+          </router-link>
+          <router-link to="/project-case" class="case-card-link">
+            <div class="case-card">
+              <div class="case-image" style="background-color: #dbeafe;"></div>
+              <h3 class="case-title">工业设备故障预测系统</h3>
+              <p class="case-desc">基于AI的设备健康管理系统，实现故障提前预警与维护</p>
+              <span class="case-link">查看详情 →</span>
+            </div>
+          </router-link>
+          <router-link to="/project-case" class="case-card-link">
+            <div class="case-card">
+              <div class="case-image" style="background-color: #dbeafe;"></div>
+              <h3 class="case-title">消费电子可靠性优化项目</h3>
+              <p class="case-desc">通过可靠性设计提升消费电子产品使用寿命与用户体验</p>
+              <span class="case-link">查看详情 →</span>
+            </div>
+          </router-link>
         </div>
       </section>
 
@@ -392,6 +434,23 @@ onMounted(() => {
 </template>
 
 <style scoped>
+/* 链接样式 */
+.activity-card-link, .service-card-link, .team-card-link, .case-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.case-card-link .case-link {
+  color: #3b82f6;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.case-card-link:hover .case-link {
+  color: #2563eb;
+}
 .app-container {
   position: relative;
   min-height: 100vh;
@@ -482,6 +541,14 @@ onMounted(() => {
   line-height: 1.6;
 }
 
+.hero-video-container {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%; /* 16:9 比例 */
+  overflow: hidden;
+}
+
 .hero-video {
   position: absolute;
   top: 0;
@@ -489,7 +556,6 @@ onMounted(() => {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: -1;
 }
 
 .hero-gradient {
@@ -666,7 +732,7 @@ onMounted(() => {
 
 .middle-connect-area {
   position: absolute;
-  top: 35%;
+  bottom: 15%;
   left: 0;
   right: 0;
   text-align: center;
@@ -675,10 +741,10 @@ onMounted(() => {
   justify-content: center;
   align-items: center;
   gap: 2rem;
-  animation: floatUp 1.5s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
+  animation: floatUp 1.5s cubic-bezier(0.22, 1, 0.36, 1) 0.6s forwards;
   transform: translateY(50px);
   opacity: 0;
-  z-index: 10;
+  z-index: 5;
 }
 
 .website-section {
@@ -696,8 +762,8 @@ onMounted(() => {
 .website-image-placeholder {
   width: 120px;
   height: 120px;
-  background-color: #3b82f6;
-  color: white;
+  background-color: #f3f4f6;
+  color: #3b82f6;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -707,15 +773,15 @@ onMounted(() => {
 
 .hero-content-below-logo {
   position: absolute;
-  bottom: 15%;
+  top: 35%;
   left: 0;
   right: 0;
   text-align: center;
-  animation: floatUp 1.5s cubic-bezier(0.22, 1, 0.36, 1) 0.6s forwards;
+  animation: floatUp 1.5s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
   transform: translateY(50px);
   opacity: 0;
   margin-top: 30px;
-  z-index: 5;
+  z-index: 10;
 }
 
 .website-link-container {
@@ -758,6 +824,7 @@ onMounted(() => {
   padding: 10px;
   border-radius: 8px;
   border: 1px solid #e5e7eb;
+  box-sizing: border-box;
 }
 
 .qrcode-text {

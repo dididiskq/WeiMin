@@ -13,51 +13,54 @@
         <div class="services-container">
           <!-- 服务类别1 -->
           <div class="service-category">
-            <h3 class="category-title">工程师培训</h3>
+            <h3 class="category-title">核心技术服务</h3>
             <div class="service-cards">
-              <div class="service-card">
-                <div class="card-icon">📚</div>
-                <h4>可靠性基础课程</h4>
-                <p>面向工程师的可靠性基础知识培训，涵盖可靠性工程原理、工具与方法。</p>
+              <div class="service-card hover-lift">
+                <div class="card-icon"><span>01</span></div>
+                <h4>可靠性工程师培训</h4>
+                <p>提供全面的可靠性工程师培训课程，涵盖基础理论、工具应用与实战案例分析，提升工程师专业技能。</p>
               </div>
-              <div class="service-card">
-                <div class="card-icon">🎯</div>
-                <h4>高级应用培训</h4>
-                <p>针对有经验工程师的进阶培训，深入讲解复杂系统可靠性分析技术。</p>
+              <div class="service-card hover-lift">
+                <div class="card-icon"><span>02</span></div>
+                <h4>企业可靠性诊断</h4>
+                <p>对企业现有产品和流程进行全面可靠性诊断，识别潜在风险点，提供改进建议和优化方案。</p>
+              </div>
+              <div class="service-card hover-lift">
+                <div class="card-icon"><span>03</span></div>
+                <h4>技术项目咨询</h4>
+                <p>为企业提供可靠性相关技术项目咨询服务，包括项目规划、实施指导和成果评估等。</p>
+              </div>
+              <div class="service-card hover-lift">
+                <div class="card-icon"><span>04</span></div>
+                <h4>工程师驻场服务</h4>
+                <p>派遣资深可靠性工程师到企业驻场，提供一对一技术支持和问题解决，确保项目顺利实施。</p>
               </div>
             </div>
           </div>
 
           <!-- 服务类别2 -->
           <div class="service-category">
-            <h3 class="category-title">企业系统诊断</h3>
+            <h3 class="category-title">高级解决方案</h3>
             <div class="service-cards">
-              <div class="service-card">
-                <div class="card-icon">🔍</div>
-                <h4>系统健康评估</h4>
-                <p>对企业现有系统进行全面评估，识别潜在可靠性风险与改进机会。</p>
+              <div class="service-card hover-lift">
+                <div class="card-icon"><span>05</span></div>
+                <h4>供应链可靠性</h4>
+                <p>提供供应链可靠性管理解决方案，帮助企业评估和提升供应链各环节的可靠性水平。</p>
               </div>
-              <div class="service-card">
-                <div class="card-icon">📊</div>
-                <h4>数据驱动诊断</h4>
-                <p>基于工业大数据分析的系统故障诊断与预测，提高设备运行可靠性。</p>
+              <div class="service-card hover-lift">
+                <div class="card-icon"><span>06</span></div>
+                <h4>可靠性正向设计</h4>
+                <p>从产品设计阶段开始，融入可靠性理念和方法，确保产品从源头就具备高可靠性特性。</p>
               </div>
-            </div>
-          </div>
-
-          <!-- 服务类别3 -->
-          <div class="service-category">
-            <h3 class="category-title">技术咨询示范</h3>
-            <div class="service-cards">
-              <div class="service-card">
-                <div class="card-icon">💡</div>
-                <h4>可靠性设计咨询</h4>
-                <p>为新产品开发提供可靠性设计咨询，从源头提升产品质量与可靠性。</p>
+              <div class="service-card hover-lift">
+                <div class="card-icon"><span>07</span></div>
+                <h4>标准和认证</h4>
+                <p>提供可靠性相关标准咨询和认证服务，帮助企业满足行业标准要求，提升产品竞争力。</p>
               </div>
-              <div class="service-card">
-                <div class="card-icon">🏭</div>
-                <h4>现场技术示范</h4>
-                <p>在企业现场进行可靠性技术示范应用，指导工程师实际操作与应用。</p>
+              <div class="service-card hover-lift">
+                <div class="card-icon"><span>08</span></div>
+                <h4>企业高可靠平台建设</h4>
+                <p>协助企业构建高可靠性管理平台，整合数据、工具和流程，实现可靠性管理的系统化和数字化。</p>
               </div>
             </div>
           </div>
@@ -125,16 +128,26 @@ import Footer from '../components/Footer.vue';
 }
 
 .card-icon {
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  background-color: #dcfce7;
-  color: #10b981;
+  background-color: #3b82f6;
+  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
   margin-bottom: 1.5rem;
+}
+
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.1);
 }
 
 .service-card h4 {

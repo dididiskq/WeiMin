@@ -8,7 +8,7 @@ import ContactUs from '../views/ContactUs.vue';
 import ProjectCase from '../views/ProjectCase.vue';
 
 /**
- * 路由配置数组
+ * 路由配置数组c
  * 每个对象定义一个路由规则，包含路径、名称和对应组件
  */
 const routes = [
@@ -51,7 +51,11 @@ const routes = [
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
+  routes,
+  scrollBehavior() {
+    // 每次导航时滚动到页面顶部
+    return { top: 0 };
+  }
 });
 
 export default router;
