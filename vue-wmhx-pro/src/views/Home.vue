@@ -113,7 +113,8 @@ onMounted(() => {
        <p class="website-text">访问官方网站</p>
      </div>
     <div class="wechat-qrcode">
-      <img src="@/assets/vue.svg" alt="微信公众号二维码" class="qrcode-image">
+      <img src="@/assets/gzh.png" alt="微信公众号二维码" class="qrcode-image">
+
       <p class="qrcode-text">扫码关注公众号</p>
     </div>
   </div>
@@ -500,7 +501,7 @@ onMounted(() => {
 .hero-section {
   position: relative;
   overflow: hidden;
-  height: 100vh;
+  height: 80vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -727,12 +728,12 @@ onMounted(() => {
   animation: scaleIn 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   transform: scale(0);
   opacity: 0;
-  margin-top: -520px;
+  margin-top: -350px;
 }
 
 .middle-connect-area {
   position: absolute;
-  bottom: 15%;
+  bottom: -2%;
   left: 0;
   right: 0;
   text-align: center;
@@ -773,14 +774,14 @@ onMounted(() => {
 
 .hero-content-below-logo {
   position: absolute;
-  top: 35%;
+  top: 40%;
   left: 0;
   right: 0;
   text-align: center;
   animation: floatUp 1.5s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
   transform: translateY(50px);
   opacity: 0;
-  margin-top: 30px;
+  margin-top: 120px;
   z-index: 10;
 }
 
@@ -1027,6 +1028,9 @@ onMounted(() => {
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .case-card:hover {
@@ -1064,6 +1068,7 @@ onMounted(() => {
   padding: 0 1.5rem 1.5rem;
   text-decoration: none;
   transition: color 0.3s ease;
+  margin-top: auto;
 }
 
 .case-link:hover {
@@ -1071,9 +1076,10 @@ onMounted(() => {
 }
 
 /* 合作机构样式 */
-#cooperation-agencies {
-  background-color: #f8fafc;
+#vision {
+  background-color: #ffffff;
   padding: 80px 0;
+  margin-top: 40px;
 }
 
 .agencies-grid {

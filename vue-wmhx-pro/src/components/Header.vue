@@ -4,7 +4,7 @@
   <header class="tech-header">
     <div class="container">
       <nav class="tech-nav">
-        <router-link to="/" class="logo-link"><div class="logo">RSE<span class="highlight">TECH</span></div></router-link>
+        <router-link to="/" class="logo-link"><img src="@/assets/logo.svg" alt="品牌logo" class="logo-img"></router-link>
         <ul class="nav-links">
           <li><router-link to="/institute-introduction" class="nav-link">研究院简介</router-link></li>
           <li><router-link to="/expert-team" class="nav-link">专家团队</router-link></li>
@@ -55,11 +55,14 @@
   text-decoration: none;
 }
 
-.logo {
-  font-size: 1.5rem;
-  font-weight: 300;
-  color: #fff;
-  transition: color 0.3s ease;
+.logo-img {
+  height: 40px;
+  width: auto;
+  transition: transform 0.3s ease;
+}
+
+.logo-img:hover {
+  transform: scale(1.05);
 }
 
 .logo:hover {

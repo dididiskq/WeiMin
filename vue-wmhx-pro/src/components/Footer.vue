@@ -41,8 +41,8 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <div class="footer-logo">RSE<span class="highlight">TECH</span></div>
-        <div class="footer-copyright">© 2025 RSETECH. 保留所有权利</div>
+        <div class="footer-logo"><img src="@/assets/logo.svg" alt="品牌logo" class="footer-logo-img"></div>
+        <div class="footer-copyright">© 2025 深圳市卫民可靠性系统工程研究院. 保留所有权利</div>
         <div class="footer-social">
           <a href="#" class="social-icon">微信</a>
           <a href="#" class="social-icon">微博</a>
@@ -134,9 +134,18 @@
 }
 
 .footer-logo {
-  font-size: 1.5rem;
-  font-weight: 300;
-  color: #fff;
+  display: flex;
+  align-items: center;
+}
+
+.footer-logo-img {
+  height: 36px;
+  width: auto;
+  transition: transform 0.3s ease;
+}
+
+.footer-logo-img:hover {
+  transform: scale(1.05);
 }
 
 .footer-copyright {
