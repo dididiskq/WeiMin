@@ -25,14 +25,14 @@ const scrollToTop = () => {
   /* 位于咨询组件下方，形成功能组 */
 .back-to-top {
   position: fixed;
-  left: 0;
-  top: calc(50% + 120px);
+  right: 0;
+  top: calc(60% + 120px);
   transform: translateY(-50%);
   background-color: white;
   color: #165DFF;
   border: 1px solid #165DFF;
   padding: 15px 10px;
-  border-radius: 0 8px 8px 0;
+  border-radius: 8px 0px 0px 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   display: flex;

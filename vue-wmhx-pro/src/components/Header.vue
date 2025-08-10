@@ -4,13 +4,15 @@
   <header class="tech-header">
     <div class="container">
       <nav class="tech-nav">
-        <router-link to="/" class="logo-link"><img src="@/assets/logo.svg" alt="品牌logo" class="logo-img"></router-link>
+        <router-link to="/" class="logo-link"><img src="@/assets/logo.svg" alt="品牌logo" class="logo-img"><span class="logo-text">深圳市为民可靠性系统工程研究院</span></router-link>
         <ul class="nav-links">
           <li><router-link to="/institute-introduction" class="nav-link">研究院简介</router-link></li>
           <li><router-link to="/expert-team" class="nav-link">专家团队</router-link></li>
           <li><router-link to="/service-content" class="nav-link">服务内容</router-link></li>
           <li><router-link to="/brand-activities" class="nav-link">品牌活动</router-link></li>
           <li><router-link to="/project-case" class="nav-link">项目案例</router-link></li>
+          <li><router-link to="/intellectual-property" class="nav-link">知识产权和智库</router-link></li>
+          <li><router-link to="/cooperation-agencies" class="nav-link">合作机构</router-link></li>
           <li><router-link to="/contact-us" class="nav-link cta-button">联系我们</router-link></li>
         </ul>
       </nav>
@@ -59,6 +61,15 @@
   height: 40px;
   width: auto;
   transition: transform 0.3s ease;
+  vertical-align: middle;
+}
+
+.logo-text {
+  color: white;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-left: 10px;
+  vertical-align: middle;
 }
 
 .logo-img:hover {

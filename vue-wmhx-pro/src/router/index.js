@@ -6,6 +6,8 @@ import ServiceContent from '../views/ServiceContent.vue';
 import BrandActivities from '../views/BrandActivities.vue';
 import ContactUs from '../views/ContactUs.vue';
 import ProjectCase from '../views/ProjectCase.vue';
+import IntellectualProperty from '../views/IntellectualProperty.vue';
+import CooperationAgencies from '../views/CooperationAgencies.vue';
 
 /**
  * 路由配置数组c
@@ -42,11 +44,9 @@ const routes = [
     name: 'ContactUs',
     component: ContactUs
   },
-  {
-    path: '/project-case',
-    name: 'ProjectCase',
-    component: ProjectCase
-  }
+  {    path: '/project-case',    name: 'ProjectCase',    component: ProjectCase  },
+    {    path: '/intellectual-property',    name: 'IntellectualProperty',    component: IntellectualProperty  },  
+    {    path: '/cooperation-agencies',    name: 'CooperationAgencies',    component: CooperationAgencies  }
 ];
 
 const router = createRouter({

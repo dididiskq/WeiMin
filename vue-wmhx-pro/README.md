@@ -20,3 +20,6 @@ module.exports = {
 
 cd dist 
 http-server 
+
+### 打包exe
+npm run packager 

@@ -14,13 +14,13 @@
 /* z-index: 1000 确保显示在其他内容上方 */
 .consultation-float {
   position: fixed;
-  left: 0;
-  top: 50%;
+  right: 0;
+  top: 60%;
   transform: translateY(-50%);
   background-color: #165DFF;
   color: white;
   padding: 15px 10px;
-  border-radius: 0 8px 8px 0;
+  border-radius: 8px 0px 0px 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   z-index: 1000;
   display: flex;

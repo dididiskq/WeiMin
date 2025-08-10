@@ -98,24 +98,19 @@ onMounted(() => {
 <div class="video-logo-container" v-else>
   <img src="@/assets/logo.svg" alt="品牌logo" class="animated-logo">
   <div class="hero-content-below-logo">
-    <h1 class="hero-title">服务创新科技 · 普惠中国智造</h1>
-    <p class="hero-subtitle">确性可靠性，赋能中国制造企业</p>
-    <div class="hero-buttons">
+    <h1 class="hero-title">深圳市为民可靠性系统工程研究院</h1>
+    <p class="hero-subtitle">确性可靠性 · 赋能中国制造企业 · 服务创新科技 · 普惠中国智造</p>
+    <div class="hero-buttons-with-extras">
+      <div class="website-section">
+         <a href="https://www.charmingclass.com/" target="_blank" class="website-link-container">
+           <div class="website-image-placeholder">场鸣职业课</div>
+         </a>
+       </div>
       <router-link to="/institute-introduction" class="primary-btn">认识为民可靠性研究院</router-link>
       <router-link to="/project-case" class="secondary-btn">了解产品可靠性</router-link>
-    </div>
-  </div>
-  <div class="middle-connect-area">
-    <div class="website-section">
-       <a href="https://www.charmingclass.com/" target="_blank" class="website-link-container">
-         <div class="website-image-placeholder">场鸣职业课</div>
-       </a>
-       <p class="website-text">访问官方网站</p>
-     </div>
-    <div class="wechat-qrcode">
-      <img src="@/assets/gzh.png" alt="微信公众号二维码" class="qrcode-image">
-
-      <p class="qrcode-text">扫码关注公众号</p>
+      <div class="wechat-qrcode">
+        <img src="@/assets/gzh.png" alt="微信公众号二维码" class="qrcode-image">
+      </div>
     </div>
   </div>
 </div>
@@ -375,26 +370,38 @@ onMounted(() => {
           <div class="section-divider"></div>
         </div>
         <div class="agencies-grid">
-          <div class="agency-card">
-            <div class="agency-icon" style="background-color: #3b82f6;">01</div>
-            <h3 class="agency-title">发起单位</h3>
-            <p class="agency-desc">联合行业领军企业共同发起成立，推动可靠性技术标准化与产业化应用</p>
-          </div>
-          <div class="agency-card">
-            <div class="agency-icon" style="background-color: #10b981;">02</div>
-            <h3 class="agency-title">理事会</h3>
-            <p class="agency-desc">由学术界、产业界专家组成的决策机构，指导平台发展方向与战略规划</p>
-          </div>
-          <div class="agency-card">
-            <div class="agency-icon" style="background-color: #8b5cf6;">03</div>
-            <h3 class="agency-title">为民生态圈</h3>
-            <p class="agency-desc">构建产学研用一体化生态系统，促进资源共享与协同创新</p>
-          </div>
-          <div class="agency-card">
-            <div class="agency-icon" style="background-color: #f59e0b;">04</div>
-            <h3 class="agency-title">合作企业</h3>
-            <p class="agency-desc">汇聚国内外知名企业，共建可靠性技术创新与应用合作网络</p>
-          </div>
+          <router-link to="/cooperation-agencies" class="agency-card-link">
+            <div class="agency-card">
+              <div class="agency-icon" style="background-color: #3b82f6;">01</div>
+              <h3 class="agency-title">发起单位</h3>
+              <p class="agency-desc">联合行业领军企业共同发起成立，推动可靠性技术标准化与产业化应用</p>
+              <span class="case-link">查看详情 →</span>
+            </div>
+          </router-link>
+          <router-link to="/cooperation-agencies" class="agency-card-link">
+            <div class="agency-card">
+              <div class="agency-icon" style="background-color: #10b981;">02</div>
+              <h3 class="agency-title">理事会</h3>
+              <p class="agency-desc">由学术界、产业界专家组成的决策机构，指导平台发展方向与战略规划</p>
+              <span class="case-link">查看详情 →</span>
+            </div>
+          </router-link>
+          <router-link to="/cooperation-agencies" class="agency-card-link">
+            <div class="agency-card">
+              <div class="agency-icon" style="background-color: #8b5cf6;">03</div>
+              <h3 class="agency-title">为民生态圈</h3>
+              <p class="agency-desc">构建产学研用一体化生态系统，促进资源共享与协同创新</p>
+              <span class="case-link">查看详情 →</span>
+            </div>
+          </router-link>
+          <router-link to="/cooperation-agencies" class="agency-card-link">
+            <div class="agency-card">
+              <div class="agency-icon" style="background-color: #f59e0b;">04</div>
+              <h3 class="agency-title">合作企业</h3>
+              <p class="agency-desc">汇聚国内外知名企业，共建可靠性技术创新与应用合作网络</p>
+              <span class="case-link">查看详情 →</span>
+            </div>
+          </router-link>
         </div>
       </section>
 
@@ -435,6 +442,50 @@ onMounted(() => {
 </template>
 
 <style scoped>
+  /* 调整按钮区域样式 */
+  .hero-buttons-with-extras {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 60px;
+  }
+
+  .hero-content-below-logo {
+    margin-top: 40px;
+  }
+
+  .website-section {
+    display: flex;
+    align-items: center;
+  }
+
+  .wechat-qrcode {
+    display: flex;
+    align-items: center;
+  }
+
+  .qrcode-image {
+    width: 120px;
+    height: 120px;
+  }
+
+  .website-image-placeholder {
+    padding: 10px 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #333;
+  }
+
+  /* 响应式调整 */
+  @media (max-width: 768px) {
+    .hero-buttons-with-extras {
+      flex-direction: column;
+    }
+  }
 /* 链接样式 */
 .activity-card-link, .service-card-link, .team-card-link, .case-card-link {
   text-decoration: none;
@@ -528,7 +579,7 @@ onMounted(() => {
 }
 
 .hero-title {
-  font-size: 3rem;
+  font-size: 3.8rem;
   font-weight: 600;
   color: #1e293b;
   margin-bottom: 1rem;
@@ -586,6 +637,7 @@ onMounted(() => {
   cursor: pointer;
   transition: all 0.3s ease;
   text-decoration: none;
+  min-width: 200px;
 }
 
 .primary-btn:hover {
@@ -603,6 +655,7 @@ onMounted(() => {
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.3s ease;
+  min-width: 200px;
 }
 
 .secondary-btn:hover {
