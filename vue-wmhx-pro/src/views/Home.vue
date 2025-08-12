@@ -472,12 +472,19 @@ onMounted(() => {
   }
 
   .website-image-placeholder {
-    padding: 10px 20px;
+    width: 120px;
+    height: 120px;
     background-color: #f5f5f5;
     border: 1px solid #ddd;
     border-radius: 4px;
-    font-size: 16px;
+    font-size: 14px;
     color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 10px;
   }
 
   /* 响应式调整 */
@@ -631,13 +638,22 @@ onMounted(() => {
   background: #3b82f6;
   color: white;
   border: none;
-  padding: 0.8rem 2rem;
+  padding: 0 10px;
   border-radius: 4px;
-  font-size: 1rem;
+  font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.3s ease;
   text-decoration: none;
-  min-width: 200px;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-sizing: border-box;
+  overflow: hidden;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .primary-btn:hover {
@@ -650,12 +666,21 @@ onMounted(() => {
   background: transparent;
   color: #3b82f6;
   border: 1px solid #3b82f6;
-  padding: 0.8rem 2rem;
+  padding: 0 10px;
   border-radius: 4px;
-  font-size: 1rem;
+  font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  min-width: 200px;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-sizing: border-box;
+  overflow: hidden;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .secondary-btn:hover {
@@ -776,12 +801,12 @@ onMounted(() => {
 }
 
 .animated-logo {
-  width: 260px;
+  width: 200px;
   height: auto;
   animation: scaleIn 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   transform: scale(0);
   opacity: 0;
-  margin-top: -350px;
+  margin-top: -280px;
 }
 
 .middle-connect-area {

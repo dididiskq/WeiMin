@@ -58,7 +58,7 @@
 }
 
 .logo-img {
-  height: 40px;
+  height: 22px;
   width: auto;
   transition: transform 0.3s ease;
   vertical-align: middle;
