@@ -77,6 +77,89 @@ onMounted(() => {
 
   // 窗口调整时重新生成粒子
   window.addEventListener('resize', generateParticles);
+
+  // 初始化滚动图片区域
+    const sliderWrapper = document.querySelector('.slider-wrapper');
+    if (sliderWrapper) {
+      const sliderItems = document.querySelectorAll('.slider-item');
+      const totalItems = sliderItems.length;
+      const itemWidth = 530; // 包含边距的宽度 (500px宽度 + 15px*2边距)
+      let currentPosition = 0;
+      let currentIndex = 0; // 当前激活的索引
+
+      // 绑定静态指示器事件
+      setTimeout(() => {
+        const indicators = document.querySelectorAll('.indicator');
+        if (indicators.length > 0) {
+          indicators.forEach((indicator, index) => {
+            // 确保初始状态正确
+            if (index === currentIndex) {
+              indicator.classList.add('active');
+            } else {
+              indicator.classList.remove('active');
+            }
+
+            // 添加点击事件
+            indicator.addEventListener('click', () => {
+              currentIndex = index;
+              updateIndicators();
+              currentPosition = -index * itemWidth;
+              sliderWrapper.style.transition = 'transform 0.5s ease-in-out';
+              sliderWrapper.style.transform = `translateX(${currentPosition}px)`;
+            });
+          });
+        } else {
+          console.warn('未找到指示器元素');
+        }
+      }, 100);
+
+      // 更新指示器状态
+      function updateIndicators() {
+        const indicators = document.querySelectorAll('.indicator');
+        indicators.forEach((indicator, index) => {
+          if (index === currentIndex) {
+            indicator.classList.add('active');
+          } else {
+            indicator.classList.remove('active');
+          }
+        });
+      }
+
+      // 设置初始位置
+      currentPosition = 0;
+      sliderWrapper.style.transform = `translateX(${currentPosition}px)`;
+
+      // 复制元素以实现无缝滚动
+      sliderItems.forEach(item => {
+        const clone = item.cloneNode(true);
+        sliderWrapper.appendChild(clone);
+      });
+
+      function slide() {
+        currentPosition -= itemWidth;
+        sliderWrapper.style.transition = 'transform 0.5s ease-in-out';
+        sliderWrapper.style.transform = `translateX(${currentPosition}px)`;
+
+        // 更新当前索引
+        currentIndex = (currentIndex + 1) % totalItems;
+        updateIndicators();
+
+        // 当滚动完一轮后，重置位置
+        if (Math.abs(currentPosition) >= totalItems * itemWidth) {
+          setTimeout(() => {
+            sliderWrapper.style.transition = 'none';
+            currentPosition = 0;
+            sliderWrapper.style.transform = `translateX(${currentPosition}px)`;
+            // 重置索引到起始位置
+            currentIndex = 0;
+            updateIndicators();
+          }, 500);
+        }
+      }
+
+      // 每5秒滚动一次
+      setInterval(slide, 5000);
+    }
 });
 </script>
 
@@ -130,6 +213,55 @@ onMounted(() => {
         </div>
         <div class="section-content">
           <p>集合大学科研和专业工程师，打造可靠性共性技术公共服务平台，提升企业高可靠工程能力，支持中国制造业高质量发展。</p>
+        </div>
+      </section>
+
+      <!-- 滚动图片展示区 -->
+      <section id="image-slider" class="section fade-in" style="background-color: white;">
+        <div class="section-header">
+          <h2 class="section-title">新闻咨询</h2>
+          <div class="section-divider"></div>
+        </div>
+        <div class="slider-container">
+          <div class="slider-wrapper">
+            <div class="slider-item">
+              <div class="image-container">
+                <img src="@/assets/1.png" alt="AI大模型取得突破性进展" class="slider-image">
+              </div>
+              <p class="image-caption">AI大模型在复杂推理任务上超越人类专家水平</p>
+            </div>
+            <div class="slider-item">
+              <div class="image-container">
+                <img src="@/assets/2.png" alt="量子计算实现重大突破" class="slider-image">
+              </div>
+              <p class="image-caption">科学家成功研发出100量子比特处理器</p>
+            </div>
+            <div class="slider-item">
+              <div class="image-container">
+                <img src="@/assets/3.png" alt="太空探索新发现" class="slider-image">
+              </div>
+              <p class="image-caption">发现类似地球的系外行星，可能存在液态水</p>
+            </div>
+            <div class="slider-item">
+              <div class="image-container">
+                <img src="@/assets/4.png" alt="新能源技术革新" class="slider-image">
+              </div>
+              <p class="image-caption">新型电池技术实现能量密度提升300%</p>
+            </div>
+            <div class="slider-item">
+              <div class="image-container">
+                <img src="@/assets/5.png" alt="元宇宙技术新进展" class="slider-image">
+              </div>
+              <p class="image-caption">新一代VR设备实现全沉浸式16K体验</p>
+            </div>
+          </div>
+          <div class="slider-indicators">
+            <div class="indicator active" data-index="0"></div>
+            <div class="indicator" data-index="1"></div>
+            <div class="indicator" data-index="2"></div>
+            <div class="indicator" data-index="3"></div>
+            <div class="indicator" data-index="4"></div>
+          </div>
         </div>
       </section>
 
@@ -447,7 +579,7 @@ onMounted(() => {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    gap: 100px;
     flex-wrap: wrap;
     margin-top: 60px;
   }
@@ -467,16 +599,17 @@ onMounted(() => {
   }
 
   .qrcode-image {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
   }
 
   .website-image-placeholder {
-    width: 120px;
-    height: 120px;
-    background-color: #f5f5f5;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+      width: 115px;
+      height: 115px;
+      background-color: transparent;
+      border: 1px solid #ddd; 
+      
+      border-radius: 4px;
     font-size: 14px;
     color: #333;
     display: flex;
@@ -623,7 +756,7 @@ onMounted(() => {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at center, rgba(248, 250, 252, 0.05), rgba(248, 250, 252, 0.3) 70%);
+  background: transparent;
   z-index: 1;
 }
 
@@ -635,17 +768,19 @@ onMounted(() => {
 }
 
 .primary-btn {
-  background: #3b82f6;
-  color: white;
-  border: none;
+  /* background: #3b82f6;
+  color: white; */
+  background: transparent;
+  color: #3b82f6;
+  border: 1px solid #3b82f6;
   padding: 0 10px;
   border-radius: 4px;
   font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.3s ease;
   text-decoration: none;
-  width: 120px;
-  height: 120px;
+  width: 110px;
+  height: 110px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -671,8 +806,8 @@ onMounted(() => {
   font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.3s ease;
-  width: 120px;
-  height: 120px;
+  width: 110px;
+  height: 110px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -698,7 +833,7 @@ onMounted(() => {
 /* 通用区块样式 */
 /* 通用区块样式 - 初始隐藏，滚动到视图中时显示动画 */
 .section {
-  max-width: 1200px;
+  max-width: 1500px;
   margin: 0 auto 8rem;
   padding: 0 2rem;
   opacity: 0;
@@ -801,7 +936,7 @@ onMounted(() => {
 }
 
 .animated-logo {
-  width: 200px;
+  width: 150px;
   height: auto;
   animation: scaleIn 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   transform: scale(0);
@@ -896,8 +1031,8 @@ onMounted(() => {
 }
 
 .qrcode-image {
-  width: 120px;
-  height: 120px;
+  width: 115px;
+  height: 115px;
   object-fit: contain;
   background-color: #f3f4f6;
   padding: 10px;
@@ -1241,4 +1376,90 @@ onMounted(() => {
     grid-template-columns: 1fr;
   }
 }
+  /* 滚动图片区域样式 */
+  #image-slider {
+    padding: 4rem 0;
+    background-color: #f8fafc;
+  }
+
+  .slider-container {
+    width: 100%; /* 屏幕宽度的五分之四 */
+    margin: 2rem auto;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .slider-wrapper {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    will-change: transform;
+  }
+
+  .slider-item {
+    flex: 0 0 auto;
+    width: 500px;
+    margin: 0 15px;
+    transition: transform 0.3s ease;
+  }
+
+  .slider-item:hover {
+    transform: translateY(-10px);
+  }
+
+  .image-container {
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 30px; /* 将图片向下移动30px */
+  }
+
+  .slider-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  /* 轮播指示器样式 */
+  .slider-indicators {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    gap: 15px;
+    z-index: 100;
+    position: relative;
+    padding: 10px 0;
+    background-color: transparent;
+  }
+
+  .indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #94a3b8;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+  }
+
+  .indicator.active {
+    width: 16px;
+    height: 16px;
+    background-color: #1e40af;
+    transform: scale(1.3);
+    border-color: #3b82f6;
+  }
+
+  /* 已取消图片变大效果 */
+
+  .image-caption {
+    text-align: center;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #333;
+  }
+
+  /* 已取消浮动效果 */
 </style>

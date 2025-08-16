@@ -34,7 +34,8 @@
   left: 0;
   right: 0;
   z-index: 1000;
-  background: #2aaa84;
+  /* background: #2aaa84; */
+  background: #0f7cd6;
   backdrop-filter: blur(10px);
   padding: 1rem 5%;
   border-bottom: 1px solid rgba(59, 130, 246, 0.2);
