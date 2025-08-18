@@ -58,7 +58,8 @@
   /* 页脚容器样式 - 深色背景、白色文字 */
   /* 固定在页面底部，确保内容始终可见 */
 .tech-footer {
-  background-color: #2aaa84;
+  /* background-color: #2aaa84; */
+  background: #0f7cd6;
   color: #fff;
   padding: 4rem 0 0;
   margin-top: 5rem;

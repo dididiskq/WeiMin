@@ -186,7 +186,7 @@ onMounted(() => {
     <div class="hero-buttons-with-extras">
       <div class="website-section">
          <a href="https://www.charmingclass.com/" target="_blank" class="website-link-container">
-           <div class="website-image-placeholder">场鸣职业课</div>
+           <img src="@/assets/changm.png" alt="场鸣职业课" class="website-image">
          </a>
        </div>
       <router-link to="/institute-introduction" class="primary-btn">认识为民可靠性研究院</router-link>
@@ -203,23 +203,11 @@ onMounted(() => {
 
     <!-- 主要内容区域 -->
     <main class="main-content">
-      <!-- 愿景使命 -->
-
-      <!-- 愿景使命 -->
-      <section id="vision" class="section fade-in">
-        <div class="section-header">
-          <h2 class="section-title">愿景与使命</h2>
-          <div class="section-divider"></div>
-        </div>
-        <div class="section-content">
-          <p>集合大学科研和专业工程师，打造可靠性共性技术公共服务平台，提升企业高可靠工程能力，支持中国制造业高质量发展。</p>
-        </div>
-      </section>
 
       <!-- 滚动图片展示区 -->
       <section id="image-slider" class="section fade-in" style="background-color: white;">
         <div class="section-header">
-          <h2 class="section-title">新闻咨询</h2>
+          <h2 class="section-title">最新资讯</h2>
           <div class="section-divider"></div>
         </div>
         <div class="slider-container">
@@ -574,6 +562,11 @@ onMounted(() => {
 </template>
 
 <style scoped>
+.website-image {
+  width: 110px;
+  height: 100px;
+  object-fit: contain;
+}
   /* 调整按钮区域样式 */
   .hero-buttons-with-extras {
     display: flex;
@@ -591,6 +584,8 @@ onMounted(() => {
   .website-section {
     display: flex;
     align-items: center;
+    border: 1px solid #3b82f6;
+    border-radius: 4px;
   }
 
   .wechat-qrcode {
@@ -819,8 +814,9 @@ onMounted(() => {
 }
 
 .secondary-btn:hover {
-  background: rgba(59, 130, 246, 0.1);
+  background: #2563eb;
   transform: translateY(-3px);
+  box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.4);
 }
 
 /* 主要内容区域 */
