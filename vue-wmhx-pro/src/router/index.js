@@ -5,9 +5,12 @@ import ExpertTeam from '../views/ExpertTeam.vue';
 import ServiceContent from '../views/ServiceContent.vue';
 import BrandActivities from '../views/BrandActivities.vue';
 import ContactUs from '../views/ContactUs.vue';
+import LatestNews from '../views/LatestNews.vue';
 import ProjectCase from '../views/ProjectCase.vue';
 import IntellectualProperty from '../views/IntellectualProperty.vue';
 import CooperationAgencies from '../views/CooperationAgencies.vue';
+import AdminLogin from '../views/AdminLogin.vue';
+import ConfigManager from '../views/ConfigManager.vue';
 
 /**
  * 路由配置数组c
@@ -40,13 +43,28 @@ const routes = [
     component: BrandActivities
   },
   {
+    path: '/latest-news',
+    name: 'LatestNews',
+    component: LatestNews
+  },
+  {
     path: '/contact-us',
     name: 'ContactUs',
     component: ContactUs
   },
   {    path: '/project-case',    name: 'ProjectCase',    component: ProjectCase  },
     {    path: '/intellectual-property',    name: 'IntellectualProperty',    component: IntellectualProperty  },  
-    {    path: '/cooperation-agencies',    name: 'CooperationAgencies',    component: CooperationAgencies  }
+    {    path: '/cooperation-agencies',    name: 'CooperationAgencies',    component: CooperationAgencies  },
+  {
+    path: '/admin-login',
+    name: 'AdminLogin',
+    component: AdminLogin
+  },
+  {
+    path: '/config-manager',
+    name: 'ConfigManager',
+    component: ConfigManager
+  }
 ];
 
 const router = createRouter({

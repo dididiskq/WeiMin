@@ -10,6 +10,7 @@
           <li><router-link to="/expert-team" class="nav-link">专家团队</router-link></li>
           <li><router-link to="/service-content" class="nav-link">服务内容</router-link></li>
           <li><router-link to="/brand-activities" class="nav-link">品牌活动</router-link></li>
+          <li><router-link to="/latest-news" class="nav-link">最新资讯</router-link></li>
           <li><router-link to="/project-case" class="nav-link">项目案例</router-link></li>
           <li><router-link to="/intellectual-property" class="nav-link">知识产权和智库</router-link></li>
           <li><router-link to="/cooperation-agencies" class="nav-link">合作机构</router-link></li>

@@ -49,6 +49,9 @@
           <a href="#" class="social-icon">知乎</a>
           <a href="#" class="social-icon">B站</a>
         </div>
+        <div class="footer-admin">
+          <router-link to="/admin-login" class="admin-login-link">管理员登录</router-link>
+        </div>
       </div>
     </div>
   </footer>
@@ -169,7 +172,28 @@
   color: #3b82f6;
 }
 
+.footer-admin {
+  margin-top: 1rem;
+}
+
+.admin-login-link {
+  color: #fff;
+  text-decoration: none;
+  background-color: #3b82f6;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.admin-login-link:hover {
+  background-color: #2563eb;
+}
+
 @media (min-width: 768px) {
+  .footer-admin {
+    margin-top: 0;
+  }
   .footer-bottom {
     flex-direction: row;
     justify-content: space-between;

@@ -2,6 +2,8 @@
 import { onMounted, ref } from 'vue';
 import Footer from '../components/Footer.vue';
 import Header from '../components/Header.vue';
+import homeConfig from '../config/home.config.js';
+import { getMergedConfig } from '../services/configService.js';
 
 /**
  * 首页组件 - 包含粒子背景、导航栏、英雄区域和主要内容区块
@@ -12,6 +14,7 @@ const particles = ref([]);
 const sections = ref([]);
 const videoVisible = ref(true);
 const scrollTriggered = ref(false);
+const config = ref(JSON.parse(JSON.stringify(homeConfig))); // 使用响应式配置对象，初始化时使用homeConfig作为默认值
 
 const handleVideoEnd = () => {
   if (!scrollTriggered.value) {
@@ -69,6 +72,9 @@ const handleScroll = () => {
 };
 
 onMounted(() => {
+  // 获取合并后的配置（默认配置 + 保存的配置）
+  config.value = getMergedConfig(homeConfig);
+  
   generateParticles();
   sections.value = document.querySelectorAll('.section');
   window.addEventListener('scroll', handleScroll);
@@ -77,6 +83,13 @@ onMounted(() => {
 
   // 窗口调整时重新生成粒子
   window.addEventListener('resize', generateParticles);
+  
+  // 监听存储变化，实时更新配置
+  window.addEventListener('storage', (event) => {
+    if (event.key === 'siteConfig') {
+      config.value = JSON.parse(event.newValue || JSON.stringify(homeConfig));
+    }
+  });
 
   // 初始化滚动图片区域
     const sliderWrapper = document.querySelector('.slider-wrapper');
@@ -174,25 +187,25 @@ onMounted(() => {
     <header class="hero-section">
       <div class="hero-video-container" v-if="videoVisible">
   <video class="hero-video" autoplay muted playsinline @ended="handleVideoEnd">
-    <source src="/videos/background.mp4" type="video/mp4">
+    <source :src="config.hero.video" type="video/mp4">
     您的浏览器不支持视频播放
   </video>
 </div>
 <div class="video-logo-container" v-else>
-  <img src="@/assets/logo.svg" alt="品牌logo" class="animated-logo">
+  <img :src="config.hero.logo" alt="品牌logo" class="animated-logo">
   <div class="hero-content-below-logo">
-    <h1 class="hero-title">深圳市为民可靠性系统工程研究院</h1>
-    <p class="hero-subtitle">确性可靠性 · 赋能中国制造企业 · 服务创新科技 · 普惠中国智造</p>
+    <h1 class="hero-title">{{ config.hero.title }}</h1>
+    <p class="hero-subtitle">{{ config.hero.subtitle }}</p>
     <div class="hero-buttons-with-extras">
       <div class="website-section">
          <a href="https://www.charmingclass.com/" target="_blank" class="website-link-container">
-           <img src="@/assets/changm.png" alt="场鸣职业课" class="website-image">
+           <img :src="config.hero.websiteImage" alt="场鸣职业课" class="website-image">
          </a>
        </div>
       <router-link to="/institute-introduction" class="primary-btn">认识为民可靠性研究院</router-link>
       <router-link to="/project-case" class="secondary-btn">了解产品可靠性</router-link>
       <div class="wechat-qrcode">
-        <img src="@/assets/gzh.png" alt="微信公众号二维码" class="qrcode-image">
+        <img :src="config.hero.wechatQrcode" alt="微信公众号二维码" class="qrcode-image">
       </div>
     </div>
   </div>
@@ -212,35 +225,11 @@ onMounted(() => {
         </div>
         <div class="slider-container">
           <div class="slider-wrapper">
-            <div class="slider-item">
+            <div class="slider-item" v-for="(item, index) in homeConfig.newsSlider" :key="index">
               <div class="image-container">
-                <img src="@/assets/1.png" alt="AI大模型取得突破性进展" class="slider-image">
+                <img :src="item.image" :alt="item.caption" class="slider-image">
               </div>
-              <p class="image-caption">AI大模型在复杂推理任务上超越人类专家水平</p>
-            </div>
-            <div class="slider-item">
-              <div class="image-container">
-                <img src="@/assets/2.png" alt="量子计算实现重大突破" class="slider-image">
-              </div>
-              <p class="image-caption">科学家成功研发出100量子比特处理器</p>
-            </div>
-            <div class="slider-item">
-              <div class="image-container">
-                <img src="@/assets/3.png" alt="太空探索新发现" class="slider-image">
-              </div>
-              <p class="image-caption">发现类似地球的系外行星，可能存在液态水</p>
-            </div>
-            <div class="slider-item">
-              <div class="image-container">
-                <img src="@/assets/4.png" alt="新能源技术革新" class="slider-image">
-              </div>
-              <p class="image-caption">新型电池技术实现能量密度提升300%</p>
-            </div>
-            <div class="slider-item">
-              <div class="image-container">
-                <img src="@/assets/5.png" alt="元宇宙技术新进展" class="slider-image">
-              </div>
-              <p class="image-caption">新一代VR设备实现全沉浸式16K体验</p>
+              <p class="image-caption">{{ item.caption }}</p>
             </div>
           </div>
           <div class="slider-indicators">
@@ -260,58 +249,12 @@ onMounted(() => {
           <div class="section-divider"></div>
         </div>
         <div class="team-grid">
-          <!-- 团队成员1 -->
-          <router-link to="/expert-team" class="team-card-link">
+          <router-link to="/expert-team" class="team-card-link" v-for="(expert, index) in config.expertTeam" :key="index">
             <div class="team-card">
-              <div class="team-photo" style="background-color: #dcfce7;"></div>
-              <h3 class="team-name">张明</h3>
-              <p class="team-position">可靠性工程专家</p>
-              <p class="team-desc">15年工业可靠性研究经验，曾主导多项国家级可靠性项目。</p>
-            </div>
-          </router-link>
-          <!-- 团队成员2 -->
-          <router-link to="/expert-team" class="team-card-link">
-            <div class="team-card">
-              <div class="team-photo" style="background-color: #dcfce7;"></div>
-              <h3 class="team-name">李华</h3>
-              <p class="team-position">系统工程师</p>
-              <p class="team-desc">专注于复杂系统可靠性分析，发表学术论文20余篇。</p>
-            </div>
-          </router-link>
-          <!-- 团队成员3 -->
-          <router-link to="/expert-team" class="team-card-link">
-            <div class="team-card">
-              <div class="team-photo" style="background-color: #dcfce7;"></div>
-              <h3 class="team-name">王芳</h3>
-              <p class="team-position">数据分析师</p>
-              <p class="team-desc">擅长可靠性数据建模与分析，开发多项预测算法。</p>
-            </div>
-          </router-link>
-          <!-- 团队成员4 -->
-          <router-link to="/expert-team" class="team-card-link">
-            <div class="team-card">
-              <div class="team-photo" style="background-color: #dcfce7;"></div>
-              <h3 class="team-name">赵强</h3>
-              <p class="team-position">机械工程专家</p>
-              <p class="team-desc">专注于机械系统故障诊断与寿命预测技术研究。</p>
-            </div>
-          </router-link>
-          <!-- 团队成员5 -->
-          <router-link to="/expert-team" class="team-card-link">
-            <div class="team-card">
-              <div class="team-photo" style="background-color: #dcfce7;"></div>
-              <h3 class="team-name">陈静</h3>
-              <p class="team-position">软件可靠性工程师</p>
-              <p class="team-desc">负责软件系统可靠性测试与验证方法研究。</p>
-            </div>
-          </router-link>
-          <!-- 团队成员6 -->
-          <router-link to="/expert-team" class="team-card-link">
-            <div class="team-card">
-              <div class="team-photo" style="background-color: #dcfce7;"></div>
-              <h3 class="team-name">刘杰</h3>
-              <p class="team-position">质量管理专家</p>
-              <p class="team-desc">ISO可靠性管理体系认证专家，多家企业顾问。</p>
+              <div class="team-photo" :style="{ backgroundColor: expert.backgroundColor }"></div>
+              <h3 class="team-name">{{ expert.name }}</h3>
+              <p class="team-position">{{ expert.position }}</p>
+              <p class="team-desc">{{ expert.description }}</p>
             </div>
           </router-link>
         </div>
@@ -324,52 +267,10 @@ onMounted(() => {
           <div class="section-divider"></div>
         </div>
         <div class="services-grid">
-          <router-link to="/service-content" class="service-card-link">
+          <router-link to="/service-content" class="service-card-link" v-for="(service, index) in config.services" :key="index">
             <div class="service-card hover-lift">
-              <div class="card-icon"><span>01</span></div>
-              <h3>可靠性工程师培训</h3>
-            </div>
-          </router-link>
-          <router-link to="/service-content" class="service-card-link">
-            <div class="service-card hover-lift">
-              <div class="card-icon"><span>02</span></div>
-              <h3>企业可靠性诊断</h3>
-            </div>
-          </router-link>
-          <router-link to="/service-content" class="service-card-link">
-            <div class="service-card hover-lift">
-              <div class="card-icon"><span>03</span></div>
-              <h3>技术项目咨询</h3>
-            </div>
-          </router-link>
-          <router-link to="/service-content" class="service-card-link">
-            <div class="service-card hover-lift">
-              <div class="card-icon"><span>04</span></div>
-              <h3>工程师驻场服务</h3>
-            </div>
-          </router-link>
-          <router-link to="/service-content" class="service-card-link">
-            <div class="service-card hover-lift">
-              <div class="card-icon"><span>05</span></div>
-              <h3>供应链可靠性</h3>
-            </div>
-          </router-link>
-          <router-link to="/service-content" class="service-card-link">
-            <div class="service-card hover-lift">
-              <div class="card-icon"><span>06</span></div>
-              <h3>可靠性正向设计</h3>
-            </div>
-          </router-link>
-          <router-link to="/service-content" class="service-card-link">
-            <div class="service-card hover-lift">
-              <div class="card-icon"><span>07</span></div>
-              <h3>标准和认证</h3>
-            </div>
-          </router-link>
-          <router-link to="/service-content" class="service-card-link">
-            <div class="service-card hover-lift">
-              <div class="card-icon"><span>08</span></div>
-              <h3>企业高可靠平台建设</h3>
+              <div class="card-icon"><span>{{ service.id }}</span></div>
+              <h3>{{ service.title }}</h3>
             </div>
           </router-link>
         </div>
@@ -382,34 +283,10 @@ onMounted(() => {
           <div class="section-divider"></div>
         </div>
         <div class="cases-grid">
-          <div class="case-card">
-            <div class="case-image" style="background-color: #dbeafe;"></div>
-            <h3 class="case-title">技术标准</h3>
-            <p class="case-desc">制定行业可靠性测试标准与评估体系，涵盖电子、机械、软件等多领域</p>
-            <router-link to="/intellectual-property" class="case-link">查看详情 →</router-link>
-          </div>
-          <div class="case-card">
-            <div class="case-image" style="background-color: #dbeafe;"></div>
-            <h3 class="case-title">规范文件</h3>
-            <p class="case-desc">提供可靠性工程实施指南、流程规范及质量控制文件模板</p>
-            <router-link to="/intellectual-property" class="case-link">查看详情 →</router-link>
-          </div>
-          <div class="case-card">
-            <div class="case-image" style="background-color: #dbeafe;"></div>
-            <h3 class="case-title">白皮书</h3>
-            <p class="case-desc">发布可靠性技术发展趋势、行业应用案例分析及解决方案白皮书</p>
-            <router-link to="/intellectual-property" class="case-link">查看详情 →</router-link>
-          </div>
-          <div class="case-card">
-            <div class="case-image" style="background-color: #dbeafe;"></div>
-            <h3 class="case-title">专业出版物</h3>
-            <p class="case-desc">出版可靠性工程系列专著、期刊及技术论文集</p>
-            <router-link to="/intellectual-property" class="case-link">查看详情 →</router-link>
-          </div>
-          <div class="case-card">
-            <div class="case-image" style="background-color: #dbeafe;"></div>
-            <h3 class="case-title">培训资料</h3>
-            <p class="case-desc">开发专业培训课件、视频教程及实践案例分析材料</p>
+          <div class="case-card" v-for="(item, index) in homeConfig.intellectualProperty" :key="index">
+            <div class="case-image" :style="{ backgroundColor: item.backgroundColor }"></div>
+            <h3 class="case-title">{{ item.title }}</h3>
+            <p class="case-desc">{{ item.description }}</p>
             <router-link to="/intellectual-property" class="case-link">查看详情 →</router-link>
           </div>
         </div>
@@ -422,28 +299,12 @@ onMounted(() => {
           <div class="section-divider"></div>
         </div>
         <div class="activities-container">
-          <router-link to="/brand-activities" class="activity-card-link">
+          <router-link to="/brand-activities" class="activity-card-link" v-for="(activity, index) in homeConfig.brandActivities" :key="index">
             <div class="activity-card">
-              <div class="activity-date">2023.12.15</div>
-              <h3 class="activity-title">2023可靠性工程国际研讨会</h3>
-              <p class="activity-desc">汇聚全球可靠性领域专家，探讨前沿技术与应用案例</p>
-              <div class="activity-tag">国际会议</div>
-            </div>
-          </router-link>
-          <router-link to="/brand-activities" class="activity-card-link">
-            <div class="activity-card">
-              <div class="activity-date">2024.03.20</div>
-              <h3 class="activity-title">可靠性工程师认证培训</h3>
-              <p class="activity-desc">专业认证课程，提升工程师可靠性设计与分析能力</p>
-              <div class="activity-tag">培训课程</div>
-            </div>
-          </router-link>
-          <router-link to="/brand-activities" class="activity-card-link">
-            <div class="activity-card">
-              <div class="activity-date">2024.06.10</div>
-              <h3 class="activity-title">制造业可靠性提升峰会</h3>
-              <p class="activity-desc">聚焦制造业可靠性痛点，分享最佳实践与解决方案</p>
-              <div class="activity-tag">行业峰会</div>
+              <div class="activity-date">{{ activity.date }}</div>
+              <h3 class="activity-title">{{ activity.title }}</h3>
+              <p class="activity-desc">{{ activity.description }}</p>
+              <div class="activity-tag">{{ activity.tag }}</div>
             </div>
           </router-link>
         </div>
@@ -456,27 +317,11 @@ onMounted(() => {
           <div class="section-divider"></div>
         </div>
         <div class="cases-grid">
-          <router-link to="/project-case" class="case-card-link">
+          <router-link to="/project-case" class="case-card-link" v-for="(project, index) in homeConfig.projectCases" :key="index">
             <div class="case-card">
-              <div class="case-image" style="background-color: #dbeafe;"></div>
-              <h3 class="case-title">汽车电子可靠性测试平台</h3>
-              <p class="case-desc">为某汽车电子企业构建全生命周期可靠性测试解决方案</p>
-              <span class="case-link">查看详情 →</span>
-            </div>
-          </router-link>
-          <router-link to="/project-case" class="case-card-link">
-            <div class="case-card">
-              <div class="case-image" style="background-color: #dbeafe;"></div>
-              <h3 class="case-title">工业设备故障预测系统</h3>
-              <p class="case-desc">基于AI的设备健康管理系统，实现故障提前预警与维护</p>
-              <span class="case-link">查看详情 →</span>
-            </div>
-          </router-link>
-          <router-link to="/project-case" class="case-card-link">
-            <div class="case-card">
-              <div class="case-image" style="background-color: #dbeafe;"></div>
-              <h3 class="case-title">消费电子可靠性优化项目</h3>
-              <p class="case-desc">通过可靠性设计提升消费电子产品使用寿命与用户体验</p>
+              <div class="case-image" :style="{ backgroundColor: project.backgroundColor }"></div>
+              <h3 class="case-title">{{ project.title }}</h3>
+              <p class="case-desc">{{ project.description }}</p>
               <span class="case-link">查看详情 →</span>
             </div>
           </router-link>
@@ -490,35 +335,11 @@ onMounted(() => {
           <div class="section-divider"></div>
         </div>
         <div class="agencies-grid">
-          <router-link to="/cooperation-agencies" class="agency-card-link">
+          <router-link to="/cooperation-agencies" class="agency-card-link" v-for="(agency, index) in homeConfig.cooperationAgencies" :key="index">
             <div class="agency-card">
-              <div class="agency-icon" style="background-color: #3b82f6;">01</div>
-              <h3 class="agency-title">发起单位</h3>
-              <p class="agency-desc">联合行业领军企业共同发起成立，推动可靠性技术标准化与产业化应用</p>
-              <span class="case-link">查看详情 →</span>
-            </div>
-          </router-link>
-          <router-link to="/cooperation-agencies" class="agency-card-link">
-            <div class="agency-card">
-              <div class="agency-icon" style="background-color: #10b981;">02</div>
-              <h3 class="agency-title">理事会</h3>
-              <p class="agency-desc">由学术界、产业界专家组成的决策机构，指导平台发展方向与战略规划</p>
-              <span class="case-link">查看详情 →</span>
-            </div>
-          </router-link>
-          <router-link to="/cooperation-agencies" class="agency-card-link">
-            <div class="agency-card">
-              <div class="agency-icon" style="background-color: #8b5cf6;">03</div>
-              <h3 class="agency-title">为民生态圈</h3>
-              <p class="agency-desc">构建产学研用一体化生态系统，促进资源共享与协同创新</p>
-              <span class="case-link">查看详情 →</span>
-            </div>
-          </router-link>
-          <router-link to="/cooperation-agencies" class="agency-card-link">
-            <div class="agency-card">
-              <div class="agency-icon" style="background-color: #f59e0b;">04</div>
-              <h3 class="agency-title">合作企业</h3>
-              <p class="agency-desc">汇聚国内外知名企业，共建可靠性技术创新与应用合作网络</p>
+              <div class="agency-icon" :style="{ backgroundColor: agency.backgroundColor }">{{ agency.id }}</div>
+              <h3 class="agency-title">{{ agency.title }}</h3>
+              <p class="agency-desc">{{ agency.description }}</p>
               <span class="case-link">查看详情 →</span>
             </div>
           </router-link>
@@ -532,23 +353,8 @@ onMounted(() => {
           <div class="section-divider"></div>
         </div>
         <div class="companies-grid">
-          <div class="company-card">
-            <div class="company-logo" style="background-color: #dbeafe;">NVIDIA</div>
-          </div>
-          <div class="company-card">
-            <div class="company-logo" style="background-color: #dbeafe;">Qualcomm</div>
-          </div>
-          <div class="company-card">
-            <div class="company-logo" style="background-color: #dbeafe;">Texas Instruments</div>
-          </div>
-          <div class="company-card">
-            <div class="company-logo" style="background-color: #dbeafe;">APTIV</div>
-          </div>
-          <div class="company-card">
-            <div class="company-logo" style="background-color: #dbeafe;">Neusoft</div>
-          </div>
-          <div class="company-card">
-            <div class="company-logo" style="background-color: #dbeafe;">ThunderSoft</div>
+          <div class="company-card" v-for="(company, index) in homeConfig.importantLinks" :key="index">
+            <div class="company-logo" :style="{ backgroundColor: company.backgroundColor }">{{ company.name }}</div>
           </div>
         </div>
       </section>
