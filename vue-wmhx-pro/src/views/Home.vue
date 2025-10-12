@@ -1,9 +1,9 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, onUnmounted } from 'vue';
 import Footer from '../components/Footer.vue';
 import Header from '../components/Header.vue';
 import homeConfig from '../config/home.config.js';
-import { getMergedConfig } from '../services/configService.js';
+import { getMergedConfig, getMergedConfigSync, startConfigRefresh, stopConfigRefresh } from '../services/configService.js';
 
 /**
  * 首页组件 - 包含粒子背景、导航栏、英雄区域和主要内容区块
@@ -14,7 +14,8 @@ const particles = ref([]);
 const sections = ref([]);
 const videoVisible = ref(true);
 const scrollTriggered = ref(false);
-const config = ref(JSON.parse(JSON.stringify(homeConfig))); // 使用响应式配置对象，初始化时使用homeConfig作为默认值
+const config = ref(getMergedConfigSync(homeConfig)); // 使用响应式配置对象，初始化时使用homeConfig作为默认值
+const activities = ref([]);
 
 const handleVideoEnd = () => {
   if (!scrollTriggered.value) {
@@ -71,9 +72,64 @@ const handleScroll = () => {
   });
 };
 
-onMounted(() => {
-  // 获取合并后的配置（默认配置 + 保存的配置）
-  config.value = getMergedConfig(homeConfig);
+onMounted(async () => {
+  // 启动配置自动刷新（生产环境60秒，开发环境5秒）
+  startConfigRefresh(import.meta.env.DEV ? 5000 : 60000);
+  
+  // 异步获取合并后的配置（默认配置 + 保存的配置）
+  try {
+    const mergedConfig = await getMergedConfig(homeConfig);
+    config.value = mergedConfig;
+    
+    // 加载品牌活动数据
+    if (mergedConfig && mergedConfig.brandActivities) {
+      activities.value = mergedConfig.brandActivities;
+    } else {
+      activities.value = homeConfig.brandActivities;
+    }
+  } catch (error) {
+    console.error('加载配置失败:', error);
+    activities.value = homeConfig.brandActivities;
+  }
+  
+  // 监听配置文件变化
+  const handleConfigChange = (event) => {
+    if (event.key === 'siteConfig') {
+      try {
+        const updatedConfig = JSON.parse(event.newValue || JSON.stringify(homeConfig));
+        config.value = updatedConfig;
+        if (updatedConfig.brandActivities) {
+          activities.value = updatedConfig.brandActivities;
+        }
+      } catch (e) {
+        console.error('解析更新的配置失败:', e);
+      }
+    }
+  };
+  
+  // 监听自定义配置更新事件
+  const handleCustomConfigUpdate = (event) => {
+    if (event.detail && event.detail.config) {
+      try {
+        config.value = JSON.parse(JSON.stringify(event.detail.config));
+        if (event.detail.config.brandActivities) {
+          activities.value = event.detail.config.brandActivities;
+        }
+      } catch (e) {
+        console.error('处理自定义配置更新失败:', e);
+      }
+    }
+  };
+  
+  window.addEventListener('storage', handleConfigChange);
+  window.addEventListener('config-updated', handleCustomConfigUpdate);
+  
+  // 保存监听器以便在组件卸载时移除
+  onUnmounted(() => {
+    window.removeEventListener('storage', handleConfigChange);
+    window.removeEventListener('config-updated', handleCustomConfigUpdate);
+    stopConfigRefresh(); // 停止配置刷新
+  });
   
   generateParticles();
   sections.value = document.querySelectorAll('.section');
@@ -84,12 +140,7 @@ onMounted(() => {
   // 窗口调整时重新生成粒子
   window.addEventListener('resize', generateParticles);
   
-  // 监听存储变化，实时更新配置
-  window.addEventListener('storage', (event) => {
-    if (event.key === 'siteConfig') {
-      config.value = JSON.parse(event.newValue || JSON.stringify(homeConfig));
-    }
-  });
+
 
   // 初始化滚动图片区域
     const sliderWrapper = document.querySelector('.slider-wrapper');
@@ -225,7 +276,7 @@ onMounted(() => {
         </div>
         <div class="slider-container">
           <div class="slider-wrapper">
-            <div class="slider-item" v-for="(item, index) in homeConfig.newsSlider" :key="index">
+            <div class="slider-item" v-for="(item, index) in config.newsSlider" :key="index">
               <div class="image-container">
                 <img :src="item.image" :alt="item.caption" class="slider-image">
               </div>
@@ -249,12 +300,12 @@ onMounted(() => {
           <div class="section-divider"></div>
         </div>
         <div class="team-grid">
-          <router-link to="/expert-team" class="team-card-link" v-for="(expert, index) in config.expertTeam" :key="index">
+          <router-link to="/expert-team" class="team-card-link" v-for="(expert, index) in config.expertTeam || []" :key="index">
             <div class="team-card">
-              <div class="team-photo" :style="{ backgroundColor: expert.backgroundColor }"></div>
-              <h3 class="team-name">{{ expert.name }}</h3>
-              <p class="team-position">{{ expert.position }}</p>
-              <p class="team-desc">{{ expert.description }}</p>
+              <div class="team-photo" :style="{ backgroundColor: expert.backgroundColor || '#dcfce7' }"></div>
+              <h3 class="team-name">{{ expert.name || '未知专家' }}</h3>
+              <p class="team-position">{{ expert.position || '未知职位' }}</p>
+              <p class="team-desc">{{ expert.description || '暂无简介' }}</p>
             </div>
           </router-link>
         </div>
@@ -299,7 +350,7 @@ onMounted(() => {
           <div class="section-divider"></div>
         </div>
         <div class="activities-container">
-          <router-link to="/brand-activities" class="activity-card-link" v-for="(activity, index) in homeConfig.brandActivities" :key="index">
+          <router-link to="/brand-activities" class="activity-card-link" v-for="(activity, index) in activities" :key="index">
             <div class="activity-card">
               <div class="activity-date">{{ activity.date }}</div>
               <h3 class="activity-title">{{ activity.title }}</h3>

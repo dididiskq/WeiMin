@@ -11,47 +11,15 @@
           <div class="section-divider"></div>
         </div>
         <div class="team-grid">
-          <!-- 专家1 -->
-          <div class="team-card">
-            <div class="team-photo" style="background-color: #dcfce7;"></div>
-            <h3 class="team-name">张明</h3>
-            <p class="team-position">可靠性工程专家</p>
-            <p class="team-desc">15年工业可靠性研究经验，曾主导多项国家级可靠性项目，发表学术论文30余篇。</p>
-          </div>
-          <!-- 专家2 -->
-          <div class="team-card">
-            <div class="team-photo" style="background-color: #dcfce7;"></div>
-            <h3 class="team-name">李华</h3>
-            <p class="team-position">系统工程师</p>
-            <p class="team-desc">专注于复杂系统可靠性分析，参与制定多项行业标准，拥有10项相关专利。</p>
-          </div>
-          <!-- 专家3 -->
-          <div class="team-card">
-            <div class="team-photo" style="background-color: #dcfce7;"></div>
-            <h3 class="team-name">王芳</h3>
-            <p class="team-position">数据分析师</p>
-            <p class="team-desc">擅长可靠性数据建模与分析，开发多项预测算法，曾服务于多家世界500强企业。</p>
-          </div>
-          <!-- 专家4 -->
-          <div class="team-card">
-            <div class="team-photo" style="background-color: #dcfce7;"></div>
-            <h3 class="team-name">赵强</h3>
-            <p class="team-position">机械工程专家</p>
-            <p class="team-desc">专注于机械系统故障诊断与寿命预测技术研究，出版专著2部，行业培训讲师。</p>
-          </div>
-          <!-- 专家5 -->
-          <div class="team-card">
-            <div class="team-photo" style="background-color: #dcfce7;"></div>
-            <h3 class="team-name">陈静</h3>
-            <p class="team-position">软件可靠性工程师</p>
-            <p class="team-desc">负责软件系统可靠性测试与验证方法研究，参与开发多款可靠性分析软件工具。</p>
-          </div>
-          <!-- 专家6 -->
-          <div class="team-card">
-            <div class="team-photo" style="background-color: #dcfce7;"></div>
-            <h3 class="team-name">刘杰</h3>
-            <p class="team-position">质量管理专家</p>
-            <p class="team-desc">ISO可靠性管理体系认证专家，多家企业顾问，帮助企业建立可靠性管理体系。</p>
+          <!-- 动态渲染专家团队 -->
+          <div v-for="(expert, index) in config.expertTeam || []" :key="index" class="team-card">
+            <div v-if="expert.imageUrl" class="team-photo">
+              <img :src="expert.imageUrl" :alt="expert.name">
+            </div>
+            <div v-else class="team-photo" :style="{ backgroundColor: expert.backgroundColor || '#dcfce7' }"></div>
+            <h3 class="team-name">{{ expert.name }}</h3>
+            <p class="team-position">{{ expert.position }}</p>
+            <p class="team-desc">{{ expert.description }}</p>
           </div>
         </div>
       </section>
@@ -63,9 +31,59 @@
 </template>
 
 <script setup>
+import { onMounted, ref, onUnmounted } from 'vue';
 import Header from '../components/Header.vue';
 import Footer from '../components/Footer.vue';
-</script>
+import homeConfig from '../config/home.config.js';
+import { getMergedConfig, getMergedConfigSync, startConfigRefresh, stopConfigRefresh } from '../services/configService.js';
+
+// 使用响应式配置对象，初始化时使用同步版本获取配置
+const config = ref(getMergedConfigSync(homeConfig));
+
+onMounted(async () => {
+  // 启动配置自动刷新
+  startConfigRefresh(import.meta.env.DEV ? 5000 : 60000);
+  
+  // 异步获取合并后的配置（默认配置 + 保存的配置）
+  try {
+    const mergedConfig = await getMergedConfig(homeConfig);
+    config.value = mergedConfig;
+  } catch (error) {
+    console.error('加载配置失败:', error);
+  }
+  
+  // 监听存储变化，实时更新配置
+  const handleStorageChange = (event) => {
+    if (event.key === 'siteConfig') {
+      try {
+        config.value = JSON.parse(event.newValue || JSON.stringify(homeConfig));
+      } catch (e) {
+        console.error('解析更新的配置失败:', e);
+      }
+    }
+  };
+  
+  // 监听自定义配置更新事件，实现同一页面内的实时更新
+  const handleConfigUpdate = (event) => {
+    if (event.detail && event.detail.config) {
+      try {
+        config.value = JSON.parse(JSON.stringify(event.detail.config));
+      } catch (e) {
+        console.error('处理自定义配置更新失败:', e);
+      }
+    }
+  };
+  
+  window.addEventListener('storage', handleStorageChange);
+  window.addEventListener('config-updated', handleConfigUpdate);
+  
+  // 组件卸载时清理
+  onUnmounted(() => {
+    window.removeEventListener('storage', handleStorageChange);
+    window.removeEventListener('config-updated', handleConfigUpdate);
+    stopConfigRefresh();
+  });
+});</script>
 
 <style scoped>
 .page-container {

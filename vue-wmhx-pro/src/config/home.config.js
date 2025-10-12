@@ -4,34 +4,34 @@
 export default {
   // 英雄区域配置
   hero: {
-    title: '深圳市为民可靠性系统工程研究院',
+    title: '深圳市为民可靠性系统工程研究院11',
     subtitle: '确性可靠性 · 赋能中国制造企业 · 服务创新科技 · 普惠中国智造',
-    video: '/videos/background.mp4', // 视频路径
-    logo: new URL('@/assets/logo.svg', import.meta.url).href, // logo路径
-    websiteImage: new URL('@/assets/changm.png', import.meta.url).href, // 场鸣职业课图片
-    wechatQrcode: new URL('@/assets/gzh.png', import.meta.url).href, // 微信公众号二维码
+    video: '/videos/background.mp4',
+    logo: '/assets/logo.svg',
+    websiteImage: '/assets/changm.png',
+    wechatQrcode: '/assets/gzh.png',
   },
 
   // 最新资讯轮播图配置
   newsSlider: [
     {
-      image: new URL('@/assets/1.png', import.meta.url).href,
+      image: '/assets/1.png',
       caption: 'AI大模型在复杂推理任务上超越人类专家水平'
     },
     {
-      image: new URL('@/assets/2.png', import.meta.url).href,
+      image: '/assets/2.png',
       caption: '科学家成功研发出100量子比特处理器'
     },
     {
-      image: new URL('@/assets/3.png', import.meta.url).href,
+      image: '/assets/3.png',
       caption: '发现类似地球的系外行星，可能存在液态水'
     },
     {
-      image: new URL('@/assets/4.png', import.meta.url).href,
+      image: '/assets/4.png',
       caption: '新型电池技术实现能量密度提升300%'
     },
     {
-      image: new URL('@/assets/5.png', import.meta.url).href,
+      image: '/assets/5.png',
       caption: '新一代VR设备实现全沉浸式16K体验'
     }
   ],
@@ -78,14 +78,46 @@ export default {
 
   // 技术服务配置
   services: [
-    { id: '01', title: '可靠性工程师培训' },
-    { id: '02', title: '企业可靠性诊断' },
-    { id: '03', title: '技术项目咨询' },
-    { id: '04', title: '工程师驻场服务' },
-    { id: '05', title: '供应链可靠性' },
-    { id: '06', title: '可靠性正向设计' },
-    { id: '07', title: '标准和认证' },
-    { id: '08', title: '企业高可靠平台建设' }
+    {
+      id: '01',
+      title: '可靠性工程师培训',
+      description: '提供专业的可靠性工程师培训课程，帮助企业提升系统可靠性设计能力。'
+    },
+    {
+      id: '02',
+      title: '企业可靠性诊断',
+      description: '对企业系统进行详细的可靠性诊断，发现潜在问题并提供解决方案。'
+    },
+    {
+      id: '03',
+      title: '技术项目咨询',
+      description: '为客户提供专业的技术项目咨询服务，帮助客户选择合适的技术方案。'
+    },
+    {
+      id: '04',
+      title: '工程师驻场服务',
+      description: '在客户现场提供专业的工程师服务，解决客户在系统运行中遇到的问题。'
+    },
+    {
+      id: '05',
+      title: '供应链可靠性',
+      description: '关注供应商的可靠性问题，确保供应链的稳定运行。'
+    },
+    {
+      id: '06',
+      title: '可靠性正向设计',
+      description: '采用可靠性正向设计方法，从系统设计阶段就考虑可靠性问题。'
+    },
+    {
+      id: '07',
+      title: '标准和认证',
+      description: '符合行业标准，获得相关认证，确保产品质量和可靠性。'
+    },
+    {
+      id: '08',
+      title: '企业高可靠平台建设',
+      description: '为客户构建高可靠的IT平台，保障业务连续性和数据安全。'
+    }
   ],
 
   // 知识产权和智库配置
@@ -188,11 +220,29 @@ export default {
 
   // 重要链接配置
   importantLinks: [
-    { name: 'NVIDIA', backgroundColor: '#dbeafe' },
-    { name: 'Qualcomm', backgroundColor: '#dbeafe' },
-    { name: 'Texas Instruments', backgroundColor: '#dbeafe' },
-    { name: 'APTIV', backgroundColor: '#dbeafe' },
-    { name: 'Neusoft', backgroundColor: '#dbeafe' },
-    { name: 'ThunderSoft', backgroundColor: '#dbeafe' }
+    {
+      name: 'NVIDIA',
+      backgroundColor: '#dbeafe'
+    },
+    {
+      name: 'Qualcomm',
+      backgroundColor: '#dbeafe'
+    },
+    {
+      name: 'Texas Instruments',
+      backgroundColor: '#dbeafe'
+    },
+    {
+      name: 'APTIV',
+      backgroundColor: '#dbeafe'
+    },
+    {
+      name: 'Neusoft',
+      backgroundColor: '#dbeafe'
+    },
+    {
+      name: 'ThunderSoft',
+      backgroundColor: '#dbeafe'
+    }
   ]
-};
+}

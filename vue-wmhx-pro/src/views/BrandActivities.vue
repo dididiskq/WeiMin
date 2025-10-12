@@ -15,37 +15,22 @@
             <h3 class="activity-english-title">Activity</h3>
           </div>
           <div class="activity-list">
-            <!-- 活动1 -->
-            <div class="activity-card">
-              <div class="activity-icon">
-                <div class="icon-placeholder">📚</div>
+            <div 
+              v-for="(activity, index) in activities" 
+              :key="index" 
+              class="activity-card"
+            >
+              <div class="activity-info">
+                <div class="activity-date">{{ activity.date }}</div>
+                <div class="activity-tag">{{ activity.tag }}</div>
               </div>
               <div class="activity-content">
-                <h4 class="activity-title">为民客厅—可靠性茶话会</h4>
-                <p class="activity-desc">在深圳、北京、西安、苏州等地，每月定期开展一次茶话会活动，便于可靠性同行技术交流、经验分享。</p>
+                <h4 class="activity-title">{{ activity.title }}</h4>
+                <p class="activity-desc">{{ activity.description }}</p>
               </div>
             </div>
-
-            <!-- 活动2 -->
-            <div class="activity-card">
-              <div class="activity-icon">
-                <div class="icon-placeholder">🌐</div>
-              </div>
-              <div class="activity-content">
-                <h4 class="activity-title">可靠性技术与应用国际论坛</h4>
-                <p class="activity-desc">每年联合相关单位举办可靠性国际论坛，共享可靠性技术盛宴。</p>
-              </div>
-            </div>
-
-            <!-- 活动3 -->
-            <div class="activity-card">
-              <div class="activity-icon">
-                <div class="icon-placeholder">👥</div>
-              </div>
-              <div class="activity-content">
-                <h4 class="activity-title">中国可靠性工程师百人峰会</h4>
-                <p class="activity-desc">每年高交会期间，在深圳举办中国可靠性工程师百人峰会，邀请各行业可靠性工程师参与，进行技术交流研讨与发布标准/产品等。</p>
-              </div>
+            <div v-if="activities.length === 0" class="no-activities">
+              暂无品牌活动信息
             </div>
           </div>
         </div>
@@ -58,8 +43,27 @@
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue';
 import Header from '../components/Header.vue';
 import Footer from '../components/Footer.vue';
+import homeConfig from '../config/home.config.js';
+import { loadConfigFromStorage } from '../services/configService.js';
+
+// 活动数据
+const activities = ref([]);
+
+onMounted(async () => {
+  // 尝试从服务端加载配置
+  const savedConfig = await loadConfigFromStorage();
+  
+  if (savedConfig && savedConfig.brandActivities) {
+    // 使用保存的配置
+    activities.value = savedConfig.brandActivities;
+  } else {
+    // 如果没有保存的配置，使用默认配置
+    activities.value = homeConfig.brandActivities;
+  }
+});
 </script>
 
 <style scoped>
@@ -104,29 +108,43 @@ import Footer from '../components/Footer.vue';
 }
 
 .activity-card {
-  background-color: #ffffff;
+  background-color: white;
   border-radius: 8px;
-  padding: 1.8rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
-  gap: 1.8rem;
-  box-shadow: 0 4px 6px -1px rgba(167, 243, 208, 0.1);
-  align-items: flex-start;
+  flex-direction: column;
 }
 
-.activity-icon {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background-color: #10b981;
+.activity-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.activity-info {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
-.icon-placeholder {
-  color: white;
-  font-size: 1.5rem;
+.activity-date {
+  color: #10b981;
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.activity-tag {
+  background-color: #e6f7ff;
+  color: #0369a1;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
 }
 
 .activity-content {
@@ -146,12 +164,14 @@ import Footer from '../components/Footer.vue';
   line-height: 1.7;
 }
 
-.activity-icon {
-  transition: transform 0.3s ease;
-}
-
-.activity-card:hover .activity-icon {
-  transform: scale(1.05);
+.no-activities {
+  text-align: center;
+  padding: 4rem;
+  color: #64748b;
+  font-size: 1.1rem;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 @media (max-width: 768px) {

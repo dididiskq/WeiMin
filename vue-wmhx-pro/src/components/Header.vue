@@ -22,8 +22,7 @@
 </template>
 
 <script setup>
-  // 头部导航组件逻辑
-  // 处理导航交互和响应式行为
+  // 头部导航组件逻辑 - 标题已写死
 </script>
 
 <style scoped>

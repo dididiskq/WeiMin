@@ -15,25 +15,16 @@
           <div class="service-category">
             <h3 class="category-title">核心技术服务</h3>
             <div class="service-cards">
-              <div class="service-card hover-lift">
-                <div class="card-icon"><span>01</span></div>
-                <h4>可靠性工程师培训</h4>
-                <p>提供全面的可靠性工程师培训课程，涵盖基础理论、工具应用与实战案例分析，提升工程师专业技能。</p>
-              </div>
-              <div class="service-card hover-lift">
-                <div class="card-icon"><span>02</span></div>
-                <h4>企业可靠性诊断</h4>
-                <p>对企业现有产品和流程进行全面可靠性诊断，识别潜在风险点，提供改进建议和优化方案。</p>
-              </div>
-              <div class="service-card hover-lift">
-                <div class="card-icon"><span>03</span></div>
-                <h4>技术项目咨询</h4>
-                <p>为企业提供可靠性相关技术项目咨询服务，包括项目规划、实施指导和成果评估等。</p>
-              </div>
-              <div class="service-card hover-lift">
-                <div class="card-icon"><span>04</span></div>
-                <h4>工程师驻场服务</h4>
-                <p>派遣资深可靠性工程师到企业驻场，提供一对一技术支持和问题解决，确保项目顺利实施。</p>
+              <div v-for="service in coreServices" :key="service.id" class="service-card hover-lift">
+                <div class="card-icon"><span>{{ service.id }}</span></div>
+                <h4>{{ service.title || service.name }}</h4>
+                <!-- 添加额外的条件检查，确保描述字段总是显示 -->
+  <p v-if="service.description && service.description.trim()" class="service-description">
+    {{ service.description }}
+  </p>
+  <p v-else class="service-description placeholder">
+    {{ getDefaultDescription(service.id) || '暂无描述信息' }}
+  </p>
               </div>
             </div>
           </div>
@@ -42,25 +33,16 @@
           <div class="service-category">
             <h3 class="category-title">高级解决方案</h3>
             <div class="service-cards">
-              <div class="service-card hover-lift">
-                <div class="card-icon"><span>05</span></div>
-                <h4>供应链可靠性</h4>
-                <p>提供供应链可靠性管理解决方案，帮助企业评估和提升供应链各环节的可靠性水平。</p>
-              </div>
-              <div class="service-card hover-lift">
-                <div class="card-icon"><span>06</span></div>
-                <h4>可靠性正向设计</h4>
-                <p>从产品设计阶段开始，融入可靠性理念和方法，确保产品从源头就具备高可靠性特性。</p>
-              </div>
-              <div class="service-card hover-lift">
-                <div class="card-icon"><span>07</span></div>
-                <h4>标准和认证</h4>
-                <p>提供可靠性相关标准咨询和认证服务，帮助企业满足行业标准要求，提升产品竞争力。</p>
-              </div>
-              <div class="service-card hover-lift">
-                <div class="card-icon"><span>08</span></div>
-                <h4>企业高可靠平台建设</h4>
-                <p>协助企业构建高可靠性管理平台，整合数据、工具和流程，实现可靠性管理的系统化和数字化。</p>
+              <div v-for="service in advancedServices" :key="service.id" class="service-card hover-lift">
+                <div class="card-icon"><span>{{ service.id }}</span></div>
+                <h4>{{ service.title || service.name }}</h4>
+                <!-- 添加额外的条件检查，确保描述字段总是显示 -->
+              <p v-if="service.description && service.description.trim()" class="service-description">
+                {{ service.description }}
+              </p>
+              <p v-else class="service-description placeholder">
+                {{ getDefaultDescription(service.id) || '暂无描述信息' }}
+              </p>
               </div>
             </div>
           </div>
@@ -74,8 +56,115 @@
 </template>
 
 <script setup>
+import { ref, onMounted, watch } from 'vue';
 import Header from '../components/Header.vue';
 import Footer from '../components/Footer.vue';
+import defaultConfig from '../config/home.config';
+import { loadConfigFromStorage } from '../services/configService';
+
+// 响应式数据
+const config = ref({ ...defaultConfig });
+
+// 计算属性：核心技术服务（前4个）
+const coreServices = ref([]);
+
+// 计算属性：高级解决方案（后4个）
+const advancedServices = ref([]);
+
+// 初始化配置
+const initConfig = async () => {
+  // 尝试从本地存储加载配置
+  const savedConfig = await loadConfigFromStorage();
+  
+  // 合并默认配置和保存的配置，确保描述字段存在
+  if (savedConfig) {
+    // 创建配置的深拷贝
+    config.value = JSON.parse(JSON.stringify(savedConfig));
+    
+    // 确保服务数组存在
+    if (!config.value.services) {
+      config.value.services = [];
+    }
+    
+    // 如果本地存储中的服务没有描述，使用默认配置中的描述
+    config.value.services = config.value.services.map(service => {
+      // 查找默认配置中对应的服务
+      const defaultService = defaultConfig.services.find(s => s.id === service.id);
+      // 如果当前服务没有描述但默认服务有，则使用默认描述
+      if (!service.description && defaultService && defaultService.description) {
+        service.description = defaultService.description;
+      }
+      return service;
+    });
+    
+    // 如果本地存储中的服务少于默认配置，补充默认服务
+    if (config.value.services.length < defaultConfig.services.length) {
+      defaultConfig.services.forEach(defaultService => {
+        // 检查是否已存在相同ID的服务
+        const exists = config.value.services.some(s => s.id === defaultService.id);
+        if (!exists) {
+          config.value.services.push(JSON.parse(JSON.stringify(defaultService)));
+        }
+      });
+    }
+  } else {
+    // 如果没有保存的配置，直接使用默认配置
+    config.value = JSON.parse(JSON.stringify(defaultConfig));
+  }
+  
+  // 分配服务到不同类别
+  if (config.value.services && config.value.services.length > 0) {
+    // 确保按照ID排序
+    config.value.services.sort((a, b) => a.id.localeCompare(b.id));
+    coreServices.value = config.value.services.slice(0, 4);
+    advancedServices.value = config.value.services.slice(4, 8);
+  }
+};
+
+// 监听配置更新事件
+const handleConfigUpdated = (event) => {
+  if (event.detail && event.detail.config) {
+    config.value = event.detail.config;
+    // 重新分配服务到不同类别
+    if (config.value.services && config.value.services.length > 0) {
+      coreServices.value = config.value.services.slice(0, 4);
+      advancedServices.value = config.value.services.slice(4, 8);
+    }
+  }
+};
+
+// 组件挂载时初始化
+onMounted(async () => {
+  await initConfig();
+  // 监听全局配置更新事件
+  window.addEventListener('config-updated', handleConfigUpdated);
+  
+  // 调试信息，仅在开发环境显示
+  if (import.meta.env.DEV) {
+    console.log('ServiceContent initialized with services:', config.value.services);
+    console.log('Core services:', coreServices.value);
+    console.log('Advanced services:', advancedServices.value);
+  }
+});
+
+// 组件卸载时清理
+const cleanup = () => {
+  window.removeEventListener('config-updated', handleConfigUpdated);
+};
+
+// 暴露清理函数
+
+// 获取默认描述信息
+const getDefaultDescription = (serviceId) => {
+  const defaultService = defaultConfig.services.find(s => s.id === serviceId);
+  return defaultService ? defaultService.description : '';
+};
+
+// 添加卸载钩子，清理事件监听器
+import { onUnmounted } from 'vue';
+onUnmounted(() => {
+  window.removeEventListener('config-updated', handleConfigUpdated);
+});
 </script>
 
 <style scoped>
@@ -158,7 +247,20 @@ import Footer from '../components/Footer.vue';
 
 .service-card p {
   color: #64748b;
-  font-size: 0.95rem;
+  font-size: 1rem; /* 增大字体 */
   line-height: 1.6;
+  margin-top: 1rem;
+  min-height: 80px; /* 增加最小高度 */
+  padding: 0.5rem 0; /* 添加内边距 */
+}
+
+.service-description {
+  display: block; /* 确保描述总是显示 */
+  word-break: break-word;
+}
+
+.service-description.placeholder {
+  color: #94a3b8;
+  font-style: italic;
 }
 </style>
