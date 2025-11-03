@@ -43,26 +43,28 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import Header from '../components/Header.vue';
 import Footer from '../components/Footer.vue';
 import homeConfig from '../config/home.config.js';
-import { loadConfigFromStorage } from '../services/configService.js';
+import { useConfig } from '../services/configService.js';
 
-// 活动数据
+// 使用配置服务
+const { config } = useConfig();
 const activities = ref([]);
 
-onMounted(async () => {
-  // 尝试从服务端加载配置
-  const savedConfig = await loadConfigFromStorage();
-  
-  if (savedConfig && savedConfig.brandActivities) {
-    // 使用保存的配置
-    activities.value = savedConfig.brandActivities;
-  } else {
-    // 如果没有保存的配置，使用默认配置
+onMounted(() => {
+  try {
+    // 配置已通过useConfig自动加载
+    activities.value = config.value.brandActivities || homeConfig.brandActivities;
+  } catch (error) {
+    console.error('加载配置失败:', error);
     activities.value = homeConfig.brandActivities;
   }
+});
+
+onUnmounted(() => {
+  console.log('品牌活动页面已卸载');
 });
 </script>
 

@@ -9,8 +9,6 @@ import LatestNews from '../views/LatestNews.vue';
 import ProjectCase from '../views/ProjectCase.vue';
 import IntellectualProperty from '../views/IntellectualProperty.vue';
 import CooperationAgencies from '../views/CooperationAgencies.vue';
-import AdminLogin from '../views/AdminLogin.vue';
-import ConfigManager from '../views/ConfigManager.vue';
 
 /**
  * 路由配置数组c
@@ -55,16 +53,7 @@ const routes = [
   {    path: '/project-case',    name: 'ProjectCase',    component: ProjectCase  },
     {    path: '/intellectual-property',    name: 'IntellectualProperty',    component: IntellectualProperty  },  
     {    path: '/cooperation-agencies',    name: 'CooperationAgencies',    component: CooperationAgencies  },
-  {
-    path: '/admin-login',
-    name: 'AdminLogin',
-    component: AdminLogin
-  },
-  {
-    path: '/config-manager',
-    name: 'ConfigManager',
-    component: ConfigManager
-  }
+
 ];
 
 const router = createRouter({

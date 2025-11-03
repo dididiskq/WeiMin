@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500">
+  <rect width="800" height="500" fill="#f0f9ff"/>
+  <rect width="800" height="100" fill="#ec4899"/>
+  <text x="400" y="60" font-family="Arial" font-size="36" font-weight="bold" text-anchor="middle" fill="white">科技新闻</text>
+  <rect x="50" y="150" width="700" height="300" fill="white" stroke="#f9a8d4" stroke-width="2" rx="10"/>
+  <text x="400" y="220" font-family="Arial" font-size="28" font-weight="bold" text-anchor="middle" fill="#831843">新能源技术革新</text>
+  <text x="400" y="270" font-family="Arial" font-size="20" text-anchor="middle" fill="#334155">新型电池技术实现能量密度提升300%，充电时间缩短至5分钟</text>
+  <text x="400" y="320" font-family="Arial" font-size="18" text-anchor="middle" fill="#64748b">这项技术将彻底改变电动汽车行业，解决续航焦虑和充电时间长的问题</text>
+  <text x="400" y="370" font-family="Arial" font-size="16" text-anchor="middle" fill="#94a3b8">发布日期: 2023-12-18</text>
+  <circle cx="150" cy="420" r="40" fill="#fbcfe8"/>
+  <text x="150" y="425" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#831843">能源</text>
+  <circle cx="350" cy="420" r="40" fill="#fbcfe8"/>
+  <text x="350" y="425" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#831843">革新</text>
+  <circle cx="550" cy="420" r="40" fill="#fbcfe8"/>
+  <text x="550" y="425" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#831843">电池</text>
+  <circle cx="750" cy="420" r="40" fill="#fbcfe8"/>
+  <text x="750" y="425" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#831843">未来</text>
+</svg>

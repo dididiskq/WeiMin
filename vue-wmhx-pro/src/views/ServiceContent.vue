@@ -56,14 +56,14 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import Header from '../components/Header.vue';
 import Footer from '../components/Footer.vue';
 import defaultConfig from '../config/home.config';
-import { loadConfigFromStorage } from '../services/configService';
+import { useConfig } from "../services/configService";
 
-// 响应式数据
-const config = ref({ ...defaultConfig });
+// 使用新的配置服务
+const { config } = useConfig();
 
 // 计算属性：核心技术服务（前4个）
 const coreServices = ref([]);
@@ -71,97 +71,77 @@ const coreServices = ref([]);
 // 计算属性：高级解决方案（后4个）
 const advancedServices = ref([]);
 
-// 初始化配置
-const initConfig = async () => {
-  // 尝试从本地存储加载配置
-  const savedConfig = await loadConfigFromStorage();
-  
-  // 合并默认配置和保存的配置，确保描述字段存在
-  if (savedConfig) {
-    // 创建配置的深拷贝
-    config.value = JSON.parse(JSON.stringify(savedConfig));
+// 更新服务数据的函数
+const updateServicesData = () => {
+  try {
+    // 获取服务列表（优先从配置中获取，如果没有则使用默认配置）
+    const services = config.value?.services || defaultConfig.services || [];
     
-    // 确保服务数组存在
-    if (!config.value.services) {
-      config.value.services = [];
-    }
-    
-    // 如果本地存储中的服务没有描述，使用默认配置中的描述
-    config.value.services = config.value.services.map(service => {
-      // 查找默认配置中对应的服务
-      const defaultService = defaultConfig.services.find(s => s.id === service.id);
-      // 如果当前服务没有描述但默认服务有，则使用默认描述
-      if (!service.description && defaultService && defaultService.description) {
-        service.description = defaultService.description;
-      }
-      return service;
+    // 确保按照ID排序
+    const sortedServices = [...services].sort((a, b) => {
+      if (!a.id || !b.id) return 0;
+      return a.id.localeCompare(b.id);
     });
     
-    // 如果本地存储中的服务少于默认配置，补充默认服务
-    if (config.value.services.length < defaultConfig.services.length) {
-      defaultConfig.services.forEach(defaultService => {
-        // 检查是否已存在相同ID的服务
-        const exists = config.value.services.some(s => s.id === defaultService.id);
-        if (!exists) {
-          config.value.services.push(JSON.parse(JSON.stringify(defaultService)));
-        }
-      });
+    // 分配服务到不同类别
+    coreServices.value = sortedServices.slice(0, 4);
+    advancedServices.value = sortedServices.slice(4, 8);
+    
+    // 调试信息，仅在开发环境显示
+    if (import.meta.env.DEV) {
+      console.log('Services updated:', sortedServices);
+      console.log('Core services:', coreServices.value);
+      console.log('Advanced services:', advancedServices.value);
     }
-  } else {
-    // 如果没有保存的配置，直接使用默认配置
-    config.value = JSON.parse(JSON.stringify(defaultConfig));
-  }
-  
-  // 分配服务到不同类别
-  if (config.value.services && config.value.services.length > 0) {
-    // 确保按照ID排序
-    config.value.services.sort((a, b) => a.id.localeCompare(b.id));
-    coreServices.value = config.value.services.slice(0, 4);
-    advancedServices.value = config.value.services.slice(4, 8);
+  } catch (error) {
+    console.error('Error updating services data:', error);
+    // 出错时使用默认值
+    coreServices.value = [];
+    advancedServices.value = [];
   }
 };
 
 // 监听配置更新事件
 const handleConfigUpdated = (event) => {
-  if (event.detail && event.detail.config) {
-    config.value = event.detail.config;
-    // 重新分配服务到不同类别
-    if (config.value.services && config.value.services.length > 0) {
-      coreServices.value = config.value.services.slice(0, 4);
-      advancedServices.value = config.value.services.slice(4, 8);
+  try {
+    if (event?.detail?.config) {
+      config.value = event.detail.config;
+      // 重新分配服务到不同类别
+      updateServicesData();
     }
+  } catch (error) {
+    console.error('Error handling config update:', error);
   }
 };
 
 // 组件挂载时初始化
-onMounted(async () => {
-  await initConfig();
+onMounted(() => {
+  // 配置已通过useConfig自动加载
   // 监听全局配置更新事件
   window.addEventListener('config-updated', handleConfigUpdated);
   
+  // 初始化服务数据
+  updateServicesData();
+  
   // 调试信息，仅在开发环境显示
   if (import.meta.env.DEV) {
-    console.log('ServiceContent initialized with services:', config.value.services);
-    console.log('Core services:', coreServices.value);
-    console.log('Advanced services:', advancedServices.value);
+    console.log('ServiceContent initialized');
   }
 });
 
-// 组件卸载时清理
-const cleanup = () => {
-  window.removeEventListener('config-updated', handleConfigUpdated);
-};
-
-// 暴露清理函数
-
 // 获取默认描述信息
 const getDefaultDescription = (serviceId) => {
-  const defaultService = defaultConfig.services.find(s => s.id === serviceId);
-  return defaultService ? defaultService.description : '';
+  try {
+    if (!defaultConfig.services || !Array.isArray(defaultConfig.services)) {
+      return '';
+    }
+    const defaultService = defaultConfig.services.find(s => s.id === serviceId);
+    return defaultService?.description || '';
+  } catch (error) {
+    console.error('Error getting default description:', error);
+    return '';
+  }
 };
-
-// 添加卸载钩子，清理事件监听器
-import { onUnmounted } from 'vue';
 onUnmounted(() => {
   window.removeEventListener('config-updated', handleConfigUpdated);
 });

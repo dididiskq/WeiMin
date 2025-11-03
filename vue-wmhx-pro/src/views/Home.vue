@@ -1,9 +1,8 @@
 <script setup>
-import { onMounted, ref, onUnmounted } from 'vue';
+import { onMounted, ref, onUnmounted, getCurrentInstance } from 'vue';
 import Footer from '../components/Footer.vue';
 import Header from '../components/Header.vue';
-import homeConfig from '../config/home.config.js';
-import { getMergedConfig, getMergedConfigSync, startConfigRefresh, stopConfigRefresh } from '../services/configService.js';
+import { useConfig } from "../services/configService.js";
 
 /**
  * 首页组件 - 包含粒子背景、导航栏、英雄区域和主要内容区块
@@ -14,8 +13,10 @@ const particles = ref([]);
 const sections = ref([]);
 const videoVisible = ref(true);
 const scrollTriggered = ref(false);
-const config = ref(getMergedConfigSync(homeConfig)); // 使用响应式配置对象，初始化时使用homeConfig作为默认值
+const { config } = useConfig(); // 使用新的配置服务
 const activities = ref([]);
+const isLoading = ref(true);
+const instance = getCurrentInstance();
 
 const handleVideoEnd = () => {
   if (!scrollTriggered.value) {
@@ -26,8 +27,8 @@ const handleVideoEnd = () => {
 const handleScrollTrigger = () => {
   // 只有当视频可见且滚动触发尚未发生时才执行
   if (videoVisible.value && !scrollTriggered.value) {
-    // 检测是否有滚动行为（滚动距离超过10px）
-    if (window.scrollY > 10) {
+    // 检测是否有明显的滚动行为（滚动距离超过50px）
+    if (window.scrollY > 50) {
       scrollTriggered.value = true;
       videoVisible.value = false;
     }
@@ -73,72 +74,37 @@ const handleScroll = () => {
 };
 
 onMounted(async () => {
-  // 启动配置自动刷新（生产环境60秒，开发环境5秒）
-  startConfigRefresh(import.meta.env.DEV ? 5000 : 60000);
+  // 配置已通过全局$siteConfig自动加载
+  // 设置加载状态
+  setTimeout(() => {
+    isLoading.value = false;
+  }, 500);
   
-  // 异步获取合并后的配置（默认配置 + 保存的配置）
-  try {
-    const mergedConfig = await getMergedConfig(homeConfig);
-    config.value = mergedConfig;
-    
-    // 加载品牌活动数据
-    if (mergedConfig && mergedConfig.brandActivities) {
-      activities.value = mergedConfig.brandActivities;
-    } else {
-      activities.value = homeConfig.brandActivities;
-    }
-  } catch (error) {
-    console.error('加载配置失败:', error);
-    activities.value = homeConfig.brandActivities;
+  // 使用全局配置中的数据
+  if (instance?.proxy?.$siteConfig?.brandActivities) {
+    activities.value = instance.proxy.$siteConfig.brandActivities;
   }
-  
-  // 监听配置文件变化
-  const handleConfigChange = (event) => {
-    if (event.key === 'siteConfig') {
-      try {
-        const updatedConfig = JSON.parse(event.newValue || JSON.stringify(homeConfig));
-        config.value = updatedConfig;
-        if (updatedConfig.brandActivities) {
-          activities.value = updatedConfig.brandActivities;
-        }
-      } catch (e) {
-        console.error('解析更新的配置失败:', e);
-      }
-    }
-  };
-  
-  // 监听自定义配置更新事件
-  const handleCustomConfigUpdate = (event) => {
-    if (event.detail && event.detail.config) {
-      try {
-        config.value = JSON.parse(JSON.stringify(event.detail.config));
-        if (event.detail.config.brandActivities) {
-          activities.value = event.detail.config.brandActivities;
-        }
-      } catch (e) {
-        console.error('处理自定义配置更新失败:', e);
-      }
-    }
-  };
-  
-  window.addEventListener('storage', handleConfigChange);
-  window.addEventListener('config-updated', handleCustomConfigUpdate);
-  
-  // 保存监听器以便在组件卸载时移除
-  onUnmounted(() => {
-    window.removeEventListener('storage', handleConfigChange);
-    window.removeEventListener('config-updated', handleCustomConfigUpdate);
-    stopConfigRefresh(); // 停止配置刷新
-  });
   
   generateParticles();
   sections.value = document.querySelectorAll('.section');
   window.addEventListener('scroll', handleScroll);
-  window.addEventListener('scroll', handleScrollTrigger);
   handleScroll(); // 初始检查
+  
+  // 延迟2秒后添加滚动触发器，确保视频有足够时间开始播放
+  setTimeout(() => {
+    window.addEventListener('scroll', handleScrollTrigger);
+  }, 2000);
 
   // 窗口调整时重新生成粒子
   window.addEventListener('resize', generateParticles);
+  
+  // 保存监听器以便在组件卸载时移除
+  onUnmounted(() => {
+    // 移除所有事件监听器
+    window.removeEventListener('scroll', handleScroll);
+    window.removeEventListener('scroll', handleScrollTrigger);
+    window.removeEventListener('resize', generateParticles);
+  });
   
 
 
@@ -236,27 +202,32 @@ onMounted(async () => {
 
     <!-- 英雄区域 -->
     <header class="hero-section">
+      <!-- 配置加载占位内容 -->
+      <div v-if="isLoading" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 100;">
+        <h2>欢迎访问深圳市为民可靠性系统工程研究院</h2>
+        <p>系统正在加载配置，请稍候...</p>
+      </div>
       <div class="hero-video-container" v-if="videoVisible">
   <video class="hero-video" autoplay muted playsinline @ended="handleVideoEnd">
-    <source :src="config.hero.video" type="video/mp4">
+    <source :src="$siteConfig?.hero?.video || '/static/videos/hero.mp4'" type="video/mp4">
     您的浏览器不支持视频播放
   </video>
 </div>
 <div class="video-logo-container" v-else>
-  <img :src="config.hero.logo" alt="品牌logo" class="animated-logo">
+  <img :src="$siteConfig?.hero?.logo || '/static/images/logo.png'" alt="品牌logo" class="animated-logo">
   <div class="hero-content-below-logo">
-    <h1 class="hero-title">{{ config.hero.title }}</h1>
-    <p class="hero-subtitle">{{ config.hero.subtitle }}</p>
+    <h1 class="hero-title">{{ $siteConfig?.hero?.title || '网站标题' }}</h1>
+    <p class="hero-subtitle">{{ $siteConfig?.hero?.subtitle || '网站副标题' }}</p>
     <div class="hero-buttons-with-extras">
       <div class="website-section">
          <a href="https://www.charmingclass.com/" target="_blank" class="website-link-container">
-           <img :src="config.hero.websiteImage" alt="场鸣职业课" class="website-image">
+           <img :src="$siteConfig?.hero?.websiteImage || '/static/images/website.png'" alt="场鸣职业课" class="website-image">
          </a>
        </div>
       <router-link to="/institute-introduction" class="primary-btn">认识为民可靠性研究院</router-link>
       <router-link to="/project-case" class="secondary-btn">了解产品可靠性</router-link>
       <div class="wechat-qrcode">
-        <img :src="config.hero.wechatQrcode" alt="微信公众号二维码" class="qrcode-image">
+        <img :src="$siteConfig?.hero?.wechatQrcode || '/static/images/qrcode.png'" alt="微信公众号二维码" class="qrcode-image">
       </div>
     </div>
   </div>
@@ -276,7 +247,7 @@ onMounted(async () => {
         </div>
         <div class="slider-container">
           <div class="slider-wrapper">
-            <div class="slider-item" v-for="(item, index) in config.newsSlider" :key="index">
+            <div class="slider-item" v-for="(item, index) in $siteConfig?.newsSlider || []" :key="index">
               <div class="image-container">
                 <img :src="item.image" :alt="item.caption" class="slider-image">
               </div>
@@ -300,7 +271,7 @@ onMounted(async () => {
           <div class="section-divider"></div>
         </div>
         <div class="team-grid">
-          <router-link to="/expert-team" class="team-card-link" v-for="(expert, index) in config.expertTeam || []" :key="index">
+          <router-link to="/expert-team" class="team-card-link" v-for="(expert, index) in $siteConfig?.expertTeam || []" :key="index">
             <div class="team-card">
               <div class="team-photo" :style="{ backgroundColor: expert.backgroundColor || '#dcfce7' }"></div>
               <h3 class="team-name">{{ expert.name || '未知专家' }}</h3>
@@ -318,7 +289,7 @@ onMounted(async () => {
           <div class="section-divider"></div>
         </div>
         <div class="services-grid">
-          <router-link to="/service-content" class="service-card-link" v-for="(service, index) in config.services" :key="index">
+          <router-link to="/service-content" class="service-card-link" v-for="(service, index) in $siteConfig?.services || []" :key="index">
             <div class="service-card hover-lift">
               <div class="card-icon"><span>{{ service.id }}</span></div>
               <h3>{{ service.title }}</h3>
@@ -334,7 +305,7 @@ onMounted(async () => {
           <div class="section-divider"></div>
         </div>
         <div class="cases-grid">
-          <div class="case-card" v-for="(item, index) in homeConfig.intellectualProperty" :key="index">
+          <div class="case-card" v-for="(item, index) in $siteConfig?.intellectualProperty || []" :key="index">
             <div class="case-image" :style="{ backgroundColor: item.backgroundColor }"></div>
             <h3 class="case-title">{{ item.title }}</h3>
             <p class="case-desc">{{ item.description }}</p>
@@ -368,7 +339,7 @@ onMounted(async () => {
           <div class="section-divider"></div>
         </div>
         <div class="cases-grid">
-          <router-link to="/project-case" class="case-card-link" v-for="(project, index) in homeConfig.projectCases" :key="index">
+          <router-link to="/project-case" class="case-card-link" v-for="(project, index) in $siteConfig?.projectCases || []" :key="index">
             <div class="case-card">
               <div class="case-image" :style="{ backgroundColor: project.backgroundColor }"></div>
               <h3 class="case-title">{{ project.title }}</h3>
@@ -386,7 +357,7 @@ onMounted(async () => {
           <div class="section-divider"></div>
         </div>
         <div class="agencies-grid">
-          <router-link to="/cooperation-agencies" class="agency-card-link" v-for="(agency, index) in homeConfig.cooperationAgencies" :key="index">
+          <router-link to="/cooperation-agencies" class="agency-card-link" v-for="(agency, index) in $siteConfig?.cooperationAgencies || []" :key="index">
             <div class="agency-card">
               <div class="agency-icon" :style="{ backgroundColor: agency.backgroundColor }">{{ agency.id }}</div>
               <h3 class="agency-title">{{ agency.title }}</h3>
@@ -404,7 +375,7 @@ onMounted(async () => {
           <div class="section-divider"></div>
         </div>
         <div class="companies-grid">
-          <div class="company-card" v-for="(company, index) in homeConfig.importantLinks" :key="index">
+          <div class="company-card" v-for="(company, index) in $siteConfig?.importantLinks || []" :key="index">
             <div class="company-logo" :style="{ backgroundColor: company.backgroundColor }">{{ company.name }}</div>
           </div>
         </div>

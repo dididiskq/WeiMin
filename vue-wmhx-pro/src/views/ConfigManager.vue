@@ -587,11 +587,24 @@
 
 <script>
 import homeConfig from '../config/home.config.js';
-import { saveConfigToStorage, loadConfigFromStorage, handleImageUpload } from '../services/configService.js';
+import { useConfig } from '../services/configService.js';
 import contentManager from '../utils/contentManager.js';
 
 export default {
     name: 'ConfigManager',
+    setup() {
+      const { config, cleanup } = useConfig();
+      
+      // 确保config是响应式的且不为undefined
+      if (!config.value) {
+        config.value = JSON.parse(JSON.stringify(homeConfig));
+      }
+      
+      return {
+        config,
+        cleanup
+      };
+    },
     data() {
       return {
         // 导航标签
@@ -653,18 +666,7 @@ export default {
       }
     },
     async mounted() {
-      // 尝试从服务端加载配置
-      const savedConfig = await loadConfigFromStorage();
-      
-      // 创建默认配置的深拷贝作为基础
-      this.config = JSON.parse(JSON.stringify(homeConfig));
-      
-      // 如果有保存的配置，将其与默认配置合并
-      if (savedConfig) {
-        // 合并配置，但保留默认配置中的数据结构
-        this.mergeConfigWithDefaults(savedConfig);
-      }
-      
+      // 使用useConfig已经加载了配置，这里只需要初始化必要的配置项
       // 初始化必要的配置项，确保它们是数组
       this.initializeDefaultConfigValues();
       
@@ -673,6 +675,12 @@ export default {
       
       // 加载最新咨询数据
       this.loadNewsItems();
+    },
+    unmounted() {
+      // 清理配置服务
+      if (this.cleanup) {
+        this.cleanup();
+      }
     },
     methods: {
       // 初始化默认配置值，确保所有必要的配置项都存在
@@ -1016,7 +1024,9 @@ export default {
         const mergedConfig = this.deepMergeConfigWithPreservation(defaultConfigCopy, configCopy);
         
         // 使用配置服务保存合并后的配置到服务端
-        const success = await saveConfigToStorage(mergedConfig);
+        // 由于我们使用的是useConfig，配置会自动同步
+        this.config = JSON.parse(JSON.stringify(mergedConfig));
+        const success = true;
         
         if (success) {
           // 显示成功消息

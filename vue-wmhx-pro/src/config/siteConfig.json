@@ -1,0 +1,157 @@
+{
+  "hero": {
+    "title": "深圳市为民可靠性系统工程研究院",
+    "subtitle": "确定性可靠·赋能中国制造业·服务创新科技·普惠中国智造",
+    "videoSrc": "https://video-player.weiminkeji.com/weimin-main.mp4"
+  },
+  "expertTeam": [
+    {
+      "id": 1,
+      "name": "张教授",
+      "title": "首席科学家",
+      "avatar": "https://image.weiminkeji.com/expert1.jpg",
+      "bio": "可靠性工程领域专家，拥有30年行业经验"
+    },
+    {
+      "id": 2,
+      "name": "李博士",
+      "title": "技术总监",
+      "avatar": "https://image.weiminkeji.com/expert2.jpg",
+      "bio": "智能制造与可靠性评估专家"
+    },
+    {
+      "id": 3,
+      "name": "王工程师",
+      "title": "高级工程师",
+      "avatar": "https://image.weiminkeji.com/expert3.jpg",
+      "bio": "系统可靠性设计专家"
+    }
+  ],
+  "services": [
+    {
+      "id": 1,
+      "title": "可靠性设计",
+      "description": "提供产品可靠性设计方案与优化服务",
+      "icon": "design"
+    },
+    {
+      "id": 2,
+      "title": "失效分析",
+      "description": "专业的失效模式分析与解决方案",
+      "icon": "analysis"
+    },
+    {
+      "id": 3,
+      "title": "可靠性测试",
+      "description": "全面的可靠性测试与验证服务",
+      "icon": "test"
+    },
+    {
+      "id": 4,
+      "title": "咨询培训",
+      "description": "可靠性工程技术咨询与培训",
+      "icon": "training"
+    }
+  ],
+  "newsSlider": [
+    {
+      "id": 1,
+      "title": "我院荣获深圳市科技创新奖",
+      "date": "2024-01-15",
+      "summary": "我院在可靠性工程领域的创新成果获得深圳市政府表彰"
+    },
+    {
+      "id": 2,
+      "title": "2024可靠性工程论坛即将召开",
+      "date": "2024-02-20",
+      "summary": "我院将主办2024年可靠性工程国际论坛，邀请国内外专家参会"
+    },
+    {
+      "id": 3,
+      "title": "新技术研发中心成立",
+      "date": "2024-03-10",
+      "summary": "我院新技术研发中心正式成立，专注于智能制造可靠性研究"
+    }
+  ],
+  "intellectualProperty": [
+    {
+      "id": 1,
+      "name": "一种智能设备可靠性评估方法",
+      "type": "发明专利",
+      "date": "2023"
+    },
+    {
+      "id": 2,
+      "name": "可靠性数据分析软件",
+      "type": "软件著作权",
+      "date": "2023"
+    },
+    {
+      "id": 3,
+      "name": "工业设备故障预测系统",
+      "type": "实用新型专利",
+      "date": "2022"
+    }
+  ],
+  "brandActivities": [
+    {
+      "id": 1,
+      "title": "参加2024深圳国际智能制造展",
+      "date": "2024-04-10至12",
+      "location": "深圳会展中心",
+      "image": "https://image.weiminkeji.com/activity1.jpg"
+    },
+    {
+      "id": 2,
+      "title": "可靠性技术讲座走进企业",
+      "date": "2024-05-08",
+      "location": "深圳南山区",
+      "image": "https://image.weiminkeji.com/activity2.jpg"
+    }
+  ],
+  "projectCases": [
+    {
+      "id": 1,
+      "name": "某大型制造企业设备可靠性提升项目",
+      "description": "通过可靠性设计改进，使设备故障率降低40%",
+      "category": "制造业",
+      "image": "https://image.weiminkeji.com/case1.jpg"
+    },
+    {
+      "id": 2,
+      "name": "医疗器械可靠性验证项目",
+      "description": "为医疗器械产品提供全面的可靠性测试与验证",
+      "category": "医疗器械",
+      "image": "https://image.weiminkeji.com/case2.jpg"
+    }
+  ],
+  "cooperationAgencies": [
+    {
+      "id": 1,
+      "name": "深圳大学",
+      "logo": "https://image.weiminkeji.com/partner1.png"
+    },
+    {
+      "id": 2,
+      "name": "中国可靠性工程学会",
+      "logo": "https://image.weiminkeji.com/partner2.png"
+    },
+    {
+      "id": 3,
+      "name": "深圳市科技创新委员会",
+      "logo": "https://image.weiminkeji.com/partner3.png"
+    }
+  ],
+  "importantLinks": [
+    {
+      "id": 1,
+      "name": "中国可靠性网",
+      "url": "https://www.reliability.cn"
+    },
+    {
+      "id": 2,
+      "name": "国际可靠性工程学会",
+      "url": "https://www.asq.org/rcm"
+    }
+  ]
+}

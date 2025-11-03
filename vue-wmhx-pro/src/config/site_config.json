@@ -1,3 +1,254 @@
 {
-  "test": "配置文件正常工作"
+  "brandActivities": [
+    {
+      "title": "2023可靠性工程国际研讨会45",
+      "date": "2023.12.15",
+      "tag": "国际会议",
+      "description": "汇聚全球可靠性领域专家，探讨前沿技术与应用案例"
+    },
+    {
+      "date": "2024.03.20",
+      "description": "专业认证课程，提升工程师可靠性设计与分析能力",
+      "tag": "培训课程",
+      "title": "可靠性工程师认证培训"
+    },
+    {
+      "date": "2024.06.10",
+      "description": "聚焦制造业可靠性痛点，分享最佳实践与解决方案",
+      "tag": "行业峰会",
+      "title": "制造业可靠性提升峰会"
+    }
+  ],
+  "cooperationAgencies": [
+    {
+      "backgroundColor": "#3b82f6",
+      "description": "联合行业领军企业共同发起成立，推动可靠性技术标准化与产业化应用，引领行业发展方向",
+      "id": "01",
+      "title": "发起单位"
+    },
+    {
+      "backgroundColor": "#10b981",
+      "description": "由学术界、产业界专家组成的决策机构，指导平台发展方向与战略规划，制定行业标准规范",
+      "id": "02",
+      "title": "理事会"
+    },
+    {
+      "backgroundColor": "#8b5cf6",
+      "description": "构建产学研用一体化生态系统，促进资源共享与协同创新，加速技术成果转化应用",
+      "id": "03",
+      "title": "为民生态圈"
+    },
+    {
+      "backgroundColor": "#f59e0b",
+      "description": "汇聚国内外知名企业，共建可靠性技术创新与应用合作网络，开展深度项目合作",
+      "id": "04",
+      "title": "合作企业"
+    },
+    {
+      "backgroundColor": "#ef4444",
+      "description": "整合高校资源，开展可靠性理论研究与人才培养，提供学术支持与前沿技术指导",
+      "id": "05",
+      "title": "学术合作伙伴"
+    },
+    {
+      "backgroundColor": "#6366f1",
+      "description": "提供专业检测认证服务，确保产品质量与可靠性符合国际标准与行业规范",
+      "id": "06",
+      "title": "检测认证机构"
+    }
+  ],
+  "expertTeam": [
+    {
+      "backgroundColor": "#dcfce7",
+      "description": "15年工业可靠性研究经验，曾主导多项国家级可靠性项目。",
+      "name": "张明",
+      "position": "可靠性工程专家"
+    },
+    {
+      "backgroundColor": "#dcfce7",
+      "description": "专注于复杂系统可靠性分析，发表学术论文20余篇。",
+      "name": "李华",
+      "position": "系统工程师"
+    },
+    {
+      "backgroundColor": "#dcfce7",
+      "description": "擅长可靠性数据建模与分析，开发多项预测算法。",
+      "name": "王芳",
+      "position": "数据分析师"
+    },
+    {
+      "backgroundColor": "#dcfce7",
+      "description": "专注于机械系统故障诊断与寿命预测技术研究。",
+      "name": "赵强",
+      "position": "机械工程专家"
+    },
+    {
+      "backgroundColor": "#dcfce7",
+      "description": "负责软件系统可靠性测试与验证方法研究。",
+      "name": "陈静",
+      "position": "软件可靠性工程师"
+    },
+    {
+      "backgroundColor": "#dcfce7",
+      "description": "ISO可靠性管理体系认证专家，多家企业顾问。",
+      "name": "刘杰666",
+      "position": "质量管理专家"
+    }
+  ],
+  "hero": {
+    "logo": "/static/logo.svg",
+    "subtitle": "确性可靠性 · 赋能中国制造企业 · 服务创新科技 · 普惠中国智造",
+    "title": "深圳市为民可靠性系统工程研究院",
+    "video": "/videos/background.mp4",
+    "websiteImage": "/static/changm.png",
+    "wechatQrcode": "/static/gzh.png"
+  },
+  "importantLinks": [
+    {
+      "backgroundColor": "#dbeafe",
+      "name": "NVIDIA"
+    },
+    {
+      "backgroundColor": "#dbeafe",
+      "name": "Qualcomm"
+    },
+    {
+      "backgroundColor": "#dbeafe",
+      "name": "Texas Instruments"
+    },
+    {
+      "backgroundColor": "#dbeafe",
+      "name": "APTIV"
+    },
+    {
+      "backgroundColor": "#dbeafe",
+      "name": "Neusoft"
+    },
+    {
+      "backgroundColor": "#dbeafe",
+      "name": "ThunderSoft"
+    }
+  ],
+  "intellectualProperty": [
+    {
+      "backgroundColor": "#dbeafe",
+      "description": "制定行业可靠性测试标准与评估体系，涵盖电子、机械、软件等多领域，包含ISO 9000/9001质量管理体系认证相关内容",
+      "title": "可靠性技术标准"
+    },
+    {
+      "backgroundColor": "#dcfce7",
+      "description": "提供可靠性工程实施指南、流程规范及质量控制文件模板，包含DFMEA、PFMEA等失效分析方法论",
+      "title": "工程规范文件"
+    },
+    {
+      "backgroundColor": "#fef3c7",
+      "description": "发布可靠性技术发展趋势、行业应用案例分析及解决方案白皮书，每月更新行业前沿技术研究成果",
+      "title": "技术白皮书"
+    },
+    {
+      "backgroundColor": "#fee2e2",
+      "description": "出版可靠性工程系列专著、期刊及技术论文集，包括《可靠性工程学报》《质量与可靠性》等核心期刊",
+      "title": "学术出版物"
+    },
+    {
+      "backgroundColor": "#e0e7ff",
+      "description": "开发专业培训课件、视频教程及实践案例分析材料，包含线上线下培训课程资源包",
+      "title": "专业培训资料"
+    },
+    {
+      "backgroundColor": "#f3e8ff",
+      "description": "基于大数据分析的可靠性预测模型与系统，支持企业产品寿命周期管理与预测性维护",
+      "title": "智能预测系统"
+    }
+  ],
+  "newsSlider": [
+    {
+      "caption": "AI大模型在复杂推理任务上超越人类专家水平",
+      "image": "/static/1.png"
+    },
+    {
+      "caption": "科学家成功研发出100量子比特处理器",
+      "image": "/static/2.png"
+    },
+    {
+      "caption": "发现类似地球的系外行星，可能存在液态水",
+      "image": "/static/3.png"
+    },
+    {
+      "caption": "新型电池技术实现能量密度提升300%",
+      "image": "/static/4.png"
+    },
+    {
+      "caption": "新一代VR设备实现全沉浸式16K体验",
+      "image": "/static/5.png"
+    }
+  ],
+  "projectCases": [
+    {
+      "backgroundColor": "#3b82f6",
+      "description": "为某汽车电子企业构建全生命周期可靠性测试解决方案，包含环境适应性测试、耐久性测试、电磁兼容性测试等全方位评估体系",
+      "id": "01",
+      "title": "汽车电子可靠性测试平台"
+    },
+    {
+      "backgroundColor": "#10b981",
+      "description": "基于AI的设备健康管理系统，融合机器学习算法与大数据分析，实现工业设备故障提前预警与智能化维护决策",
+      "id": "02",
+      "title": "工业设备故障预测系统"
+    },
+    {
+      "backgroundColor": "#8b5cf6",
+      "description": "通过可靠性设计提升消费电子产品使用寿命与用户体验，优化产品结构设计与材料选择，降低故障率达30%",
+      "id": "03",
+      "title": "消费电子可靠性优化项目"
+    },
+    {
+      "backgroundColor": "#f59e0b",
+      "description": "为新能源汽车动力电池系统开发可靠性评估与管理平台，提升电池安全性与寿命，支持实时监控与预警功能",
+      "id": "04",
+      "title": "新能源电池可靠性管理系统"
+    }
+  ],
+  "services": [
+    {
+      "description": "提供专业的可靠性工程师培训课程，帮助企业提升系统可靠性设计能力。",
+      "id": "01",
+      "title": "可靠性工程师培训666"
+    },
+    {
+      "description": "对企业系统进行详细的可靠性诊断，发现潜在问题并提供解决方案。",
+      "id": "02",
+      "title": "企业可靠性诊断"
+    },
+    {
+      "description": "为客户提供专业的技术项目咨询服务，帮助客户选择合适的技术方案。",
+      "id": "03",
+      "title": "技术项目咨询"
+    },
+    {
+      "description": "在客户现场提供专业的工程师服务，解决客户在系统运行中遇到的问题。",
+      "id": "04",
+      "title": "工程师驻场服务"
+    },
+    {
+      "description": "关注供应商的可靠性问题，确保供应链的稳定运行。",
+      "id": "05",
+      "title": "供应链可靠性"
+    },
+    {
+      "description": "采用可靠性正向设计方法，从系统设计阶段就考虑可靠性问题。",
+      "id": "06",
+      "title": "可靠性正向设计"
+    },
+    {
+      "description": "符合行业标准，获得相关认证，确保产品质量和可靠性。",
+      "id": "07",
+      "title": "标准和认证"
+    },
+    {
+      "description": "为客户构建高可靠的IT平台，保障业务连续性和数据安全。",
+      "id": "08",
+      "title": "企业高可靠平台建设"
+    }
+  ]
 }

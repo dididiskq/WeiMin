@@ -11,6 +11,7 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src')
     }
   },
+  // 移除API代理配置，因为Vue应用不再需要调用Flask API
   build: {
     rollupOptions: {
       output: {

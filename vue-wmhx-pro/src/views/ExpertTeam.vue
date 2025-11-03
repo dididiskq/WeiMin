@@ -35,54 +35,19 @@ import { onMounted, ref, onUnmounted } from 'vue';
 import Header from '../components/Header.vue';
 import Footer from '../components/Footer.vue';
 import homeConfig from '../config/home.config.js';
-import { getMergedConfig, getMergedConfigSync, startConfigRefresh, stopConfigRefresh } from '../services/configService.js';
+import { useConfig } from "../services/configService.js";
 
-// 使用响应式配置对象，初始化时使用同步版本获取配置
-const config = ref(getMergedConfigSync(homeConfig));
+// 使用新的配置服务
+const { config } = useConfig();
 
-onMounted(async () => {
-  // 启动配置自动刷新
-  startConfigRefresh(import.meta.env.DEV ? 5000 : 60000);
-  
-  // 异步获取合并后的配置（默认配置 + 保存的配置）
-  try {
-    const mergedConfig = await getMergedConfig(homeConfig);
-    config.value = mergedConfig;
-  } catch (error) {
-    console.error('加载配置失败:', error);
-  }
-  
-  // 监听存储变化，实时更新配置
-  const handleStorageChange = (event) => {
-    if (event.key === 'siteConfig') {
-      try {
-        config.value = JSON.parse(event.newValue || JSON.stringify(homeConfig));
-      } catch (e) {
-        console.error('解析更新的配置失败:', e);
-      }
-    }
-  };
-  
-  // 监听自定义配置更新事件，实现同一页面内的实时更新
-  const handleConfigUpdate = (event) => {
-    if (event.detail && event.detail.config) {
-      try {
-        config.value = JSON.parse(JSON.stringify(event.detail.config));
-      } catch (e) {
-        console.error('处理自定义配置更新失败:', e);
-      }
-    }
-  };
-  
-  window.addEventListener('storage', handleStorageChange);
-  window.addEventListener('config-updated', handleConfigUpdate);
-  
-  // 组件卸载时清理
-  onUnmounted(() => {
-    window.removeEventListener('storage', handleStorageChange);
-    window.removeEventListener('config-updated', handleConfigUpdate);
-    stopConfigRefresh();
-  });
+onMounted(() => {
+  // 配置已通过useConfig自动加载
+  console.log('专家团队页面已加载');
+});
+
+// 组件卸载时不需要特殊清理
+onUnmounted(() => {
+  console.log('专家团队页面已卸载');
 });</script>
 
 <style scoped>
