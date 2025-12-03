@@ -27,8 +27,8 @@ const handleVideoEnd = () => {
 const handleScrollTrigger = () => {
   // 只有当视频可见且滚动触发尚未发生时才执行
   if (videoVisible.value && !scrollTriggered.value) {
-    // 检测是否有明显的滚动行为（滚动距离超过50px）
-    if (window.scrollY > 50) {
+    // 检测是否有明显的滚动行为（滚动距离超过10px）
+    if (window.scrollY > 5) {
       scrollTriggered.value = true;
       videoVisible.value = false;
     }
@@ -207,13 +207,13 @@ onMounted(async () => {
         <h2>欢迎访问深圳市为民可靠性系统工程研究院</h2>
         <p>系统正在加载配置，请稍候...</p>
       </div>
-      <div class="hero-video-container" v-if="videoVisible">
+      <div class="hero-video-container" :class="{ hidden: !videoVisible }">
   <video class="hero-video" autoplay muted playsinline @ended="handleVideoEnd">
     <source :src="$siteConfig?.hero?.video || '/static/videos/hero.mp4'" type="video/mp4">
     您的浏览器不支持视频播放
   </video>
 </div>
-<div class="video-logo-container" v-else>
+<div class="video-logo-container" :class="{ visible: !videoVisible }">
   <img :src="$siteConfig?.hero?.logo || '/static/images/logo.png'" alt="品牌logo" class="animated-logo">
   <div class="hero-content-below-logo">
     <h1 class="hero-title">{{ $siteConfig?.hero?.title || '网站标题' }}</h1>
@@ -271,12 +271,20 @@ onMounted(async () => {
           <div class="section-divider"></div>
         </div>
         <div class="team-grid">
-          <router-link to="/expert-team" class="team-card-link" v-for="(expert, index) in $siteConfig?.expertTeam || []" :key="index">
+          <router-link to="/expert-team" class="team-card-link" v-for="(expert, index) in ($siteConfig?.expertTeam || []).slice(0, 5)" :key="index">
             <div class="team-card">
               <div class="team-photo" :style="{ backgroundColor: expert.backgroundColor || '#dcfce7' }"></div>
               <h3 class="team-name">{{ expert.name || '未知专家' }}</h3>
               <p class="team-position">{{ expert.position || '未知职位' }}</p>
-              <p class="team-desc">{{ expert.description || '暂无简介' }}</p>
+            </div>
+          </router-link>
+          <!-- 更多专家按钮 -->
+          <router-link to="/expert-team" class="team-card-link more-team-link">
+            <div class="team-card more-team-card">
+              <div class="more-team-content">
+                <span class="more-team-text">更多</span>
+                <span class="more-team-icon">→</span>
+              </div>
             </div>
           </router-link>
         </div>
@@ -356,15 +364,8 @@ onMounted(async () => {
           <h2 class="section-title">合作机构</h2>
           <div class="section-divider"></div>
         </div>
-        <div class="agencies-grid">
-          <router-link to="/cooperation-agencies" class="agency-card-link" v-for="(agency, index) in $siteConfig?.cooperationAgencies || []" :key="index">
-            <div class="agency-card">
-              <div class="agency-icon" :style="{ backgroundColor: agency.backgroundColor }">{{ agency.id }}</div>
-              <h3 class="agency-title">{{ agency.title }}</h3>
-              <p class="agency-desc">{{ agency.description }}</p>
-              <span class="case-link">查看详情 →</span>
-            </div>
-          </router-link>
+        <div class="partner-image-container">
+          <img src="/static/partner.png" alt="合作机构" class="partner-image">
         </div>
       </section>
 
@@ -515,11 +516,10 @@ onMounted(async () => {
 .hero-section {
   position: relative;
   overflow: hidden;
-  height: 80vh;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
   width: 100vw;
   margin-left: calc(-50vw + 50%);
 }
@@ -557,11 +557,14 @@ onMounted(async () => {
 }
 
 .hero-video-container {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 0;
-  padding-bottom: 56.25%; /* 16:9 比例 */
+  height: 100%;
   overflow: hidden;
+  transition: opacity 1s ease, transform 1s ease;
+  z-index: 2;
 }
 
 .hero-video {
@@ -746,6 +749,41 @@ onMounted(async () => {
   width: 120px;
 }
 
+/* 更多专家按钮样式 */
+.more-team-link .team-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  background-color: #f8fafc;
+  border-style: dashed;
+  cursor: pointer;
+}
+
+.more-team-link:hover .team-card {
+  background-color: #f1f5f9;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgba(167, 243, 208, 0.2);
+}
+
+.more-team-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.more-team-text {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #10b981;
+}
+
+.more-team-icon {
+  font-size: 1.5rem;
+  color: #10b981;
+}
+
 /* 视频区域logo动画 */
 .video-logo-container {
   position: absolute;
@@ -757,6 +795,10 @@ onMounted(async () => {
   align-items: center;
   justify-content: center;
   background-color: #ffffff;
+  transition: opacity 1s ease, transform 1s ease;
+  opacity: 0;
+  transform: scale(0.9);
+  z-index: 1;
 }
 
 .animated-logo {
@@ -871,7 +913,18 @@ onMounted(async () => {
 }
 
 /* 确保动画只触发一次 */
-.video-logo-container, .hero-content-below-logo {
+.video-logo-container.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.hero-video-container.hidden {
+  opacity: 0;
+  transform: scale(1.1);
+}
+
+/* 确保动画只触发一次 */
+.hero-content-below-logo {
   animation-play-state: running;
 }
 
@@ -943,11 +996,7 @@ onMounted(async () => {
   font-size: 0.9rem;
 }
 
-.team-desc {
-  color: #64748b;
-  font-size: 0.9rem;
-  line-height: 1.6;
-}
+
 
 /* 服务卡片 */
 .services-grid {
@@ -1119,11 +1168,18 @@ onMounted(async () => {
   margin-top: 40px;
 }
 
-.agencies-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 24px;
+.partner-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 40px;
+  padding: 20px 0;
+}
+
+.partner-image {
+  max-width: 100%;
+  height: auto;
+  max-height: 300px;
 }
 
 .agency-card {

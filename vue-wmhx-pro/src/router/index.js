@@ -1,14 +1,9 @@
 import { createRouter, createWebHashHistory  } from 'vue-router';
 import Home from '../views/Home.vue';
-import InstituteIntroduction from '../views/InstituteIntroduction.vue';
-import ExpertTeam from '../views/ExpertTeam.vue';
-import ServiceContent from '../views/ServiceContent.vue';
+import AboutUs from '../views/AboutUs.vue';
+import MainBusiness from '../views/MainBusiness.vue';
 import BrandActivities from '../views/BrandActivities.vue';
 import ContactUs from '../views/ContactUs.vue';
-import LatestNews from '../views/LatestNews.vue';
-import ProjectCase from '../views/ProjectCase.vue';
-import IntellectualProperty from '../views/IntellectualProperty.vue';
-import CooperationAgencies from '../views/CooperationAgencies.vue';
 
 /**
  * 路由配置数组c
@@ -21,46 +16,56 @@ const routes = [
     component: Home
   },
   {
-    path: '/institute-introduction',
-    name: 'InstituteIntroduction',
-    component: InstituteIntroduction
+    path: '/about-us',
+    name: 'AboutUs',
+    component: AboutUs
   },
   {
-    path: '/expert-team',
-    name: 'ExpertTeam',
-    component: ExpertTeam
-  },
-  {
-    path: '/service-content',
-    name: 'ServiceContent',
-    component: ServiceContent
+    path: '/main-business',
+    name: 'MainBusiness',
+    component: MainBusiness
   },
   {
     path: '/brand-activities',
     name: 'BrandActivities',
     component: BrandActivities
   },
-  {
-    path: '/latest-news',
-    name: 'LatestNews',
-    component: LatestNews
-  },
+
   {
     path: '/contact-us',
     name: 'ContactUs',
     component: ContactUs
   },
-  {    path: '/project-case',    name: 'ProjectCase',    component: ProjectCase  },
-    {    path: '/intellectual-property',    name: 'IntellectualProperty',    component: IntellectualProperty  },  
-    {    path: '/cooperation-agencies',    name: 'CooperationAgencies',    component: CooperationAgencies  },
+
+   
 
 ];
 
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
-  scrollBehavior() {
-    // 每次导航时滚动到页面顶部
+  scrollBehavior(to, from, savedPosition) {
+    // 处理锚点跳转
+    if (to.hash) {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          const el = document.querySelector(to.hash);
+          if (el) {
+            resolve({
+              el: to.hash,
+              behavior: 'smooth'
+            });
+          } else {
+            resolve({ top: 0 });
+          }
+        }, 100);
+      });
+    }
+    // 如果有保存的位置，则恢复到该位置
+    if (savedPosition) {
+      return savedPosition;
+    }
+    // 默认滚动到页面顶部
     return { top: 0 };
   }
 });

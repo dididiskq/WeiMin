@@ -9,47 +9,54 @@
           <span class="logo-text">深圳市为民可靠性系统工程研究院</span>
         </router-link>
         <ul class="nav-links">
-          <li>
-            <router-link to="/institute-introduction" class="nav-link" active-class="active">
-              研究院简介
-            </router-link>
+          <!-- 首页 -->
+          <li class="nav-item">
+            <router-link to="/" class="nav-link" active-class="active">首页</router-link>
           </li>
-          <li>
-            <router-link to="/expert-team" class="nav-link" active-class="active">
-              专家团队
+          <!-- 关于我们 -->
+          <li class="nav-item">
+            <router-link to="/about-us" class="nav-link" active-class="active">
+              关于我们
             </router-link>
+            <!-- 关于我们的下拉内容 -->
+            <div class="dropdown-item">
+              <ul class="sub-nav">
+                <li><router-link to="/about-us#研究院简介" class="sub-nav-link">研究院简介</router-link></li>
+                <li><router-link to="/about-us#确信可靠性" class="sub-nav-link">确信可靠性</router-link></li>
+                <li><router-link to="/about-us#工程技术" class="sub-nav-link">工程技术</router-link></li>
+                <li><router-link to="/about-us#合作机构" class="sub-nav-link">合作机构</router-link></li>
+              </ul>
+            </div>
           </li>
-          <li>
-            <router-link to="/service-content" class="nav-link" active-class="active">
-              服务内容
+          <!-- 主营业务 -->
+          <li class="nav-item">
+            <router-link to="/main-business" class="nav-link" active-class="active">
+              主营业务
             </router-link>
+            <!-- 主营业务的下拉内容 -->
+            <div class="dropdown-item">
+              <ul class="sub-nav">
+                <li><router-link to="/main-business#服务内容" class="sub-nav-link">服务内容</router-link></li>
+                <li><router-link to="/main-business#项目案例" class="sub-nav-link">项目案例</router-link></li>
+                <li><router-link to="/main-business#知识产权和智库" class="sub-nav-link">知识产权和智库</router-link></li>
+              </ul>
+            </div>
           </li>
-          <li>
+          <!-- 品牌活动 -->
+          <li class="nav-item">
             <router-link to="/brand-activities" class="nav-link" active-class="active">
               品牌活动
             </router-link>
+            <!-- 品牌活动的下拉内容 -->
+            <div class="dropdown-item">
+              <ul class="sub-nav">
+                <li><router-link to="/brand-activities#最新资讯" class="sub-nav-link">最新资讯</router-link></li>
+                <li><router-link to="/brand-activities#品牌活动" class="sub-nav-link">品牌活动</router-link></li>
+              </ul>
+            </div>
           </li>
-          <li>
-            <router-link to="/latest-news" class="nav-link" active-class="active">
-              最新资讯
-            </router-link>
-          </li>
-          <li>
-            <router-link to="/project-case" class="nav-link" active-class="active">
-              项目案例
-            </router-link>
-          </li>
-          <li>
-            <router-link to="/intellectual-property" class="nav-link" active-class="active">
-              知识产权和智库
-            </router-link>
-          </li>
-          <li>
-            <router-link to="/cooperation-agencies" class="nav-link" active-class="active">
-              合作机构
-            </router-link>
-          </li>
-          <li>
+          <!-- 联系我们 -->
+          <li class="nav-item">
             <router-link to="/contact-us" class="nav-link cta-button" active-class="active">
               联系我们
             </router-link>
@@ -61,11 +68,12 @@
 </template>
 
 <script setup>
-  import { useRoute } from 'vue-router';
+  import { useRoute, useRouter } from 'vue-router';
   import { watch } from 'vue';
   
   // 获取当前路由信息
   const route = useRoute();
+  const router = useRouter();
   
   // 监听路由变化，确保导航正常工作
   watch(() => route.path, (newPath) => {
@@ -89,6 +97,8 @@
   backdrop-filter: blur(10px);
   padding: 1rem 5%;
   border-bottom: 1px solid rgba(59, 130, 246, 0.2);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .container {
@@ -106,6 +116,8 @@
 
 .logo-link {
   text-decoration: none;
+  display: flex;
+  align-items: center;
 }
 
 .logo-img {
@@ -142,6 +154,14 @@
   list-style: none;
   margin: 0;
   padding: 0;
+  position: relative;
+}
+
+/* 主导航项样式 */
+.nav-links > li {
+  position: relative;
+  padding: 0;
+  margin: 0;
 }
 
 .nav-link {
@@ -149,6 +169,8 @@
   text-decoration: none;
   font-size: 0.95rem;
   transition: color 0.3s ease;
+  display: block;
+  padding: 0.5rem 0;
 }
 
 .nav-link:hover {
@@ -168,6 +190,77 @@
   transform: translateY(-2px);
 }
 
+/* 导航项样式 */
+.nav-item {
+  position: relative;
+  display: inline-block;
+}
+
+/* 导航项的下拉内容 */
+.dropdown-item {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  /* 科技风半透明背景 */
+  background: rgba(255, 255, 255, 0.95);
+  /* 蓝色科技边框效果 */
+  border: 1px solid rgba(15, 124, 214, 0.3);
+  border-radius: 0 0 12px 12px;
+  /* 科技感阴影效果 */
+  box-shadow: 0 8px 24px rgba(15, 124, 214, 0.15),
+              0 0 20px rgba(15, 124, 214, 0.05);
+  z-index: 1001;
+  margin-top: -1px;
+  /* 平滑过渡效果 */
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, -10px);
+  transition: all 0.3s ease;
+  min-width: 180px;
+  /* 确保与导航标题完全对齐 */
+  padding: 0;
+  backdrop-filter: blur(5px);
+}
+
+/* 子导航内容居中 */
+.sub-nav {
+  text-align: center;
+}
+
+/* 当鼠标悬停在导航项上时显示下拉内容 */
+.nav-item:hover .dropdown-item {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+
+/* 子导航样式 */
+.sub-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 180px;
+}
+
+.sub-nav-link {
+  color: #1e293b;
+  text-decoration: none;
+  font-size: 0.9rem;
+  padding: 0.5rem 1.5rem;
+  transition: all 0.3s ease;
+  display: block;
+  white-space: nowrap;
+}
+
+.sub-nav-link:hover {
+  background: #f1f5f9;
+  color: #0f7cd6;
+}
+
+/* 响应式设计 */
 @media (max-width: 768px) {
   .nav-links {
     display: none;

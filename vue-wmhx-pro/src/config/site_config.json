@@ -1,7 +1,7 @@
 {
   "brandActivities": [
     {
-      "title": "2023可靠性工程国际研讨会45",
+      "title": "2023可靠性工程国际研讨会",
       "date": "2023.12.15",
       "tag": "国际会议",
       "description": "汇聚全球可靠性领域专家，探讨前沿技术与应用案例"
@@ -85,13 +85,13 @@
     {
       "backgroundColor": "#dcfce7",
       "description": "负责软件系统可靠性测试与验证方法研究。",
-      "name": "陈静",
+      "name": "陈静123",
       "position": "软件可靠性工程师"
     },
     {
       "backgroundColor": "#dcfce7",
       "description": "ISO可靠性管理体系认证专家，多家企业顾问。",
-      "name": "刘杰666",
+      "name": "刘杰777",
       "position": "质量管理专家"
     }
   ],

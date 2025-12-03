@@ -23,3 +23,7 @@ http-server
 
 ### 打包exe
 npm run packager 
+
+### pm2运行
+pm2 start npm --name "vue-wnhx-pro" -- run dev
+pm2 logs
