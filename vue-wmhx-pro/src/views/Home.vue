@@ -776,12 +776,12 @@ onMounted(async () => {
 .more-team-text {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #10b981;
+  color: #3b82f6;
 }
 
 .more-team-icon {
   font-size: 1.5rem;
-  color: #10b981;
+  color: #3b82f6;
 }
 
 /* 视频区域logo动画 */
@@ -990,7 +990,7 @@ onMounted(async () => {
 }
 
 .team-position {
-  color: #10b981;
+  color: #3b82f6;
   font-weight: 500;
   margin-bottom: 1rem;
   font-size: 0.9rem;

@@ -202,7 +202,7 @@ export default {
       id: '02',
       title: '理事会',
       description: '由学术界、产业界专家组成的决策机构，指导平台发展方向与战略规划',
-      backgroundColor: '#10b981'
+      backgroundColor: '#3b82f6'
     },
     {
       id: '03',

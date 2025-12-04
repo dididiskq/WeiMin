@@ -259,7 +259,7 @@ onUnmounted(() => {
 }
 
 .activity-header {
-  background-color: #10b981;
+  background-color: #3b82f6;
   color: white;
   padding: 0.8rem 1.5rem;
   display: inline-block;
@@ -306,7 +306,7 @@ onUnmounted(() => {
 }
 
 .activity-date {
-  color: #10b981;
+  color: #3b82f6;
   font-weight: 500;
   font-size: 1rem;
 }

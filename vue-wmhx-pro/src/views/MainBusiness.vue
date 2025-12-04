@@ -283,7 +283,7 @@ onUnmounted(() => {
   color: #1e293b;
   margin-bottom: 2rem;
   font-size: 1.8rem;
-  border-left: 4px solid #10b981;
+  border-left: 4px solid #3b82f6;
   padding-left: 1rem;
 }
 
@@ -388,9 +388,9 @@ onUnmounted(() => {
 
 .filter-btn.active,
 .filter-btn:hover {
-  background-color: #10b981;
+  background-color: #3b82f6;
   color: #ffffff;
-  border-color: #10b981;
+  border-color: #3b82f6;
 }
 
 /* 案例网格样式 */
@@ -424,7 +424,7 @@ onUnmounted(() => {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #10b981;
+  color: #3b82f6;
   font-size: 2rem;
 }
 
@@ -439,7 +439,7 @@ onUnmounted(() => {
 }
 
 .case-category {
-  color: #10b981;
+  color: #3b82f6;
   font-size: 0.8rem;
   margin-bottom: 1rem;
   font-weight: 500;
@@ -454,7 +454,7 @@ onUnmounted(() => {
 
 .view-details {
   display: inline-block;
-  color: #10b981;
+  color: #3b82f6;
   font-size: 0.9rem;
   font-weight: 500;
   background: none;

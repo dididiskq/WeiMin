@@ -27,7 +27,7 @@
       "title": "发起单位"
     },
     {
-      "backgroundColor": "#10b981",
+      "backgroundColor": "#3b82f6",
       "description": "由学术界、产业界专家组成的决策机构，指导平台发展方向与战略规划，制定行业标准规范",
       "id": "02",
       "title": "理事会"
@@ -191,7 +191,7 @@
       "title": "汽车电子可靠性测试平台"
     },
     {
-      "backgroundColor": "#10b981",
+      "backgroundColor": "#3b82f6",
       "description": "基于AI的设备健康管理系统，融合机器学习算法与大数据分析，实现工业设备故障提前预警与智能化维护决策",
       "id": "02",
       "title": "工业设备故障预测系统"
