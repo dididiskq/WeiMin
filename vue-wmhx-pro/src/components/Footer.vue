@@ -7,28 +7,25 @@
         <div class="footer-column">
           <h3 class="footer-title">关于我们</h3>
           <ul class="footer-links">
-            <li><a href="#" class="footer-link">公司简介</a></li>
-            <li><a href="#" class="footer-link">团队介绍</a></li>
-            <li><a href="#" class="footer-link">新闻动态</a></li>
-            <li><a href="#" class="footer-link">加入我们</a></li>
+            <li><a href="#" class="footer-link">为民研究院简介</a></li>
+            <li><a href="#" class="footer-link">专家团队</a></li>
+            <li><a href="#" class="footer-link">合作机构</a></li>
           </ul>
         </div>
         <div class="footer-column">
-          <h3 class="footer-title">服务内容</h3>
+          <h3 class="footer-title">主营业务</h3>
           <ul class="footer-links">
-            <li><a href="#" class="footer-link">工程师培训</a></li>
-            <li><a href="#" class="footer-link">技术咨询</a></li>
-            <li><a href="#" class="footer-link">系统集成</a></li>
-            <li><a href="#" class="footer-link">定制开发</a></li>
+            <li><a href="#" class="footer-link">最新资讯</a></li>
+            <li><a href="#" class="footer-link">主营业务</a></li>
+            <li><a href="#" class="footer-link">项目案例</a></li>
           </ul>
         </div>
         <div class="footer-column">
           <h3 class="footer-title">资源中心</h3>
           <ul class="footer-links">
-            <li><a href="#" class="footer-link">技术文档</a></li>
-            <li><a href="#" class="footer-link">案例研究</a></li>
-            <li><a href="#" class="footer-link">行业报告</a></li>
-            <li><a href="#" class="footer-link">常见问题</a></li>
+            <li><a href="#" class="footer-link">可靠性标准</a></li>
+            <li><a href="#" class="footer-link">品牌活动</a></li>
+            <li><a href="#" class="footer-link">可靠性专著</a></li>
           </ul>
         </div>
         <div class="footer-column">
@@ -36,7 +33,7 @@
           <ul class="footer-links">
             <li><a href="#" class="footer-link">联系方式</a></li>
             <li><a href="#" class="footer-link">在线留言</a></li>
-            <li><a href="#" class="footer-link">意见反馈</a></li>
+            <li><a href="#" class="footer-link">加入我们</a></li>
           </ul>
         </div>
       </div>
@@ -49,9 +46,9 @@
           <a href="#" class="social-icon">知乎</a>
           <a href="#" class="social-icon">B站</a>
         </div>
-        <div class="footer-admin">
+        <!-- <div class="footer-admin">
           <router-link to="/admin-login" class="admin-login-link">管理员登录</router-link>
-        </div>
+        </div> -->
       </div>
     </div>
   </footer>

@@ -21,9 +21,8 @@
             <!-- 关于我们的下拉内容 -->
             <div class="dropdown-item">
               <ul class="sub-nav">
-                <li><router-link to="/about-us#研究院简介" class="sub-nav-link">研究院简介</router-link></li>
-                <li><router-link to="/about-us#确信可靠性" class="sub-nav-link">确信可靠性</router-link></li>
-                <li><router-link to="/about-us#工程技术" class="sub-nav-link">工程技术</router-link></li>
+                <li><router-link to="/about-us#为民院简介" class="sub-nav-link">为民院简介</router-link></li>
+                <li><router-link to="/about-us#专家团队" class="sub-nav-link">专家团队</router-link></li>
                 <li><router-link to="/about-us#合作机构" class="sub-nav-link">合作机构</router-link></li>
               </ul>
             </div>
@@ -36,7 +35,7 @@
             <!-- 主营业务的下拉内容 -->
             <div class="dropdown-item">
               <ul class="sub-nav">
-                <li><router-link to="/main-business#服务内容" class="sub-nav-link">服务内容</router-link></li>
+                <li><router-link to="/main-business#主营业务" class="sub-nav-link">主营业务</router-link></li>
                 <li><router-link to="/main-business#项目案例" class="sub-nav-link">项目案例</router-link></li>
                 <li><router-link to="/main-business#知识产权和智库" class="sub-nav-link">知识产权和智库</router-link></li>
               </ul>

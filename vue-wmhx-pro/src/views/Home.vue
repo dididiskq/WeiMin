@@ -270,16 +270,18 @@ onMounted(async () => {
           <h2 class="section-title">专家团队</h2>
           <div class="section-divider"></div>
         </div>
-        <div class="team-grid">
-          <router-link to="/expert-team" class="team-card-link" v-for="(expert, index) in ($siteConfig?.expertTeam || []).slice(0, 5)" :key="index">
-            <div class="team-card">
-              <div class="team-photo" :style="{ backgroundColor: expert.backgroundColor || '#dcfce7' }"></div>
-              <h3 class="team-name">{{ expert.name || '未知专家' }}</h3>
-              <p class="team-position">{{ expert.position || '未知职位' }}</p>
-            </div>
-          </router-link>
+        <div class="team-grid-wrapper">
+          <div class="team-grid">
+            <router-link to="/expert-team" class="team-card-link" v-for="(expert, index) in ($siteConfig?.expertTeam || []).slice(0, 5)" :key="index">
+              <div class="team-card">
+                <div class="team-photo" :style="{ backgroundColor: expert.backgroundColor || '#dcfce7' }"></div>
+                <h3 class="team-name">{{ expert.name || '未知专家' }}</h3>
+                <p class="team-position">{{ expert.position || '未知职位' }}</p>
+              </div>
+            </router-link>
+          </div>
           <!-- 更多专家按钮 -->
-          <router-link to="/expert-team" class="team-card-link more-team-link">
+          <router-link to="/expert-team" class="team-card-link more-team-link small-more-button">
             <div class="team-card more-team-card">
               <div class="more-team-content">
                 <span class="more-team-text">更多</span>
@@ -293,7 +295,7 @@ onMounted(async () => {
       <!-- 核心服务 -->
       <section id="services" class="section fade-in">
         <div class="section-header">
-          <h2 class="section-title">技术服务</h2>
+          <h2 class="section-title">主营业务</h2>
           <div class="section-divider"></div>
         </div>
         <div class="services-grid">
@@ -724,12 +726,17 @@ onMounted(async () => {
 }
 
 /* 专家团队 */
+.team-grid-wrapper {
+  position: relative;
+  margin-top: 2rem;
+}
+
 .team-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 2rem;
-  margin-top: 2rem;
 }
+
 
 .team-card {
   background: #ffffff;
@@ -782,6 +789,45 @@ onMounted(async () => {
 .more-team-icon {
   font-size: 1.5rem;
   color: #3b82f6;
+}
+
+/* 缩小版更多按钮 */
+.small-more-button {
+  position: absolute;
+  bottom: -2rem;
+  right: 0;
+  width: 80px;
+  height: 80px;
+  z-index: 10;
+}
+
+.small-more-button .team-card {
+  min-height: auto;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px dashed #3b82f6;
+  background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.small-more-button:hover .team-card {
+  background-color: #f8fafc;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.small-more-button .more-team-content {
+  gap: 0.25rem;
+}
+
+.small-more-button .more-team-text {
+  font-size: 0.9rem;
+}
+
+.small-more-button .more-team-icon {
+  font-size: 1rem;
 }
 
 /* 视频区域logo动画 */

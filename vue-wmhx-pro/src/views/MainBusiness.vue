@@ -8,7 +8,7 @@
       <!-- 服务内容部分 -->
       <section id="服务内容" class="section fade-in">
         <div class="section-header">
-          <h2 class="section-title">服务内容</h2>
+          <h2 class="section-title">主营业务</h2>
           <div class="section-divider"></div>
         </div>
         <div class="services-container">
