@@ -7,9 +7,9 @@ export default {
     title: '深圳市为民可靠性系统工程研究院11',
     subtitle: '确性可靠性 · 赋能中国制造企业 · 服务创新科技 · 普惠中国智造',
     video: '/videos/background.mp4',
-    logo: '/assets/logo.svg',
-    websiteImage: '/assets/changm.png',
-    wechatQrcode: '/assets/gzh.png',
+    logo: '/static/logo.svg',
+    websiteImage: '/static/changm.png',
+    wechatQrcode: '/static/gzh.png',
   },
 
   // 最新资讯轮播图配置

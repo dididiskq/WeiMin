@@ -14,7 +14,7 @@
         <div class="services-container">
           <!-- 服务类别1 -->
           <div class="service-category">
-            <h3 class="category-title">核心技术服务</h3>
+            <!-- <h3 class="category-title">核心技术服务</h3> -->
             <div class="service-cards">
               <div v-for="service in coreServices" :key="service.id" class="service-card hover-lift">
                 <div class="card-icon"><span>{{ service.id }}</span></div>
@@ -31,7 +31,7 @@
 
           <!-- 服务类别2 -->
           <div class="service-category">
-            <h3 class="category-title">高级解决方案</h3>
+            <!-- <h3 class="category-title">高级解决方案</h3> -->
             <div class="service-cards">
               <div v-for="service in advancedServices" :key="service.id" class="service-card hover-lift">
                 <div class="card-icon"><span>{{ service.id }}</span></div>
@@ -129,7 +129,7 @@
         <div class="container">
           <!-- 技术标准 -->
           <div class="section-content">
-            <p>制定行业可靠性测试标准与评估体系，涵盖电子、机械、软件等多领域。我们的标准体系基于国际先进经验，结合国内实际需求，为企业提供科学、规范的可靠性技术指导。</p>
+            <h3 class="subsection-title">可靠性标准</h3>
             <div class="standards-grid">
               <div class="standard-item hover-lift">
                 <div class="standard-icon"><span>01</span></div>
@@ -151,7 +151,7 @@
 
           <!-- 规范文件 -->
           <div class="section-content">
-            <p>提供可靠性工程实施指南、流程规范及质量控制文件模板，帮助企业建立完善的可靠性管理体系，提升产品质量与竞争力。</p>
+            <h3 class="subsection-title">专著</h3>
             <div class="documents-grid">
               <div class="document-item hover-lift">
                 <div class="document-icon"><span>01</span></div>
@@ -507,6 +507,14 @@ onUnmounted(() => {
 
 .section-content {
   margin-bottom: 60px;
+}
+
+.subsection-title {
+  font-size: 1.6rem;
+  color: #1e293b;
+  text-align: center;
+  margin: 0 auto 40px;
+  font-weight: 600;
 }
 
 .section-content p {

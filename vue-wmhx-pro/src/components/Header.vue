@@ -5,7 +5,7 @@
     <div class="container">
       <nav class="tech-nav">
         <router-link to="/" class="logo-link" active-class="active">
-          <img src="@/assets/logo.svg" alt="品牌logo" class="logo-img">
+          <img src="/static/logo.svg" alt="品牌logo" class="logo-img">
           <span class="logo-text">深圳市为民可靠性系统工程研究院</span>
         </router-link>
         <ul class="nav-links">
@@ -15,42 +15,40 @@
           </li>
           <!-- 关于我们 -->
           <li class="nav-item">
-            <router-link to="/about-us" class="nav-link" active-class="active">
+            <a href="javascript:void(0);" class="nav-link">
               关于我们
-            </router-link>
+            </a>
             <!-- 关于我们的下拉内容 -->
             <div class="dropdown-item">
               <ul class="sub-nav">
-                <li><router-link to="/about-us#为民院简介" class="sub-nav-link">为民院简介</router-link></li>
-                <li><router-link to="/about-us#专家团队" class="sub-nav-link">专家团队</router-link></li>
-                <li><router-link to="/about-us#合作机构" class="sub-nav-link">合作机构</router-link></li>
+                <li><router-link to="/institute-introduction" class="sub-nav-link">为民院简介</router-link></li>
+                <li><router-link to="/expert-team" class="sub-nav-link">专家团队</router-link></li>
+                <li><router-link to="/cooperation-organizations" class="sub-nav-link">合作机构</router-link></li>
               </ul>
             </div>
           </li>
           <!-- 主营业务 -->
           <li class="nav-item">
-            <router-link to="/main-business" class="nav-link" active-class="active">
-              主营业务
-            </router-link>
-            <!-- 主营业务的下拉内容 -->
-            <div class="dropdown-item">
-              <ul class="sub-nav">
-                <li><router-link to="/main-business#主营业务" class="sub-nav-link">主营业务</router-link></li>
-                <li><router-link to="/main-business#项目案例" class="sub-nav-link">项目案例</router-link></li>
-                <li><router-link to="/main-business#知识产权和智库" class="sub-nav-link">知识产权和智库</router-link></li>
-              </ul>
-            </div>
-          </li>
+              <a class="nav-link" href="javascript:void(0);">主营业务</a>
+              <!-- 主营业务的下拉内容 -->
+              <div class="dropdown-item">
+                <ul class="sub-nav">
+                  <li><router-link to="/main-business-service" class="sub-nav-link">主营业务</router-link></li>
+                  <li><router-link to="/project-cases" class="sub-nav-link">项目案例</router-link></li>
+                  <li><router-link to="/intellectual-property" class="sub-nav-link">知识产权和智库</router-link></li>
+                </ul>
+              </div>
+            </li>
           <!-- 品牌活动 -->
           <li class="nav-item">
-            <router-link to="/brand-activities" class="nav-link" active-class="active">
+            <a href="javascript:void(0);" class="nav-link">
               品牌活动
-            </router-link>
+            </a>
             <!-- 品牌活动的下拉内容 -->
             <div class="dropdown-item">
               <ul class="sub-nav">
-                <li><router-link to="/brand-activities#最新资讯" class="sub-nav-link">最新资讯</router-link></li>
-                <li><router-link to="/brand-activities#品牌活动" class="sub-nav-link">品牌活动</router-link></li>
+                <li><router-link to="/latest-news" class="sub-nav-link">最新资讯</router-link></li>
+                <li><router-link to="/brand-activities-detail" class="sub-nav-link">品牌活动</router-link></li>
               </ul>
             </div>
           </li>

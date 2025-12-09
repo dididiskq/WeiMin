@@ -1,35 +1,10 @@
 // 内容管理器 - 用于管理最新资讯页面的数据
 
-// 模拟新闻数据
-const mockNewsData = [
-  {
-    id: 1,
-    title: '研究院举办2024年度可靠性工程技术研讨会',
-    date: '2024-12-15',
-    category: '行业动态',
-    summary: '深圳市为民可靠性系统工程研究院成功举办2024年度可靠性工程技术研讨会，邀请了国内外知名专家学者参与。',
-    content: '本次研讨会旨在促进可靠性工程领域的技术交流与合作，探讨行业最新发展趋势和应用前景。\n\n来自全国各地的200余名专业人士参加了此次盛会，共同分享了可靠性工程领域的最新研究成果和实践经验。',
-    image: '/src/assets/image1.jpg'
-  },
-  {
-    id: 2,
-    title: '我院获得国家重点实验室认证',
-    date: '2024-11-20',
-    category: '机构动态',
-    summary: '深圳市为民可靠性系统工程研究院近日获得国家重点实验室认证，成为国内可靠性工程领域的重要研究基地。',
-    content: '此次认证标志着我院在可靠性工程研究方面取得了重要突破，将进一步提升我院的科研能力和影响力。\n\n未来，我院将继续加强与国内外科研机构的合作，推动可靠性工程技术的创新发展。',
-    image: '/src/assets/image2.jpg'
-  },
-  {
-    id: 3,
-    title: '可靠性工程技术在新能源领域的应用研讨会成功召开',
-    date: '2024-10-10',
-    category: '学术交流',
-    summary: '我院联合多家企业举办可靠性工程技术在新能源领域的应用研讨会，探讨技术创新与产业发展。',
-    content: '研讨会围绕新能源设备的可靠性设计、测试与评估等主题展开深入讨论，为行业发展提供了新思路。\n\n与会专家一致认为，提高新能源设备的可靠性对于推动行业健康发展具有重要意义。',
-    image: '/src/assets/image3.jpg'
-  }
-];
+// 导入配置文件
+import siteConfig from '../config/site_config.json';
+
+// 从配置文件获取新闻数据
+let mockNewsData = [...siteConfig.mockNewsData];
 
 // 存储内容变化监听器
 const contentChangeListeners = [];
@@ -38,8 +13,7 @@ const contentChangeListeners = [];
 const contentManager = {
   // 获取新闻内容
   getNewsContent() {
-    // 在实际应用中，这里可能会从API或其他数据源获取数据
-    // 目前返回模拟数据
+    // 从配置文件获取最新数据
     return mockNewsData;
   },
   

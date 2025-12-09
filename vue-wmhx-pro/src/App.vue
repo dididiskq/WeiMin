@@ -3,10 +3,10 @@ import { onUnmounted } from 'vue';
 import Header from './components/Header.vue'
 import ConsultationFloat from './components/ConsultationFloat.vue'
 import BackToTop from './components/BackToTop.vue';
-import { useConfig } from './services/configService';
+import { useConfig, cleanup } from './services/configService';
 
 // 使用配置服务
-const { cleanup } = useConfig();
+const { config } = useConfig();
 
 // 组件卸载时清理资源
 onUnmounted(() => {

@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref, onUnmounted, getCurrentInstance } from 'vue';
+import { onMounted, ref, onUnmounted } from 'vue';
 import Footer from '../components/Footer.vue';
 import Header from '../components/Header.vue';
 import { useConfig } from "../services/configService.js";
@@ -16,7 +16,6 @@ const scrollTriggered = ref(false);
 const { config } = useConfig(); // 使用新的配置服务
 const activities = ref([]);
 const isLoading = ref(true);
-const instance = getCurrentInstance();
 
 const handleVideoEnd = () => {
   if (!scrollTriggered.value) {
@@ -74,15 +73,14 @@ const handleScroll = () => {
 };
 
 onMounted(async () => {
-  // 配置已通过全局$siteConfig自动加载
   // 设置加载状态
   setTimeout(() => {
     isLoading.value = false;
   }, 500);
   
-  // 使用全局配置中的数据
-  if (instance?.proxy?.$siteConfig?.brandActivities) {
-    activities.value = instance.proxy.$siteConfig.brandActivities;
+  // 使用配置服务中的数据
+  if (config.value?.brandActivities) {
+    activities.value = config.value.brandActivities;
   }
   
   generateParticles();
@@ -209,25 +207,25 @@ onMounted(async () => {
       </div>
       <div class="hero-video-container" :class="{ hidden: !videoVisible }">
   <video class="hero-video" autoplay muted playsinline @ended="handleVideoEnd">
-    <source :src="$siteConfig?.hero?.video || '/static/videos/hero.mp4'" type="video/mp4">
+    <source :src="config?.hero?.video || '/static/videos/hero.mp4'" type="video/mp4">
     您的浏览器不支持视频播放
   </video>
 </div>
 <div class="video-logo-container" :class="{ visible: !videoVisible }">
-  <img :src="$siteConfig?.hero?.logo || '/static/images/logo.png'" alt="品牌logo" class="animated-logo">
+  <img :src="config?.hero?.logo || '/static/images/logo.png'" alt="品牌logo" class="animated-logo">
   <div class="hero-content-below-logo">
-    <h1 class="hero-title">{{ $siteConfig?.hero?.title || '网站标题' }}</h1>
-    <p class="hero-subtitle">{{ $siteConfig?.hero?.subtitle || '网站副标题' }}</p>
+    <h1 class="hero-title">{{ config?.hero?.title || '网站标题' }}</h1>
+    <p class="hero-subtitle">{{ config?.hero?.subtitle || '网站副标题' }}</p>
     <div class="hero-buttons-with-extras">
       <div class="website-section">
          <a href="https://www.charmingclass.com/" target="_blank" class="website-link-container">
-           <img :src="$siteConfig?.hero?.websiteImage || '/static/images/website.png'" alt="场鸣职业课" class="website-image">
+           <img :src="config?.hero?.websiteImage || '/static/images/website.png'" alt="场鸣职业课" class="website-image">
          </a>
        </div>
       <router-link to="/institute-introduction" class="primary-btn">认识为民可靠性研究院</router-link>
       <router-link to="/project-case" class="secondary-btn">了解产品可靠性</router-link>
       <div class="wechat-qrcode">
-        <img :src="$siteConfig?.hero?.wechatQrcode || '/static/images/qrcode.png'" alt="微信公众号二维码" class="qrcode-image">
+        <img :src="config?.hero?.wechatQrcode || '/static/images/qrcode.png'" alt="微信公众号二维码" class="qrcode-image">
       </div>
     </div>
   </div>
@@ -247,7 +245,7 @@ onMounted(async () => {
         </div>
         <div class="slider-container">
           <div class="slider-wrapper">
-            <div class="slider-item" v-for="(item, index) in $siteConfig?.newsSlider || []" :key="index">
+            <div class="slider-item" v-for="(item, index) in config?.newsSlider || []" :key="index">
               <div class="image-container">
                 <img :src="item.image" :alt="item.caption" class="slider-image">
               </div>
@@ -272,7 +270,7 @@ onMounted(async () => {
         </div>
         <div class="team-grid-wrapper">
           <div class="team-grid">
-            <router-link to="/expert-team" class="team-card-link" v-for="(expert, index) in ($siteConfig?.expertTeam || []).slice(0, 5)" :key="index">
+            <router-link to="/expert-team" class="team-card-link" v-for="(expert, index) in (config?.expertTeam || []).slice(0, 5)" :key="index">
               <div class="team-card">
                 <div class="team-photo" :style="{ backgroundColor: expert.backgroundColor || '#dcfce7' }"></div>
                 <h3 class="team-name">{{ expert.name || '未知专家' }}</h3>
@@ -299,7 +297,7 @@ onMounted(async () => {
           <div class="section-divider"></div>
         </div>
         <div class="services-grid">
-          <router-link to="/service-content" class="service-card-link" v-for="(service, index) in $siteConfig?.services || []" :key="index">
+          <router-link to="/service-content" class="service-card-link" v-for="(service, index) in config?.services || []" :key="index">
             <div class="service-card hover-lift">
               <div class="card-icon"><span>{{ service.id }}</span></div>
               <h3>{{ service.title }}</h3>
@@ -308,39 +306,6 @@ onMounted(async () => {
         </div>
       </section>
 
-      <!-- 知识产权和智库 -->
-      <section id="intellectual-property" class="section fade-in">
-        <div class="section-header">
-          <h2 class="section-title">知识产权和智库</h2>
-          <div class="section-divider"></div>
-        </div>
-        <div class="cases-grid">
-          <div class="case-card" v-for="(item, index) in $siteConfig?.intellectualProperty || []" :key="index">
-            <div class="case-image" :style="{ backgroundColor: item.backgroundColor }"></div>
-            <h3 class="case-title">{{ item.title }}</h3>
-            <p class="case-desc">{{ item.description }}</p>
-            <router-link to="/intellectual-property" class="case-link">查看详情 →</router-link>
-          </div>
-        </div>
-      </section>
-
-      <!-- 品牌活动 -->
-      <section id="activities" class="section fade-in">
-        <div class="section-header">
-          <h2 class="section-title">品牌活动</h2>
-          <div class="section-divider"></div>
-        </div>
-        <div class="activities-container">
-          <router-link to="/brand-activities" class="activity-card-link" v-for="(activity, index) in activities" :key="index">
-            <div class="activity-card">
-              <div class="activity-date">{{ activity.date }}</div>
-              <h3 class="activity-title">{{ activity.title }}</h3>
-              <p class="activity-desc">{{ activity.description }}</p>
-              <div class="activity-tag">{{ activity.tag }}</div>
-            </div>
-          </router-link>
-        </div>
-      </section>
 
       <!-- 项目案例 -->
       <section id="cases" class="section fade-in">
@@ -349,7 +314,7 @@ onMounted(async () => {
           <div class="section-divider"></div>
         </div>
         <div class="cases-grid">
-          <router-link to="/project-case" class="case-card-link" v-for="(project, index) in $siteConfig?.projectCases || []" :key="index">
+          <router-link to="/project-case" class="case-card-link" v-for="(project, index) in config?.projectCases || []" :key="index">
             <div class="case-card">
               <div class="case-image" :style="{ backgroundColor: project.backgroundColor }"></div>
               <h3 class="case-title">{{ project.title }}</h3>
@@ -371,18 +336,7 @@ onMounted(async () => {
         </div>
       </section>
 
-      <!-- 重要链接 -->
-      <section id="cooperation" class="section fade-in">
-        <div class="section-header">
-          <h2 class="section-title">重要链接</h2>
-          <div class="section-divider"></div>
-        </div>
-        <div class="companies-grid">
-          <div class="company-card" v-for="(company, index) in $siteConfig?.importantLinks || []" :key="index">
-            <div class="company-logo" :style="{ backgroundColor: company.backgroundColor }">{{ company.name }}</div>
-          </div>
-        </div>
-      </section>
+
       
     </main>
 

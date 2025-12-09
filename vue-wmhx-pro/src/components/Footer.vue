@@ -38,7 +38,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <div class="footer-logo"><img src="@/assets/logo.svg" alt="品牌logo" class="footer-logo-img"></div>
+        <div class="footer-logo"><img src="/static/logo.svg" alt="品牌logo" class="footer-logo-img"></div>
         <div class="footer-copyright">© 2025 深圳市卫民可靠性系统工程研究院. 保留所有权利</div>
         <div class="footer-social">
           <a href="#" class="social-icon">微信</a>

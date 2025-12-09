@@ -16,3 +16,17 @@ export const useConfig = () => {
     config
   };
 };
+
+// 更新配置的函数 - 供外部调用
+export const updateConfig = (newConfig) => {
+  if (newConfig) {
+    Object.keys(newConfig).forEach(key => {
+      config.value[key] = newConfig[key];
+    });
+  }
+};
+
+// 导出清理函数（为空实现，保持兼容性）
+export const cleanup = () => {
+  // 暂无清理逻辑
+};

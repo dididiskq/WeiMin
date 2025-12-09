@@ -7,10 +7,7 @@ import './style.css';
 import App from './App.vue';
 import router from './router';
 
-// 导入静态资源以确保它们被包含在构建中
-import './assets/logo.svg';
-import './assets/changm.png';
-import './assets/gzh.png';
+// 静态资源已移至public/static目录，无需通过import导入
 
 // 创建应用实例
 const app = createApp(App);

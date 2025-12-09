@@ -1,9 +1,17 @@
 import { createRouter, createWebHashHistory  } from 'vue-router';
 import Home from '../views/Home.vue';
 import AboutUs from '../views/AboutUs.vue';
+import InstituteIntroduction from '../views/InstituteIntroduction.vue';
+import ExpertTeam from '../views/ExpertTeam.vue';
+import CooperationOrganizations from '../views/CooperationOrganizations.vue';
 import MainBusiness from '../views/MainBusiness.vue';
 import BrandActivities from '../views/BrandActivities.vue';
+import LatestNews from '../views/LatestNews.vue';
+import BrandActivitiesDetail from '../views/BrandActivitiesDetail.vue';
 import ContactUs from '../views/ContactUs.vue';
+import MainBusinessService from '../views/MainBusinessService.vue';
+import ProjectCases from '../views/ProjectCases.vue';
+import IntellectualProperty from '../views/IntellectualProperty.vue';
 
 /**
  * 路由配置数组c
@@ -21,6 +29,21 @@ const routes = [
     component: AboutUs
   },
   {
+    path: '/institute-introduction',
+    name: 'InstituteIntroduction',
+    component: InstituteIntroduction
+  },
+  {
+    path: '/expert-team',
+    name: 'ExpertTeam',
+    component: ExpertTeam
+  },
+  {
+    path: '/cooperation-organizations',
+    name: 'CooperationOrganizations',
+    component: CooperationOrganizations
+  },
+  {
     path: '/main-business',
     name: 'MainBusiness',
     component: MainBusiness
@@ -30,12 +53,37 @@ const routes = [
     name: 'BrandActivities',
     component: BrandActivities
   },
+  {
+    path: '/latest-news',
+    name: 'LatestNews',
+    component: LatestNews
+  },
+  {
+    path: '/brand-activities-detail',
+    name: 'BrandActivitiesDetail',
+    component: BrandActivitiesDetail
+  },
 
   {
     path: '/contact-us',
     name: 'ContactUs',
     component: ContactUs
   },
+  {
+    path: '/main-business-service',
+    name: 'MainBusinessService',
+    component: MainBusinessService
+  },
+  {
+    path: '/project-cases',
+    name: 'ProjectCases',
+    component: ProjectCases
+  },
+  {
+    path: '/intellectual-property',
+    name: 'IntellectualProperty',
+    component: IntellectualProperty
+  }
 
    
 

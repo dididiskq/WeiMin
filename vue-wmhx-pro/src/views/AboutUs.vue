@@ -50,17 +50,11 @@
           <div class="section-divider"></div>
         </div>
         <div class="section-content">
-          <!-- 确信可靠性专家 -->
+          <!-- 北京航天航空大学 -->
           <div class="subsection">
             <h3 class="subsection-title">北京航天航空大学</h3>
-            <div class="team-grid">
-              <div v-for="(expert, index) in expertTeam.slice(0, 3)" :key="index" class="team-card">
-                <div class="team-card-link">
-                  <div class="team-photo" :style="{ backgroundColor: expert.backgroundColor }"></div>
-                  <h3 class="team-name">{{ expert.name }}</h3>
-                  <p class="team-position">{{ expert.position }}</p>
-                </div>
-              </div>
+            <div class="cooperation-image-container">
+              <img src="/static/hezuo.png" alt="合作图片" class="cooperation-image">
             </div>
           </div>
           
@@ -68,11 +62,13 @@
           <div class="subsection">
             <h3 class="subsection-title">工程技术</h3>
             <div v-for="(expert, index) in expertTeam.slice(3)" :key="index" class="engineering-expert">
-              <div class="expert-photo-container" :style="{ backgroundColor: expert.backgroundColor }">
-                <div class="expert-photo"></div>
+              <div class="expert-photo-section">
+                <div class="expert-photo-container" :style="{ backgroundColor: expert.backgroundColor }">
+                  <div class="expert-photo"></div>
+                </div>
+                <h3 class="expert-name">{{ expert.name }}</h3>
               </div>
               <div class="expert-details">
-                <h3 class="expert-name">{{ expert.name }}</h3>
                 <p class="expert-position">{{ expert.position }}</p>
                 <p class="expert-description">{{ expert.description }}</p>
               </div>
@@ -465,6 +461,21 @@ export default {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
+/* 合作图片样式 */
+.cooperation-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.cooperation-image {
+  max-width: 100%;
+  max-height: 400px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
 .subsection-title {
   font-size: 1.5rem;
   margin-bottom: 1.5rem;
@@ -544,12 +555,20 @@ export default {
 .engineering-expert {
   display: flex;
   gap: 30px;
-  align-items: center;
+  align-items: flex-start;
   margin-bottom: 40px;
   padding: 20px;
   background: #ffffff;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* 左侧照片和姓名区域 */
+.expert-photo-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
 }
 
 .expert-photo-container {
@@ -559,7 +578,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+  margin-bottom: 12px;
 }
 
 .expert-photo {
@@ -569,26 +588,32 @@ export default {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-.expert-details {
-  flex: 1;
+.expert-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #1e293b;
+  margin: 0;
+  text-align: center;
 }
 
-.expert-name {
-  font-size: 1.5rem;
-  margin-bottom: 8px;
-  color: #1e293b;
+/* 右侧详情区域 */
+.expert-details {
+  flex: 1;
+  padding-top: 10px;
 }
 
 .expert-position {
   font-size: 1rem;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   color: #64748b;
+  font-weight: 500;
 }
 
 .expert-description {
   font-size: 1rem;
   line-height: 1.8;
   color: #475569;
+  margin-bottom: 0;
 }
 
 /* 合作机构样式 */
@@ -788,6 +813,25 @@ export default {
   align-items: center;
   padding: 40px 0;
   width: 100%;
+}
+
+/* 合作图片样式 */
+.cooperation-image-container {
+  width: 100%;
+  height: auto;
+  min-height: 400px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cooperation-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* 合作企业样式 */
